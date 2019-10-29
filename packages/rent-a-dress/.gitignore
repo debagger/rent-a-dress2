@@ -1,7 +1,11 @@
 .DS_Store
 node_modules
 /dist
+<<<<<<< HEAD
 
+=======
+/ssl
+>>>>>>> 5298847182fc25b6ab9355ec4c1001df85325b19
 # local env files
 .env.local
 .env.*.local
