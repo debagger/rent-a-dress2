@@ -6,17 +6,17 @@ const path = require('path')
 // Require the framework and instantiate it
 const fastify = require('fastify')({
   logger: true,
-  https: {
-    key: fs.readFileSync("./ssl/key.txt"),
-    cert: fs.readFileSync("./ssl/www_rent_a_dress_ru_2020_07_10.crt")
-  }
+  // https: {
+  //   key: fs.readFileSync("./ssl/key.txt"),
+  //   cert: fs.readFileSync("./ssl/www_rent_a_dress_ru_2020_07_10.crt")
+  // }
 })
 
 fastify.register(require('fastify-static'), {
   root: path.join(__dirname, 'dist')
 })
 
-fastify.register(require("fastify-https-redirect"));
+// fastify.register(require("fastify-https-redirect"));
 
 // Declare a route
 fastify.get('/', function (request, reply) {
@@ -24,7 +24,7 @@ fastify.get('/', function (request, reply) {
 })
 
 // Run the server!
-fastify.listen(443, '0.0.0.0', function (err, address) {
+fastify.listen(80, '0.0.0.0', function (err, address) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)

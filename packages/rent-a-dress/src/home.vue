@@ -20,7 +20,7 @@
             title="COCKTAIL PARTY"
             description="Find stunning women's cocktail dresses and party dresses. Stand out in lace and metallic cocktail dresses from all your favorite brands."
             button-text="SHOP NOW"
-            image="assets/storybook/homepage/bannerF.jpg"
+            image="assets/bannerF.jpg"
             class="sf-banner--slim"
           />
         </a>
@@ -32,7 +32,7 @@
             title="LINEN DRESSES"
             description="Find stunning women's cocktail dresses and party dresses. Stand out in lace and metallic cocktail dresses from all your favorite brands."
             button-text="SHOP NOW"
-            image="assets/storybook/homepage/bannerE.jpg"
+            image="assets/bannerE.jpg"
             class="sf-banner--slim banner-central"
           />
         </a>
@@ -42,7 +42,7 @@
           <SfBanner
             subtitle="T-Shirts"
             title="THE OFFICE LIFE"
-            image="assets/storybook/homepage/bannerC.jpg"
+            image="assets/bannerC.jpg"
             class="sf-banner--slim"
           />
         </a>
@@ -52,7 +52,7 @@
           <SfBanner
             subtitle="Summer shoes"
             title="ECO SANDALS"
-            image="assets/storybook/homepage/bannerG.jpg"
+            image="assets/bannerG.jpg"
             class="sf-banner--slim"
           />
         </a>
@@ -63,7 +63,7 @@
       button-text="Subscribe"
       description="Be aware of upcoming sales and events. Receive gifts and special offers!"
       class="call-to-action-newsletter"
-      image="assets/storybook/homepage/newsletter.jpg"
+      image="assets/newsletter.jpg"
     />
     <SfSection title-heading="Best Sellers" class="section">
       <SfCarousel class="product-carousel">
@@ -89,24 +89,24 @@
       <div class="grid grid-images">
         <div class="grid__row">
           <div class="grid__col">
-            <SfImage src="assets/storybook/homepage/imageA.jpg"
+            <SfImage src="assets/imageA.jpg"
               >katherina_trn</SfImage
             >
           </div>
           <div class="grid__col">
-            <SfImage src="assets/storybook/homepage/imageB.jpg"
+            <SfImage src="assets/imageB.jpg"
               >katherina_trn</SfImage
             >
           </div>
         </div>
         <div class="grid__row">
           <div class="grid__col">
-            <SfImage src="assets/storybook/homepage/imageC.jpg"
+            <SfImage src="assets/imageC.jpg"
               >katherina_trn</SfImage
             >
           </div>
           <div class="grid__col">
-            <SfImage src="assets/storybook/homepage/imageD.jpg"
+            <SfImage src="assets/imageD.jpg"
               >katherina_trn</SfImage
             >
           </div>
@@ -114,7 +114,7 @@
       </div>
     </SfSection>
     <SfBanner
-      image="assets/storybook/homepage/bannerD.png"
+      image="assets/bannerD.png"
       class="banner-application desktop-only"
     >
       <template #subtitle>
@@ -129,12 +129,12 @@
         <div>
           <img
             class="banner-application__download"
-            src="assets/storybook/homepage/google.png"
+            src="assets/google.png"
             alt=""
           />
           <img
             class="banner-application__download"
-            src="assets/storybook/homepage/apple.png"
+            src="assets/apple.png"
             alt=""
           />
         </div>
@@ -181,7 +181,7 @@ import {
   SfBottomNavigation,
   SfIcon,
   SfCircleIcon
-} from "../../../../index.js";
+} from "@storefront-ui/vue";
 export default {
   name: "Home",
   data() {
@@ -192,14 +192,14 @@ export default {
           subtitle: "SUMMER COLLECTION 2019",
           buttonText: "Learn more",
           background: "#eceff1",
-          image: "assets/storybook/homepage/bannerH.jpg"
+          image: "assets/bannerH.jpg"
         },
         {
           title: "Colorful summer dresses are already in store",
           subtitle: "SUMMER COLLECTION 2019",
           buttonText: "Learn more",
           background: "#efebe9",
-          image: "assets/storybook/homepage/bannerA.jpg",
+          image: "assets/bannerA.jpg",
           className:
             "sf-hero-item--position-bg-top-left sf-hero-item--align-right"
         },
@@ -208,62 +208,62 @@ export default {
           subtitle: "SUMMER COLLECTION 2019",
           buttonText: "Learn more",
           background: "#fce4ec",
-          image: "assets/storybook/homepage/bannerB.jpg"
+          image: "assets/bannerB.jpg"
         }
       ],
       products: [
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productA.jpg",
+          image: "assets/productA.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: true
         },
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productB.jpg",
+          image: "assets/productB.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: false
         },
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productC.jpg",
+          image: "assets/productC.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: false
         },
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productA.jpg",
+          image: "assets/productA.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: false
         },
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productB.jpg",
+          image: "assets/productB.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: false
         },
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productC.jpg",
+          image: "assets/productC.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: false
         },
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productA.jpg",
+          image: "assets/productA.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: false
         },
         {
           title: "Cream Beach Bag",
-          image: "assets/storybook/homepage/productB.jpg",
+          image: "assets/productB.jpg",
           price: { regular: "50.00 $" },
           rating: { max: 5, score: 4 },
           isOnWishlist: false
@@ -292,7 +292,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-@import "../../../css/variables";
+@import '~@storefront-ui/shared/styles/variables';
 @import "~@storefront-ui/shared/styles/helpers/visibility";
 @mixin for-desktop {
   @media screen and (min-width: $desktop-min) {
