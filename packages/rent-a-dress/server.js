@@ -18,10 +18,10 @@ fastify.register(require("fastify-static"), {
 
 fastify.register(require("fastify-https-redirect"));
 // Enable the fastify CORS plugin
-fastify.register(require('fastify-cors'), {
-  origin: '*',
-  credentials: true
-})
+// fastify.register(require('fastify-cors'), {
+//   origin: '*',
+//   credentials: true
+// })
 
 // Declare a route
 fastify.get("/", function(request, reply) {
