@@ -6,7 +6,7 @@
 
 <script>
 import "@storefront-ui/vue/styles.scss";
-import  Home  from "./home.vue";
+import  Home from "./components/home/home";
 
 export default {
   name: "app",
