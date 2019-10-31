@@ -2,7 +2,7 @@
   <section>
     <SfProductCard
       :title="img"
-      :image="`https://localhost/assets/items/${img}`"
+      :image="`https://rent-a-dress.ru/assets/items/${img}`"
       v-for="(img, i) in imgs"
       :regular-price="'1000 руб'"
       :max-rating="5"
