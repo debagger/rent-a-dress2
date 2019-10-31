@@ -33,7 +33,7 @@ export default {
   },
   methods: {},
   mounted() {
-    axios.get("https://localhost/items").then(response => {
+    axios.get("https://rent-a-dress.ru/items").then(response => {
       const d = JSON.parse(response.data);
       console.log(d);
       this.imgs = d;
