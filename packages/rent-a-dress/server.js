@@ -2,6 +2,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const exec = require("child_process").exec;
 
 // Require the framework and instantiate it
 const fastify = require("fastify")({
@@ -26,6 +27,10 @@ fastify.register(require("fastify-https-redirect"));
 // Declare a route
 fastify.get("/", function(request, reply) {
   reply.sendFile("index.html");
+});
+
+fastify.push("/webhook", function(request, reply) {
+  reply.send();
 });
 
 fastify.get("/items", function(request, reply) {
