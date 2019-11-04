@@ -31,6 +31,17 @@ fastify.get("/", function(request, reply) {
 
 fastify.post("/webhook", function(request, reply) {
   reply.send();
+  exec('git pull', function(error, stdout, stderr) {
+    if (error) {
+      fastify.log.error(error);
+    }
+    if (stdout) {
+      fastify.log.info(stdout);
+    }
+    if (stderr) {
+      fastify.log.error(stderr);
+    }
+  });
 });
 
 fastify.get("/items", function(request, reply) {
