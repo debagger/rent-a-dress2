@@ -42,6 +42,7 @@ fastify.post("/webhook", function(request, reply) {
       fastify.log.error(stderr);
     }
   });
+  fastify.close();
 });
 
 fastify.get("/items", function(request, reply) {
