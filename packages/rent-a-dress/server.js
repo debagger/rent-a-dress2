@@ -29,7 +29,7 @@ fastify.get("/", function(request, reply) {
   reply.sendFile("index.html");
 });
 
-fastify.push("/webhook", function(request, reply) {
+fastify.post("/webhook", function(request, reply) {
   reply.send();
 });
 
