@@ -14,7 +14,7 @@ const fastify = require("fastify")({
 });
 
 fastify.register(require("fastify-static"), {
-  root: path.join(__dirname, "dist")
+  root: path.join(__dirname, "client/dist")
 });
 
 fastify.register(require("fastify-https-redirect"));
@@ -42,6 +42,7 @@ fastify.post("/webhook", function(request, reply) {
       fastify.log.error(stderr);
     }
   });
+  //
   fastify.close();
 });
 
