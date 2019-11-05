@@ -44,6 +44,7 @@ fastify.post("/webhook", function(request, reply) {
   });
   //
   fastify.close();
+  process.exit();
 });
 
 fastify.get("/items", function(request, reply) {
