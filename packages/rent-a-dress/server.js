@@ -31,7 +31,7 @@ fastify.get("/", function(request, reply) {
 
 fastify.post("/webhook", function(request, reply) {
   reply.send();
-  exec('git pull', function(error, stdout, stderr) {
+  exec("git pull", function(error, stdout, stderr) {
     if (error) {
       fastify.log.error(error);
     }
@@ -41,10 +41,10 @@ fastify.post("/webhook", function(request, reply) {
     if (stderr) {
       fastify.log.error(stderr);
     }
+    fastify.log.warn("Restarting server after git pull...");
+    fastify.close();
+    process.exit();
   });
-  fastify.log.warn("Restarting server after git pull...")
-  fastify.close();
-  process.exit();
 });
 
 fastify.get("/items", function(request, reply) {
