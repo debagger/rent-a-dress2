@@ -42,7 +42,7 @@ fastify.post("/webhook", function(request, reply) {
       fastify.log.error(stderr);
     }
   });
-  //
+  fastify.log.warn("Restarting server after git pull...")
   fastify.close();
   process.exit();
 });
