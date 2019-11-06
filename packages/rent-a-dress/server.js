@@ -59,6 +59,25 @@ builder.build().then(() => {
   // });
 
   // Run the server!
+
+  fastify.post("/webhook", function(request, reply) {
+    reply.send();
+    exec("git pull && npm install", function(error, stdout, stderr) {
+      if (error) {
+        fastify.log.error(error);
+      }
+      if (stdout) {
+        fastify.log.warn(stdout);
+      }
+      if (stderr) {
+        fastify.log.error(stderr);
+      }
+      fastify.log.warn("Restarting server after git pull...");
+      fastify.close();
+      process.exit();
+    });
+  });
+
   fastify.listen(443, "0.0.0.0", function(err, address) {
     if (err) {
       fastify.log.error(err);
