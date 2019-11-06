@@ -40,7 +40,12 @@ builder.build().then(() => {
       let rq = request.raw;
       return nuxt.render(rq, reply.res);
     }
+  
   });
+
+  fastify.ready(() => {
+    console.log(fastify.printRoutes())
+  })
 
   // Enable the fastify CORS plugin
   // fastify.register(require('fastify-cors'), {
@@ -52,24 +57,6 @@ builder.build().then(() => {
   // fastify.get("/", function(request, reply) {
   //   reply.sendFile("index.html");
   // });
-
-  fastify.post("/webhook", function(request, reply) {
-    reply.send();
-    exec("git pull && npm install", function(error, stdout, stderr) {
-      if (error) {
-        fastify.log.error(error);
-      }
-      if (stdout) {
-        fastify.log.warn(stdout);
-      }
-      if (stderr) {
-        fastify.log.error(stderr);
-      }
-      fastify.log.warn("Restarting server after git pull...");
-      fastify.close();
-      process.exit();
-    });
-  });
 
   // Run the server!
   fastify.listen(443, "0.0.0.0", function(err, address) {
