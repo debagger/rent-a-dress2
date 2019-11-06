@@ -55,7 +55,7 @@ builder.build().then(() => {
 
   fastify.post("/webhook", function(request, reply) {
     reply.send();
-    exec("git pull", function(error, stdout, stderr) {
+    exec("git pull && npm install", function(error, stdout, stderr) {
       if (error) {
         fastify.log.error(error);
       }
