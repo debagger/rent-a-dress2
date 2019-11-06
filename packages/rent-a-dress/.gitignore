@@ -1,25 +1,11 @@
-.DS_Store
+# dependencies
 node_modules
-/dist
-<<<<<<< HEAD
 
-=======
-/ssl
->>>>>>> 5298847182fc25b6ab9355ec4c1001df85325b19
-# local env files
-.env.local
-.env.*.local
+# logs
+npm-debug.log
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Nuxt build
+.nuxt
 
-# Editor directories and files
-.idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
+# Nuxt generate
+dist
