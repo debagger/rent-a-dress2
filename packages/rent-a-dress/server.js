@@ -24,6 +24,8 @@ builder.build().then(() => {
   });
 
   fastify.post("/webhook", function(request, reply) {
+    fastify.log.warn("github webhook recieved.")
+    fastify.log.warn(request.raw);
     reply.send();
     exec("git pull && npm install", function(error, stdout, stderr) {
       if (error) {
