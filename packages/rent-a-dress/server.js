@@ -3,22 +3,26 @@ const { Nuxt, Builder } = require("nuxt");
 const nuxtConfig = require("./nuxt.config");
 const nuxt = new Nuxt(nuxtConfig);
 const builder = new Builder(nuxt);
+const fs = require("fs");
+const path = require("path");
+const logfile = "./logs/server.log"
+
+fs.mkdirSync(path.dirname(logfile), {recursive:true});
+fs.closeSync(fs.openSync(logfile,  "as+"));
 
 builder.build().then(() => {
-  const fs = require("fs");
-  const path = require("path");
+  
   const exec = require("child_process").exec;
 
   // Require the framework and instantiate it
   const fastify = require("fastify")({
-    logger: true,
+    logger: { level: "info", file: logfile },
     https: {
       key: fs.readFileSync("./ssl/key.txt"),
       cert: fs.readFileSync("./ssl/www_rent_a_dress_ru_2020_07_10.crt")
     }
   });
 
-  
   fastify.post("/webhook", function(request, reply) {
     reply.send();
     exec("git pull && npm install", function(error, stdout, stderr) {
@@ -43,15 +47,15 @@ builder.build().then(() => {
 
   fastify.register(require("fastify-https-redirect"));
 
-  fastify.setNotFoundHandler((request, reply)=>{
+  fastify.setNotFoundHandler((request, reply) => {
     reply.sent = true;
     let rq = request.raw;
     return nuxt.render(rq, reply.res);
-  })
+  });
 
   fastify.ready(() => {
-    console.log(fastify.printRoutes())
-  })
+    fastify.log.info(fastify.printRoutes());
+  });
 
   // Enable the fastify CORS plugin
   // fastify.register(require('fastify-cors'), {
@@ -65,7 +69,6 @@ builder.build().then(() => {
   // });
 
   // Run the server!
-
 
   fastify.listen(443, "0.0.0.0", function(err, address) {
     if (err) {
