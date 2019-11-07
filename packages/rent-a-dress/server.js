@@ -37,30 +37,17 @@ builder.build().then(() => {
     });
   });
 
-  fastify.use(nuxt.render);
-
   fastify.register(require("fastify-static"), {
     root: path.join(__dirname, "static")
   });
 
   fastify.register(require("fastify-https-redirect"));
 
-  fastify.get("/_nuxt/*", (request, reply) => {
+  fastify.setNotFoundHandler((request, reply)=>{
     reply.sent = true;
     let rq = request.raw;
     return nuxt.render(rq, reply.res);
-  });
-
-  fastify.route({
-    url: "/__webpack_hmr/*",
-    method: ["DELETE", "GET", "HEAD", "PATCH", "POST", "PUT", "OPTIONS"],
-    handler: (request, reply) => {
-      reply.sent = true;
-      let rq = request.raw;
-      return nuxt.render(rq, reply.res);
-    }
-  
-  });
+  })
 
   fastify.ready(() => {
     console.log(fastify.printRoutes())
