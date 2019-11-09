@@ -7,8 +7,16 @@
         "request": "launch",
         "name": "Launch prod server",
         "program": "${workspaceFolder}/server.js"
-      }
-    
+      },
+
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch dev server",
+        "program": "${workspaceFolder}/dev-server.js"
+      },
+
+
         {
             "type": "chrome",
             "request": "launch",
