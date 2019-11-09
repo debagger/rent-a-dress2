@@ -1,9 +1,8 @@
-
 const fs = require("fs");
 const path = require("path");
 const logfile = "./logs/server.log";
 
-module.exports =(nuxt)=> () => {
+module.exports = nuxt => () => {
   fs.mkdirSync(path.dirname(logfile), { recursive: true });
   fs.closeSync(fs.openSync(logfile, "as+"));
 
@@ -19,8 +18,8 @@ module.exports =(nuxt)=> () => {
   fastify.post("/webhook", function(request, reply) {
     const exec = require("child_process").exec;
     fastify.log.warn("github webhook recieved");
-    fastify.log.warn(request.raw);
     reply.send();
+
     exec("git pull && npm install && npm run build", function(
       error,
       stdout,

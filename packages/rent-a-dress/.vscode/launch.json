@@ -1,6 +1,14 @@
 {
     "version": "0.1.0",
     "configurations": [
+
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch prod server",
+        "program": "${workspaceFolder}/server.js"
+      }
+    
         {
             "type": "chrome",
             "request": "launch",
