@@ -1,5 +1,6 @@
 const fs = require("fs");
 const Db = require("tingodb")().Db;
+const config = require("./fastfy.config");
 
 const dataDir = "./data";
 
@@ -12,7 +13,7 @@ Users.insert(
   [
     {
       username: "admin",
-      password: "123",
+      password: config.hash("123"),
       email: "debagger@gmail.com",
       role: "admin"
     }

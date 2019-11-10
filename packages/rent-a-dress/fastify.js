@@ -1,71 +1,133 @@
+const config = require("./fastfy.config");
 const fs = require("fs");
 const path = require("path");
 const Db = require("tingodb")().Db;
-const logfile = "./logs/server.log";
+const promisify = require("util").promisify;
 const dataDir = "./data";
 module.exports = nuxt => () => {
   fs.mkdirSync(dataDir, { recursive: true });
   const db = new Db(dataDir, {});
   const Users = db.collection("users");
 
-  fs.mkdirSync(path.dirname(logfile), { recursive: true });
-  fs.closeSync(fs.openSync(logfile, "as+"));
+  Users.asyncFindOne = promisify(Users.findOne);
+  Users.asyncFindAndModify = promisify(Users.findAndModify);
+  Users.asyncFindOne = promisify(Users.findOne);
+
+  //Create directory and file for log if not exist
+  fs.mkdirSync(path.dirname(config.fastify.logger.file), { recursive: true });
+  fs.closeSync(fs.openSync(config.fastify.logger.file, "as+"));
 
   // Require the framework and instantiate it
-  const fastify = require("fastify")({
-    logger: { level: "info", file: logfile },
-    https: {
-      key: fs.readFileSync("./ssl/key.txt"),
-      cert: fs.readFileSync("./ssl/www_rent_a_dress_ru_2020_07_10.crt")
-    }
+  const fastify = require("fastify")(config.fastify);
+
+  const Ajv = require("ajv");
+  const ajv = new Ajv(config.ajv);
+  fastify.setSchemaCompiler(function(schema) {
+    return ajv.compile(schema);
   });
 
   fastify.register(require("fastify-cookie"));
+  fastify.register(require("fastify-static"), {
+    root: path.join(__dirname, "static")
+  });
+  fastify.register(require("fastify-https-redirect"));
+  // Enable the fastify CORS plugin
+  // fastify.register(require('fastify-cors'), {
+  //   origin: '*',
+  //   credentials: true
+  // })
 
-  fastify.post("/api/auth/login", function(request, reply) {
-    try {
-      Users.findOne({ username: request.body.username }, function(err, item) {
-        if (item) {
-          if (item.password === request.body.password) {
-            const token = Date.now();
-            Users.findAndModify(
-              item,
-              [],
-              { $set: { token: `${token}` } },
-              { new: true },
-              function(err, item) {
-                if (item) {
-                  reply.send({ token: item.token });
-                }
-                if (err) {
-                  reply.send(err);
-                }
-              }
-            );
-          } else {
-            reply.send(new Error("Wrong password"));
-          }
-        } else {
-          reply.send(new Error("No user"));
+
+  fastify.post(
+    "/api/auth/login",
+    {
+      schema: {
+        body: {
+          required: ["username", "password"],
+          properties: {
+            username: { type: "string" },
+            password: { type: "string" }
+          },
+          additionalProperties: false
         }
-      });
-    } catch (error) {
-      reply.send(error);
+      }
+    },
+    async function(request, reply) {
+      try {
+        let item;
+        if (
+          !(item = await Users.asyncFindOne({
+            username: request.body.username
+          }))
+        ) {
+          reply.code(403).send("No user with this username");
+          return;
+        }
+
+        if (item.password !== config.hash(request.body.password)) {
+          reply.code(403).send("Wrong password");
+          return;
+        }
+
+        const token = config.hash(`${Date.now()}.${item.username}.${item.password}`);
+
+        if (
+          (item = await Users.asyncFindAndModify(
+            { username: item.username, password: item.password },
+            [],
+            { $set: { token: `${token}` } },
+            { new: true }
+          ))
+        ) {
+          reply.send({ token: item.token });
+          return;
+        }
+
+        reply.send(new Error("Something goes wrong"));
+      } catch (error) {
+        reply.send(error);
+      }
+    }
+  );
+
+  fastify.post("/api/auth/logout", async function(request, reply) {
+    const token = request.cookies["auth._token.local"];
+    if (!token) {
+      reply.code(400).send("Need cookie: 'auth._token.local'");
+    }
+
+    let item = await Users.asyncFindOne({ token: token });
+    if (!item) {
+      reply.code(400).send(`Not found user session with token ${token}`);
+    }
+    if (
+      (item = await Users.asyncFindAndModify(
+        item,
+        [],
+        { $set: { token: undefined } },
+        { new: true }
+      ))
+    ) {
+      reply.send(`User ${item.username} was logged out`);
+      return;
     }
   });
 
-  fastify.post("/api/auth/logout", function(request, reply) {
-    reply.send({});
-  });
-
-  fastify.get("/api/auth/user", function(request, reply) {
+  fastify.get("/api/auth/user", async function(request, reply) {
     const token = request.cookies["auth._token.local"];
-    Users.findOne({ token: token }, function(err, item) {
-      if (item) {
-        reply.send({ user: item });
+    if (!token) {
+      reply.code(400).send("Need cookie: 'auth._token.local'");
+    }
+
+    try {
+      const item = await Users.asyncFindOne({ token: token });
+      if (!item) {
+        reply.code(400).send(`Not found user session with token ${token}`);
       }
-      reply.send(new Error("No token found"));
-    });
+      reply.send({ user: item });
+    } catch (error) {
+      reply.send(error);
+    }
   });
 
   fastify.post("/webhook", function(request, reply) {
@@ -93,11 +155,8 @@ module.exports = nuxt => () => {
     });
   });
 
-  fastify.register(require("fastify-static"), {
-    root: path.join(__dirname, "static")
-  });
 
-  fastify.register(require("fastify-https-redirect"));
+
 
   fastify.setNotFoundHandler((request, reply) => {
     reply.sent = true;
@@ -109,11 +168,6 @@ module.exports = nuxt => () => {
     fastify.log.info(fastify.printRoutes());
   });
 
-  // Enable the fastify CORS plugin
-  // fastify.register(require('fastify-cors'), {
-  //   origin: '*',
-  //   credentials: true
-  // })
 
   // Declare a route
   // fastify.get("/", function(request, reply) {
