@@ -12,6 +12,7 @@ module.exports = nuxt => () => {
   Users.asyncFindOne = promisify(Users.findOne);
   Users.asyncFindAndModify = promisify(Users.findAndModify);
   Users.asyncFindOne = promisify(Users.findOne);
+  Users.asyncInsert = promisify(Users.insert);
 
   //Create directory and file for log if not exist
   fs.mkdirSync(path.dirname(config.fastify.logger.file), { recursive: true });
@@ -36,7 +37,6 @@ module.exports = nuxt => () => {
   //   origin: '*',
   //   credentials: true
   // })
-
 
   fastify.post(
     "/api/auth/login",
@@ -69,7 +69,9 @@ module.exports = nuxt => () => {
           return;
         }
 
-        const token = config.hash(`${Date.now()}.${item.username}.${item.password}`);
+        const token = config.hash(
+          `${Date.now()}.${item.username}.${item.password}`
+        );
 
         if (
           (item = await Users.asyncFindAndModify(
@@ -130,6 +132,111 @@ module.exports = nuxt => () => {
     }
   });
 
+  fastify.get("/api/auth/users", function(request, reply) {
+    try {
+      Users.find().toArray(function(err, docs) {
+        if (err) {
+          reply.code(400).send(err);
+          return;
+        }
+        reply.send(
+          docs.map(item => ({
+            username: item.username,
+            email: item.email,
+            role: item.role ? item.role : "user"
+          }))
+        );
+      });
+    } catch (error) {
+      reply.send(error);
+    }
+  });
+
+  fastify.post(
+    "/api/auth/adduser",
+    {
+      schema: {
+        body: {
+          required: ["username", "password", "email"],
+          properties: {
+            username: { type: "string" },
+            email: { type: "string" },
+            password: { type: "string" }
+          },
+          additionalProperties: false
+        }
+      }
+    },
+    async function(request, reply) {
+      try {
+        const newUser = request.body;
+        const foundUser = await Users.asyncFindOne(
+          { username: newUser.username },
+          []
+        );
+        if (foundUser) {
+          reply.code(400).send(`User ${newUser.username} exist`);
+          return;
+        } else {
+          newUser.password = config.hash(newUser.password);
+          newUser.role = "user";
+          const result = await Users.asyncInsert([newUser]);
+          if (result && result.length == 1) {
+            reply.send(`User ${result[0].username} added`);
+            return;
+          }
+        }
+      } catch (error) {
+        reply.send(error);
+      }
+    }
+  );
+
+  fastify.post(
+    "/api/auth/edituser",
+    {
+      schema: {
+        body: {
+          required: ["username", "email"],
+          properties: {
+            username: { type: "string" },
+            email: { type: "string" },
+            role: { type: "string" }
+          },
+          additionalProperties: false
+        }
+      }
+    },
+    async function(request, reply) {
+      try {
+        const userChanges = request.body;
+        const foundUser = await Users.asyncFindOne(
+          { username: userChanges.username },
+          []
+        );
+
+        if (!foundUser) {
+          reply.code(400).send(`User ${foundUser.username} not found`);
+          return;
+        } else {
+          const result = await Users.asyncFindAndModify(
+            { username: userChanges.username },
+            [],
+            { $set: userChanges },
+            { new: true }
+          );
+          reply.send({
+            username: result.username,
+            email: result.email,
+            role: result.role
+          });
+        }
+      } catch (error) {
+        reply.send(error);
+      }
+    }
+  );
+
   fastify.post("/webhook", function(request, reply) {
     const exec = require("child_process").exec;
     fastify.log.warn("github webhook recieved");
@@ -155,9 +262,6 @@ module.exports = nuxt => () => {
     });
   });
 
-
-
-
   fastify.setNotFoundHandler((request, reply) => {
     reply.sent = true;
     let rq = request.raw;
@@ -166,8 +270,8 @@ module.exports = nuxt => () => {
 
   fastify.ready(() => {
     fastify.log.info(fastify.printRoutes());
+    console.log(fastify.printRoutes());
   });
-
 
   // Declare a route
   // fastify.get("/", function(request, reply) {

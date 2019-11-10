@@ -15,18 +15,42 @@
           <v-icon>mdi-magnify</v-icon>
         </v-btn>
 
-        <v-btn v-if="$auth.loggedIn" @click="$auth.logout()">{{$auth.user.role}} - {{$auth.user.email}}</v-btn>
-        <v-btn v-else @click="$refs.login.showForm()">Войти</v-btn>
+        <!-- <v-btn
+          v-if="$auth.loggedIn"
+          @click="$auth.logout()"
+        >{{$auth.user.role}} - {{$auth.user.email}}</v-btn>
+        <v-btn v-else @click="$refs.login.showForm()">Войти</v-btn>-->
 
         <v-menu left bottom>
           <template v-slot:activator="{ on }">
-            <v-btn icon v-on="on">
-              <v-icon>mdi-dots-vertical</v-icon>
+            <v-btn v-if="$auth.loggedIn" icon v-on="on">
+              <v-icon>mdi-account-circle</v-icon>
+            </v-btn>
+            <v-btn icon v-else @click="$refs.login.showForm()">
+              <v-icon>mdi-login-variant</v-icon>
             </v-btn>
           </template>
-          <v-list>
-            <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-              <v-list-item-title>Option {{ n }}</v-list-item-title>
+          <v-list v-if="$auth.loggedIn">
+            <v-list-item v-if="$auth.loggedIn">
+              <v-list-item-title>
+                <v-icon>mdi-account-circle</v-icon>
+                {{$auth.user.email}}
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="$auth.user && $auth.user.role==='admin'" to="/admin/users">
+              <v-list-item-title>
+                <v-icon>mdi-account-search</v-icon>Пользователи
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="$auth.user && $auth.user.role==='admin'">
+              <v-list-item-title>
+                <v-icon>mdi-format-list-checkbox</v-icon>Каталог
+              </v-list-item-title>
+            </v-list-item>
+            <v-list-item v-if="$auth.loggedIn" @click="$auth.logout()">
+              <v-list-item-title>
+                <v-icon>mdi-logout-variant</v-icon>Выйти
+              </v-list-item-title>
             </v-list-item>
           </v-list>
         </v-menu>
@@ -35,11 +59,11 @@
     <v-content>
       <nuxt />
     </v-content>
-    <LoginForm ref="login"/>
+    <LoginForm ref="login" />
   </v-app>
 </template>
 <script>
-import LoginForm from "../components/LoginForm"
+import LoginForm from "../components/LoginForm";
 export default {
   props: {
     source: String
@@ -47,7 +71,7 @@ export default {
   data: () => ({
     drawer: null
   }),
-  components:{LoginForm}
+  components: { LoginForm }
 };
 </script>
 
