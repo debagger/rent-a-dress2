@@ -1,10 +1,12 @@
-const config = require("./fastfy.config");
+const config = require("./fastify.config");
 const fs = require("fs");
 const path = require("path");
 const Db = require("tingodb")().Db;
 const promisify = require("util").promisify;
-const dataDir = "./data";
+
 module.exports = nuxt => () => {
+  const dataDir = "./data";
+
   fs.mkdirSync(dataDir, { recursive: true });
   const db = new Db(dataDir, {});
   const Users = db.collection("users");
@@ -37,6 +39,10 @@ module.exports = nuxt => () => {
   //   origin: '*',
   //   credentials: true
   // })
+
+  fastify.get("/api/auth/changepassword", function(request, reply) {
+    reply.code(400).send();
+  });
 
   fastify.post(
     "/api/auth/login",
@@ -280,11 +286,5 @@ module.exports = nuxt => () => {
 
   // Run the server!
 
-  fastify.listen(443, "0.0.0.0", function(err, address) {
-    if (err) {
-      fastify.log.error(err);
-      process.exit(1);
-    }
-    fastify.log.info(`server listening on ${address}`);
-  });
+  return fastify;
 };
