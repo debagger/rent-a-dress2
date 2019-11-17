@@ -33,7 +33,13 @@ module.exports = nuxt => () => {
   //   credentials: true
   // })
 
-require("./auth")(fastify);
+  fastify.register(require("./db"), config).after(err=>{
+    fastify.register(require("./isAdmin"), config);
+    fastify.register(require("./auth"), config);
+    fastify.register(require("./catalog"), config);
+  });
+  
+
 
   fastify.post("/webhook", function(request, reply) {
     const exec = require("child_process").exec;

@@ -42,7 +42,7 @@
                 <v-icon>mdi-account-search</v-icon>Пользователи
               </v-list-item-title>
             </v-list-item>
-            <v-list-item v-if="$auth.user && $auth.user.role==='admin'">
+            <v-list-item v-if="$auth.user && $auth.user.role==='admin'" to="/admin/catalog">
               <v-list-item-title>
                 <v-icon>mdi-format-list-checkbox</v-icon>Каталог
               </v-list-item-title>

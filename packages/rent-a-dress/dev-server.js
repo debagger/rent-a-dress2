@@ -69,7 +69,9 @@ const run = fastify => {
     });
   });
 };
-run(require("./fastify/fastify")(nuxt)());
-// builder.build().then(function() {
-//   run(require("./fastify/fastify")(nuxt)());
-// });
+
+// run(require("./fastify/fastify")(nuxt)());
+
+builder.build().then(function() {
+  run(require("./fastify/fastify")(nuxt)());
+});

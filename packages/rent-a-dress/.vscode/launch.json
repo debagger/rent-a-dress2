@@ -1,6 +1,12 @@
 {
     "version": "0.1.0",
     "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Launch tingo",
+        "program": "${workspaceFolder}/tingo.js"
+      },
 
       {
         "type": "node",
