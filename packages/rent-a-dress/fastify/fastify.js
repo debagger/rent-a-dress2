@@ -22,7 +22,7 @@ module.exports = nuxt => () => {
 
   fastify.register(require("fastify-cookie"));
   fastify.register(require("fastify-static"), {
-    root: path.join(__dirname, "static")
+    root: "./static"
   });
   fastify.register(require("fastify-https-redirect"));
   // Enable the fastify CORS plugin

@@ -16,7 +16,7 @@ module.exports = function(fastify, config, done) {
         const element = files[index];
         const filename = element.md5 + ".jpg";
         await writeFileAsync(
-          path.join(__dirname, "static","img", filename),
+          path.join("./static/img/", filename),
           element.data
         );
         uploadedImages.push(filename);
