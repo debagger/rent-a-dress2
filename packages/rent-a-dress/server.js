@@ -4,6 +4,4 @@ const path = require('path');
 nuxtConfig.dev = false;
 const nuxt = new Nuxt(nuxtConfig);
 
-
-
 require("./fastify/fastify")(nuxt)();
