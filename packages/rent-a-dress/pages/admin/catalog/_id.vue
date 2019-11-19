@@ -1,26 +1,24 @@
 <template>
-<v-content>
+  <v-content>
     <v-row>
-        <v-col>
-  <v-form>
-    <v-text-field class="mr-4 ml-4" v-model="item.caption" label="Название"></v-text-field>
-    <v-text-field class="mr-4 ml-4" v-model="item.price" label="Цена"></v-text-field>
-    <v-text-field class="mr-4 ml-4" v-model="item.details.desc" label="Описание"></v-text-field>
-  </v-form>
-  </v-col>
-  <v-col><v-img max-width="50vw" :src="'/img/' + item.img"></v-img></v-col>
+      <v-col class="text-center grey darken-4 white--text">
+        <h2 class="font-weight-thin display-2">RENT-A-DRESS</h2>
+      </v-col>
     </v-row>
-</v-content>
+    <v-row>
+      <v-col>
+        <itemEditor :itemid="$route.params.id"></itemEditor>
+      </v-col>
+    </v-row>
+  </v-content>
 </template>
 
 <script>
+import itemEditor from "../../../components/itemEditor";
 export default {
+  components: { itemEditor },
   data() {
     return {};
-  },
-  async asyncData({ $axios, route }) {
-      const data=await $axios.$get(`/api/catalog/item/${route.params.id}`);
-    return { item: data };
   }
 };
 </script>

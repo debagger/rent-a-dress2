@@ -2,12 +2,10 @@ const config = require("./fastify.config");
 const fs = require("fs");
 const path = require("path");
 
-
 module.exports = nuxt => () => {
   const dataDir = "./data";
 
   fs.mkdirSync(dataDir, { recursive: true });
-
 
   //Create directory and file for log if not exist
   fs.mkdirSync(path.dirname(config.fastify.logger.file), { recursive: true });
@@ -33,13 +31,12 @@ module.exports = nuxt => () => {
   //   credentials: true
   // })
 
-  fastify.register(require("./db"), config).after(err=>{
+  fastify.register(require("./db"), config).after(err => {
     fastify.register(require("./isAdmin"), config);
     fastify.register(require("./auth"), config);
     fastify.register(require("./catalog"), config);
+    fastify.register(require("./imagesManager"), config);
   });
-  
-
 
   fastify.post("/webhook", function(request, reply) {
     const exec = require("child_process").exec;
@@ -67,9 +64,13 @@ module.exports = nuxt => () => {
   });
 
   fastify.setNotFoundHandler((request, reply) => {
-    reply.sent = true;
-    let rq = request.raw;
-    return nuxt.render(rq, reply.res);
+    const rq = request.raw;
+    if (rq.url.startsWith("/api/")) {
+      reply.code(404).send("Unknown route");
+    } else {
+      reply.sent = true;
+      return nuxt.render(rq, reply.res);
+    }
   });
 
   fastify.ready(() => {
@@ -81,8 +82,6 @@ module.exports = nuxt => () => {
   // fastify.get("/", function(request, reply) {
   //   reply.sendFile("index.html");
   // });
-
-  // Run the server!
 
   return fastify;
 };

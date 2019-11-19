@@ -76,5 +76,36 @@ module.exports = function(fastify, config, done) {
     }
   );
 
+    fastify.post(
+    "/api/catalog/new",
+    {
+      preHandler: fastify.isAdmin,
+      schema: {
+        body: {
+          required: ["id", "caption", "price", "img", "details"],
+          properties: {
+            id: { type: "number" },
+            caption: { type: "string" },
+            price: { type: "number" },
+            img: { type: "string" },
+            details: {
+              type: "object",
+              properties: {
+                otherImgs: { type: "array", items: { type: "string" } },
+                desc: { type: "string" }
+              }
+            }
+          },
+          additionalProperties: false
+        }
+      }
+    },
+    async function(request, reply) {
+      const id = Math.max(...items.map(item => item.id)) + 1;
+      request.body.id = id;
+      items.push(request.body);
+      reply.send(request.body);
+    }
+  );
   done();
 };
