@@ -21,9 +21,12 @@ module.exports = nuxt => () => {
   });
 
   fastify.register(require("fastify-cookie"));
+
+  const staticFolder = path.join(path.dirname(require.main.filename), "static");
   fastify.register(require("fastify-static"), {
-    root: "./static"
+    root: staticFolder
   });
+
   fastify.register(require("fastify-https-redirect"));
   // Enable the fastify CORS plugin
   // fastify.register(require('fastify-cors'), {
@@ -32,10 +35,19 @@ module.exports = nuxt => () => {
   // })
 
   fastify.register(require("./db"), config).after(err => {
-    fastify.register(require("./isAdmin"), config);
-    fastify.register(require("./auth"), config);
-    fastify.register(require("./catalog"), config);
-    fastify.register(require("./imagesManager"), config);
+    if (err) {
+      console.log(err);
+    } else {
+      fastify.register(require("./isAdmin"), config).after(err => {
+        if (err) {
+          console.log(err);
+        } else {
+          fastify.register(require("./auth"), config);
+          fastify.register(require("./catalog"), config);
+          fastify.register(require("./imagesManager"), config);
+        }
+      });
+    }
   });
 
   fastify.post("/webhook", function(request, reply) {
@@ -65,7 +77,7 @@ module.exports = nuxt => () => {
 
   fastify.setNotFoundHandler((request, reply) => {
     const rq = request.raw;
-    if (rq.url.startsWith("/api/")) {
+    if (rq.url.startsWith("/api")) {
       reply.code(404).send("Unknown route");
     } else {
       reply.sent = true;
