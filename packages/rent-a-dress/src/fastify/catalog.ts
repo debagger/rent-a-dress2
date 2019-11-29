@@ -1,3 +1,6 @@
+import { FastifyInstance } from "fastify";
+
+
 const items = [...Array(10).keys()].map(id => ({
   id: id,
   caption: `Красивое платье № ${id}`,
@@ -9,8 +12,7 @@ const items = [...Array(10).keys()].map(id => ({
   }
 }));
 
-module.exports = function(fastify, config, done) {
-  const Catalog = fastify.getCollection("catalog");
+export async function CatalogPlugin (fastify:FastifyInstance, config, done) {
 
   fastify.get("/api/catalog/items", async function(request, reply) {
     reply.send(items.map(item => item.id));
@@ -44,42 +46,10 @@ module.exports = function(fastify, config, done) {
     }
   );
 
-  fastify.post(
-    "/api/catalog/new",
-    {
-      preHandler: fastify.isAdmin,
-      schema: {
-        body: {
-          required: ["id", "caption", "price", "img", "details"],
-          properties: {
-            id: { type: "number" },
-            caption: { type: "string" },
-            price: { type: "number" },
-            img: { type: "string" },
-            details: {
-              type: "object",
-              properties: {
-                otherImgs: { type: "array", items: { type: "string" } },
-                desc: { type: "string" }
-              }
-            }
-          },
-          additionalProperties: false
-        }
-      }
-    },
-    async function(request, reply) {
-      const id = Math.max(...items.map(item => item.id)) + 1;
-      request.body.id = id;
-      items.push(request.body);
-      reply.send(request.body);
-    }
-  );
-
     fastify.post(
     "/api/catalog/new",
     {
-      preHandler: fastify.isAdmin,
+      preHandler: fastify["isAdmin"],
       schema: {
         body: {
           required: ["id", "caption", "price", "img", "details"],

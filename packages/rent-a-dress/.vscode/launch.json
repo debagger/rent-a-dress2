@@ -2,11 +2,15 @@
     "version": "0.1.0",
     "configurations": [
       {
+        "name": "Current TS File",
         "type": "node",
         "request": "launch",
-        "name": "Launch tingo",
-        "program": "${workspaceFolder}/tingo.js"
-      },
+        "args": ["${relativeFile}"],
+        "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+        "sourceMaps": true,
+        "cwd": "${workspaceRoot}",
+        "protocol": "inspector",
+    },
 
       {
         "type": "node",

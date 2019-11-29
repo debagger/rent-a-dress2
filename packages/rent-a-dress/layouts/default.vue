@@ -71,7 +71,10 @@ export default {
   data: () => ({
     drawer: null
   }),
-  components: { LoginForm }
+  components: { LoginForm },
+  mounted(){
+    console.log(this.$auth);
+  }
 };
 </script>
 

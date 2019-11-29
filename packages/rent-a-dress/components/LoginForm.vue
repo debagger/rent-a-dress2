@@ -35,7 +35,10 @@ export default {
     loginLocal: function() {
       this.$auth
         .loginWith("local", {
-          data: { username: this.login.username, password: this.login.password }
+          data: { 
+            username: this.login.username, 
+            password: this.login.password 
+          }
         })
         .then(
           function() {

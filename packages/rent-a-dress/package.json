@@ -10,28 +10,36 @@
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
-    "precommit": "npm run lint"
+    "precommit": "npm run lint",
+    "addUser": "ts-node addUser.ts"
   },
   "dependencies": {
+    "@nuxt/types": "^0.3.4",
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.8.0",
-    "doasync": "^2.0.1",
     "fastify": "^2.10.0",
     "fastify-cookie": "^3.2.0",
     "fastify-file-upload": "^2.0.1",
-    "fastify-https-redirect": "^1.0.2",
+    "fastify-https-redirect": "^1.0.3",
+    "fastify-openapi-glue": "^1.3.0",
     "fastify-static": "^2.5.0",
     "node-watch": "^0.6.3",
     "nuxt": "^2.0.0",
-    "tingodb": "^0.6.1",
+    "reflect-metadata": "^0.1.13",
+    "sqlite3": "^4.1.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typeorm": "^0.2.20",
     "vue-awesome-swiper": "^3.1.3"
   },
   "devDependencies": {
     "@nuxtjs/vuetify": "^1.9.0",
+    "@types/node": "^12.12.12",
     "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
-    "eslint-plugin-vue": "^4.0.0"
+    "eslint-plugin-vue": "^4.0.0",
+    "ts-node": "^8.5.2",
+    "typescript": "^3.7.2"
   }
 }

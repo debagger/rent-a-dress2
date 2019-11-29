@@ -26,52 +26,53 @@ const connectionControl = fastify => {
   };
 };
 
-const run = fastify => {
-  let watch = require("node-watch");
+function clearCache() {
+  Object.keys(require.cache)
+    .filter(item => item.startsWith(path.join(__dirname, "build")))
+    .forEach(item => {
+      delete require.cache[item];
+      console.log(`${item} deleted from cache`);
+    });
+}
+
+const run = fastifyRun => {
+  const fastify = fastifyRun();
   fastify.listen(443, "0.0.0.0", function(err, address) {
-    if (err) {
-      console.log(err);
-      process.exit(1);
-    }
+    let watch = require("node-watch");
+    if (err) console.log(err);
     const destroyConnections = connectionControl(fastify);
     console.log(`server listening on ${address}`);
-    const watcher = watch("./fastify", { recursive: true }, function(
-      evt,
-      name
-    ) {
+    let fastifyClosing = false;
+    const watcher = watch("./build", { recursive: true }, function(evt, name) {
+      watcher.close();
       console.log("%s changed.", name);
-
+      if (fastifyClosing) return;
+      fastifyClosing = true;
       fastify
         .close()
         .then(() => {
           console.log("Fastify instance closed");
-          const fstDir = path.dirname(require.resolve("./fastify/fastify"));
-          Object.keys(require.cache)
-            .filter(item => item.startsWith(fstDir))
-            .forEach(item => {
-              delete require.cache[item];
-              console.log(`${item} deleted from cache`);
-            });
-            try {
-                run(require("./fastify/fastify")(nuxt)());      
-                watcher.close();
-
-            } catch (error) {
-                console.log("error catched")
-                console.log(error);
-            }
-          
+          clearCache();
+          try {
+            run(require("./build/fastify/fastify").myFastify(nuxt));
+          } catch (error) {
+            console.log("error catched");
+            console.log(error);
+          }
         })
         .catch(err => {
           console.log("Error when closing", err);
         });
+
       destroyConnections();
     });
   });
 };
 
-// run(require("./fastify/fastify")(nuxt)());
-
-builder.build().then(function() {
-  run(require("./fastify/fastify")(nuxt)());
-});
+const { myFastify } = require("./build/fastify/fastify");
+const server = myFastify(nuxt);
+run(server);
+builder
+  .build()
+  .then(function() {})
+  .catch(console.error);
