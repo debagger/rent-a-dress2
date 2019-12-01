@@ -1,19 +1,20 @@
+import {IsNumber, IsInt, IsString} from "class-validator"
 import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  PrimaryColumn,
   ManyToOne
 } from "typeorm";
-import { User } from "./User";
+import { User } from "./User"; 
 
-@Entity()
+@Entity() 
 export class Token {
-  @PrimaryColumn("text") token: string;
+  @PrimaryGeneratedColumn() @IsInt() id: number;
+  @Column() @IsString() token: string;
   
   @ManyToOne(
     type => User,
-    user => user.username, {
+    user => user.id, {
         eager: true
     }
   )

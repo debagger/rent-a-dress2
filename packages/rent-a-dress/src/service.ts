@@ -1,59 +1,43 @@
-const catalogItems = [];
+import { catalogItem } from "./entity/catalogItem";
+import { catalogItemOption } from "./entity/catalgItemOption";
+const catalogItems: catalogItem[] = [];
 for (let index = 0; index < 10; index++) {
-  const item = {
-    id: index,
-    caption: "Платье",
-    desc:"Описание платья",
-    img:"image.jpg"
-  }
+  const item = new catalogItem();
+
+  item.id = index;
+  item.caption = "Платье";
+  item.desc = "Описание платья";
+  item.img = "image.jpg";
+
+  const options: catalogItemOption[] = [
+    Object.assign(new catalogItemOption(), {
+      id: 123,
+      size: "xl",
+      color: "red"
+    }),
+    Object.assign(new catalogItemOption(), {
+      id: 321,
+      size: "xs",
+      color: "white"
+    })
+  ];
+
+  item.options = options;
+
   catalogItems.push(item);
 }
 export class Service {
-  constructor() {
-
-  }
-
-  private catalogItems:any;
+  constructor() {}
 
   async getCatalog(req, reply) {
-    console.log("getCatalog", catalogItems);
-    reply.send(catalogItems);
+    console.log("getCatalog");
+    return catalogItems;
   }
 
-
   async newCatalogItem(req, reply) {
-    console.log("newCatalogItem", req.body);
+    console.log("newCatalogItem");
+    req.body.id = catalogItems.length+1;
     catalogItems.push(req.body);
     return req.body;
   }
-
-  async catalog(req, reply) {
-    console.log("catalog", req.params);
-    return { key: "value" };
-  }
-
-  async getCatalogItem(req, reply) {
-    console.log("getCatalogItem", req.params);
-    return { key: "value" };
-  }
-
-  async updateCatalogItem(req, reply) {
-    console.log("updateCatalogItem", req.params);
-    return { key: "value" };
-  }
-
-
-  async deleteCatalogItem(req, reply) {
-    console.log("deleteCatalogItem", req.params);
-    return { key: "value" };
-  }
-
-
-  async catalogById(req, reply) {
-    console.log("catalogById", req.params);
-    return { key: "value" };
-  }
-
 }
-
-

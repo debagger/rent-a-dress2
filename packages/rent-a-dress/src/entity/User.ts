@@ -1,3 +1,4 @@
+import {IsInt, IsString, IsEmail} from "class-validator"
 import {
   Entity,
   PrimaryColumn,
@@ -9,15 +10,15 @@ import { Token } from "./Token";
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn() id: number;
+  @PrimaryGeneratedColumn() @IsInt() id: number;
 
-  @Column() username: string;
+  @Column() @IsString() username: string;
 
-  @Column() email: string;
+  @Column() @IsEmail() email: string;
 
-  @Column() role: string;
+  @Column() @IsString() role: string;
 
-  @Column() password: string;
+  @Column() @IsString() password: string;
 
   @OneToMany(
     type => Token,

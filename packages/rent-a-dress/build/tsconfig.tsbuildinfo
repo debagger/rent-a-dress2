@@ -109,30 +109,6 @@
         "version": "0c9ea8c2028047f39a3f66752682604f543c08be8806258c3d95c93e75a43255",
         "signature": "0c9ea8c2028047f39a3f66752682604f543c08be8806258c3d95c93e75a43255"
       },
-      "../node_modules/vue/types/vnode.d.ts": {
-        "version": "336721337da7deac683208a3089786c32cd834fd7e992cc2a9de5abd6100d8aa",
-        "signature": "336721337da7deac683208a3089786c32cd834fd7e992cc2a9de5abd6100d8aa"
-      },
-      "../node_modules/vue/types/options.d.ts": {
-        "version": "29d822e82e30d391f7a36a6daf63f7e50cef3039347ca6b5b9b08a1383e72202",
-        "signature": "29d822e82e30d391f7a36a6daf63f7e50cef3039347ca6b5b9b08a1383e72202"
-      },
-      "../node_modules/vue/types/plugin.d.ts": {
-        "version": "e8cc0280272ae461f8dc6eef59712323d9eea7abfd455a8d4861601f3c5a9a6f",
-        "signature": "e8cc0280272ae461f8dc6eef59712323d9eea7abfd455a8d4861601f3c5a9a6f"
-      },
-      "../node_modules/vue/types/vue.d.ts": {
-        "version": "c483036e3c3aea2c4b7d435120543bea042a68aa38e56b91344678384357eb27",
-        "signature": "c483036e3c3aea2c4b7d435120543bea042a68aa38e56b91344678384357eb27"
-      },
-      "../node_modules/vue/types/index.d.ts": {
-        "version": "9c80b4cff1771ae664e05882499c773861ea4d81d6cbf8e2a3e6dc61ab6a6f42",
-        "signature": "9c80b4cff1771ae664e05882499c773861ea4d81d6cbf8e2a3e6dc61ab6a6f42"
-      },
-      "../vue.d.ts": {
-        "version": "7995e120b7c695baa9e069506c1f9272d0f3ad4822ccc069fbeab2bc10ad1dd2",
-        "signature": "7995e120b7c695baa9e069506c1f9272d0f3ad4822ccc069fbeab2bc10ad1dd2"
-      },
       "../node_modules/reflect-metadata/index.d.ts": {
         "version": "8d6d51a5118d000ed3bfe6e1dd1335bebfff3fef23cd2af2f84a24d30f90cc90",
         "signature": "8d6d51a5118d000ed3bfe6e1dd1335bebfff3fef23cd2af2f84a24d30f90cc90"
@@ -1117,12 +1093,84 @@
         "version": "e91e7a20eef0975cf87762cd8d1981c0acf25ec47a30603fac8fa3346764d00b",
         "signature": "e91e7a20eef0975cf87762cd8d1981c0acf25ec47a30603fac8fa3346764d00b"
       },
+      "../node_modules/class-validator/validation/validationerror.d.ts": {
+        "version": "8b5ad058f8dab857050fdbb092b9f1267d22641f0f746cd8a7abee85b48bb83a",
+        "signature": "8b5ad058f8dab857050fdbb092b9f1267d22641f0f746cd8a7abee85b48bb83a"
+      },
+      "../node_modules/class-validator/validation/validatoroptions.d.ts": {
+        "version": "d3c0c471c298dc7115ada6c07f78d4fafb088523a301cb539c5cb44dae009954",
+        "signature": "d3c0c471c298dc7115ada6c07f78d4fafb088523a301cb539c5cb44dae009954"
+      },
+      "../node_modules/class-validator/validation-schema/validationschema.d.ts": {
+        "version": "86f89124a90fae1b90421bcce1e0ba58614383ca72403bfc03ff89761b050a4d",
+        "signature": "86f89124a90fae1b90421bcce1e0ba58614383ca72403bfc03ff89761b050a4d"
+      },
+      "../node_modules/class-validator/container.d.ts": {
+        "version": "5a6fbec8c8e62c37e9685a91a6ef0f6ecaddb1ee90f7b2c2b71b454b40a0d9a6",
+        "signature": "5a6fbec8c8e62c37e9685a91a6ef0f6ecaddb1ee90f7b2c2b71b454b40a0d9a6"
+      },
+      "../node_modules/@types/validator/index.d.ts": {
+        "version": "930f4dcf2bf161cde0f737e6fb1ee8ad1c54f3b7bdf64d18adc4c2521f48aaa8",
+        "signature": "930f4dcf2bf161cde0f737e6fb1ee8ad1c54f3b7bdf64d18adc4c2521f48aaa8"
+      },
+      "../node_modules/class-validator/validation/validationtypeoptions.d.ts": {
+        "version": "367b353f3a003d31a72ad3b1cef5c933b71889ae86cb645520d1681014e79ab9",
+        "signature": "367b353f3a003d31a72ad3b1cef5c933b71889ae86cb645520d1681014e79ab9"
+      },
+      "../node_modules/class-validator/validation/validationarguments.d.ts": {
+        "version": "f049af45e62625e0be51a3badd311110abf1ac8b23f56689e1d850923f6d9aac",
+        "signature": "f049af45e62625e0be51a3badd311110abf1ac8b23f56689e1d850923f6d9aac"
+      },
+      "../node_modules/class-validator/decorator/validationoptions.d.ts": {
+        "version": "e700a3327eb9f018b9af7a56d9214383919103950141d2e44a4a1cd59bbe67c6",
+        "signature": "e700a3327eb9f018b9af7a56d9214383919103950141d2e44a4a1cd59bbe67c6"
+      },
+      "../node_modules/class-validator/decorator/decorators.d.ts": {
+        "version": "34d83ecda22cb58a70c3c51bb356d94222ed15ba82880dfb7309e74d281804ef",
+        "signature": "34d83ecda22cb58a70c3c51bb356d94222ed15ba82880dfb7309e74d281804ef"
+      },
+      "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts": {
+        "version": "8e7c8386c3700086085770ac298d37de34bd290db95938f5c77f1ab83fa67c52",
+        "signature": "8e7c8386c3700086085770ac298d37de34bd290db95938f5c77f1ab83fa67c52"
+      },
+      "../node_modules/class-validator/validation/validationtypes.d.ts": {
+        "version": "b9448353389cfb3d7fed5fc0d23ca87b0ac16149b89ba8c9c8ae568d01b8c3ad",
+        "signature": "b9448353389cfb3d7fed5fc0d23ca87b0ac16149b89ba8c9c8ae568d01b8c3ad"
+      },
+      "../node_modules/class-validator/metadata/validationmetadataargs.d.ts": {
+        "version": "8f29f65ce09040175a948aeb38af31f34367123903c49b556a76097bcb8fe813",
+        "signature": "8f29f65ce09040175a948aeb38af31f34367123903c49b556a76097bcb8fe813"
+      },
+      "../node_modules/class-validator/metadata/validationmetadata.d.ts": {
+        "version": "8be85fd3849c702cd34aee594b4e9773dceca300cc358c63d75a3118720b12fe",
+        "signature": "8be85fd3849c702cd34aee594b4e9773dceca300cc358c63d75a3118720b12fe"
+      },
+      "../node_modules/class-validator/validation/validator.d.ts": {
+        "version": "3d0b16232d130758c990594006dd24361a7cf3a5efc86b1ec6d6af61c0b2ea67",
+        "signature": "3d0b16232d130758c990594006dd24361a7cf3a5efc86b1ec6d6af61c0b2ea67"
+      },
+      "../node_modules/class-validator/register-decorator.d.ts": {
+        "version": "ea96782b5b69f29f37be42c51f944a0a4a478cbe3fed1d2ec25cffd5bd3617a4",
+        "signature": "ea96782b5b69f29f37be42c51f944a0a4a478cbe3fed1d2ec25cffd5bd3617a4"
+      },
+      "../node_modules/class-validator/metadata/constraintmetadata.d.ts": {
+        "version": "bb71811f328b358d990e298006492de623964862240de7eb6342e5efb8aafae9",
+        "signature": "bb71811f328b358d990e298006492de623964862240de7eb6342e5efb8aafae9"
+      },
+      "../node_modules/class-validator/metadata/metadatastorage.d.ts": {
+        "version": "c569d4d6f3aa771dc1600a73bd8f1b714e10a75218379d93f9cf6bc13bbc0ab0",
+        "signature": "c569d4d6f3aa771dc1600a73bd8f1b714e10a75218379d93f9cf6bc13bbc0ab0"
+      },
+      "../node_modules/class-validator/index.d.ts": {
+        "version": "70aecfd981af29d74ba7ab6667b9cc2a53459d8eb099c139fd2aa54c3059c71d",
+        "signature": "70aecfd981af29d74ba7ab6667b9cc2a53459d8eb099c139fd2aa54c3059c71d"
+      },
       "../src/entity/token.ts": {
-        "version": "ff1aa4f21e1c5f142472cb8b0f3fcd8b78e773464913aa6c3c226c71b35252c7",
-        "signature": "58d1827083e9a87bbd581c13ea4e672e211e786d621028280c18671dc3ab3f77"
+        "version": "c44a9f15d1bfe64380f69a34eeac5d36ce566201e4d42d15138a3fa88f84868f",
+        "signature": "03aab18632c89bb629c55db3b7fafa195b2b02903203a46f58517e787a7538a9"
       },
       "../src/entity/user.ts": {
-        "version": "6a5aca3764f9055e631c043f001c4d9e49e9aa1d2a184420061a59ba78aa506e",
+        "version": "7a24dc6e08230249e031ee4dd6c4b48d912354ad609fdd81e8de7fb2f23edc09",
         "signature": "ed995a013a41e3e9d41f997febe1d663e26da59b299ba70aba852dff90acbeab"
       },
       "../src/fastify/fastify.config.ts": {
@@ -1132,6 +1180,114 @@
       "../src/adduser.ts": {
         "version": "e5096eeaa5655cdaad8c23b38904e9f2d98d5d147a9eee1a1ef97ded356d7f0f",
         "signature": "3b3cbe89219f5c7208870ae9336c27c597cc0148fa7858e25ee8561172abbec9"
+      },
+      "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts": {
+        "version": "9508fcc6616ea31bf848463f161571bcb0c8726b267a43e231f21fca775007e7",
+        "signature": "9508fcc6616ea31bf848463f161571bcb0c8726b267a43e231f21fca775007e7"
+      },
+      "../node_modules/openapi3-ts/dist/model/openapi.d.ts": {
+        "version": "c69e3a56c4893933ec066625c71263b4b6e4b609e0df8dab8a4fd51c16c47d15",
+        "signature": "c69e3a56c4893933ec066625c71263b4b6e4b609e0df8dab8a4fd51c16c47d15"
+      },
+      "../node_modules/openapi3-ts/dist/model/server.d.ts": {
+        "version": "737286d5a8cddd8afc923c70d68c23ebd01700a0b53cad4949b633ffd304c777",
+        "signature": "737286d5a8cddd8afc923c70d68c23ebd01700a0b53cad4949b633ffd304c777"
+      },
+      "../node_modules/openapi3-ts/dist/model/index.d.ts": {
+        "version": "6a967509640ff83b343c01c6dc5ef6330c929ce0e838b217768b46414e28e85c",
+        "signature": "6a967509640ff83b343c01c6dc5ef6330c929ce0e838b217768b46414e28e85c"
+      },
+      "../node_modules/openapi3-ts/dist/dsl/openapibuilder.d.ts": {
+        "version": "b5fb985d427871256ce82a572af57648e48a8372e1165936968ca5181d578da6",
+        "signature": "b5fb985d427871256ce82a572af57648e48a8372e1165936968ca5181d578da6"
+      },
+      "../node_modules/openapi3-ts/dist/dsl/index.d.ts": {
+        "version": "72374cee3b4e1451d064a29c38ccf11e49293bac535ef2a29e963a1833118a84",
+        "signature": "72374cee3b4e1451d064a29c38ccf11e49293bac535ef2a29e963a1833118a84"
+      },
+      "../node_modules/openapi3-ts/dist/index.d.ts": {
+        "version": "55b0987723fe57b0a8756299005ff218eefe1772d1215c68c20894aad5074453",
+        "signature": "55b0987723fe57b0a8756299005ff218eefe1772d1215c68c20894aad5074453"
+      },
+      "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts": {
+        "version": "1aed251ab92dfd0e4901b3b9ad5eccdeb4d3603d57af947ae5f1de967f5ffa6e",
+        "signature": "1aed251ab92dfd0e4901b3b9ad5eccdeb4d3603d57af947ae5f1de967f5ffa6e"
+      },
+      "../node_modules/class-transformer/metadata/typemetadata.d.ts": {
+        "version": "fc14f591b59444c787440f6d8d4df6d96a2eafd8dcb8f3d9773d2d52a88db64f",
+        "signature": "fc14f591b59444c787440f6d8d4df6d96a2eafd8dcb8f3d9773d2d52a88db64f"
+      },
+      "../node_modules/class-transformer/metadata/exposemetadata.d.ts": {
+        "version": "d8d7267085a30ccfca4c512f48a674549159acecce6a527b08d0fa4a3a25ad00",
+        "signature": "d8d7267085a30ccfca4c512f48a674549159acecce6a527b08d0fa4a3a25ad00"
+      },
+      "../node_modules/class-transformer/metadata/excludemetadata.d.ts": {
+        "version": "1d34979c538bf5b83fc08145eb8fb941969c1e5dec5fcd5cb9e8662eb48ed948",
+        "signature": "1d34979c538bf5b83fc08145eb8fb941969c1e5dec5fcd5cb9e8662eb48ed948"
+      },
+      "../node_modules/class-transformer/classtransformoptions.d.ts": {
+        "version": "d89af0c250e1424959162beae79f2c2745c729d6ab8028503d322395d96d3a2b",
+        "signature": "d89af0c250e1424959162beae79f2c2745c729d6ab8028503d322395d96d3a2b"
+      },
+      "../node_modules/class-transformer/transformoperationexecutor.d.ts": {
+        "version": "1fa98f06f8163fef61071f77e47ad2b7dd26064a43e219a4468df563e911caf3",
+        "signature": "1fa98f06f8163fef61071f77e47ad2b7dd26064a43e219a4468df563e911caf3"
+      },
+      "../node_modules/class-transformer/metadata/transformmetadata.d.ts": {
+        "version": "00c21fc56bdda6a76f3b3012e9f47d45d294ac25228ac4c39d569387fdbbe143",
+        "signature": "00c21fc56bdda6a76f3b3012e9f47d45d294ac25228ac4c39d569387fdbbe143"
+      },
+      "../node_modules/class-transformer/metadata/metadatastorage.d.ts": {
+        "version": "da376e4bf65963350903fe617869454baa03d5925edb7d2b1d5b65a44db01185",
+        "signature": "da376e4bf65963350903fe617869454baa03d5925edb7d2b1d5b65a44db01185"
+      },
+      "../node_modules/class-validator-jsonschema/build/defaultconverters.d.ts": {
+        "version": "85c8e367f2ea8a5b10becb3f4de7144d46f15683233ca533c924a71170086db9",
+        "signature": "85c8e367f2ea8a5b10becb3f4de7144d46f15683233ca533c924a71170086db9"
+      },
+      "../node_modules/class-validator-jsonschema/build/options.d.ts": {
+        "version": "864cb87d56fb6680f92ed803485b323802ee092e81406027325f4a286d57665e",
+        "signature": "864cb87d56fb6680f92ed803485b323802ee092e81406027325f4a286d57665e"
+      },
+      "../node_modules/class-validator-jsonschema/build/decorators.d.ts": {
+        "version": "605ea258c6c3b91cb0ecd5e4919a5b2a9bbe2f23ec3f142b5ad35a21346ffcd2",
+        "signature": "605ea258c6c3b91cb0ecd5e4919a5b2a9bbe2f23ec3f142b5ad35a21346ffcd2"
+      },
+      "../node_modules/class-validator-jsonschema/build/index.d.ts": {
+        "version": "26e5df2a38de5d1074544cd4f0866b16ce6ee0c31154e5dc69af26f51a32c8c7",
+        "signature": "26e5df2a38de5d1074544cd4f0866b16ce6ee0c31154e5dc69af26f51a32c8c7"
+      },
+      "../node_modules/class-transformer/storage.d.ts": {
+        "version": "f17e4e9995432899cadf984a98afdb0b86c60c0faece3d162b5b6ead06aa3f96",
+        "signature": "f17e4e9995432899cadf984a98afdb0b86c60c0faece3d162b5b6ead06aa3f96"
+      },
+      "../src/entity/image.ts": {
+        "version": "ee9d09d174a9c40cd630613a2e54fcc59cd3de2d41050f5a845159687176d250",
+        "signature": "4db2d2d155525b6ed0f205d5fc63dcf2196246cb33e5acfe144b1258493a7e07"
+      },
+      "../node_modules/class-transformer/classtransformer.d.ts": {
+        "version": "96589ead67dc132731ddb531c3c7de2e66156df7154b1136d1abd92bdaa27e79",
+        "signature": "96589ead67dc132731ddb531c3c7de2e66156df7154b1136d1abd92bdaa27e79"
+      },
+      "../node_modules/class-transformer/decorators.d.ts": {
+        "version": "cc8aa0870a0defda3818676ecb8123b2d8b15dc40cdc130834bc81b01a58f2e4",
+        "signature": "cc8aa0870a0defda3818676ecb8123b2d8b15dc40cdc130834bc81b01a58f2e4"
+      },
+      "../node_modules/class-transformer/index.d.ts": {
+        "version": "097d4bf3331df1e138ffdcf92e1117f6841bc8337170d927fd955d5ee8a1674b",
+        "signature": "097d4bf3331df1e138ffdcf92e1117f6841bc8337170d927fd955d5ee8a1674b"
+      },
+      "../src/entity/catalgitemoption.ts": {
+        "version": "b35f3836788980a25e7310e1c7fd44cf514b1c3f8fb9f699395f3c2c9720f339",
+        "signature": "d25d53d3f36e9283acd9df9d821b24dc3b2a93f99833215b8faff17c7589f56d"
+      },
+      "../src/entity/catalogitem.ts": {
+        "version": "d1281e8d036639a65d200bf3ca39f92abcd8cddd1d7ed0d0595f616fb9aa6122",
+        "signature": "0430ed44549c714d2c798068144abac1eeb57a745f4bd793d7b70712fe1e882d"
+      },
+      "../src/schema.ts": {
+        "version": "49d10a8e32911ddd8bb6cb3c7b3b416c803d850763840559c9d166912fa32c05",
+        "signature": "438ee233c4f98d0ed4414345cf4126760454b04f8e8da0dd06b6648d238586cd"
       },
       "../node_modules/@types/node/globals.d.ts": {
         "version": "05c42320698cb6eb4052d68ef35a0f3b88291b9275f13e9a188b96119844c5b6",
@@ -1337,10 +1493,6 @@
         "version": "4de0fe3db0213c33300637754ff7e6520a11a625f5a362421741abab72a359ed",
         "signature": "5b9589c73c6738cf34e296924cdb014da56d7cf1bd1baf0a486cd55a73a27336"
       },
-      "../src/entity/image.ts": {
-        "version": "3478eec6dd77a243c818e222d45623d4246d789c41a4c0b1f4224dd13c945367",
-        "signature": "4db2d2d155525b6ed0f205d5fc63dcf2196246cb33e5acfe144b1258493a7e07"
-      },
       "../src/fastify/imagesmanager.ts": {
         "version": "6c48790318ae8d478c803396cb4f5a91b9fe3961ce43e5b0ea3596d6e6d5a59d",
         "signature": "c60e3d6d8ab809110b5de97642de9d898d01e4f432310fd80aa5f686435f4a52"
@@ -1358,15 +1510,15 @@
         "signature": "b040cc8b4fd1b9d0a74b4dad292fb1554c66ccef626abca4798f532d084a3975"
       },
       "../src/service.ts": {
-        "version": "db872e126c261ccb5109bbff005cb396e25d484a8a402491e630d9bd77ca52ed",
-        "signature": "de1a9854297ecb5aeb1485b57fbab18c2458618e4874f8d334d095abb3c9ef5e"
+        "version": "7eaea284dfb7f0be765057a042a546f598a64da26e28a949db07df83603a75ae",
+        "signature": "df693b2fa832b15676546ff08673c26cf56e7171618ef169aa5f899aa4e9827f"
       },
-      "../src/openapi.json": {
-        "version": "8463c16f34c1e5946eae3596de1365053e628a036c1adb450c90b83b1782efb7",
-        "signature": "abe0e6dff6b49625af04092573664e97c64a24b68161682d2fec1b7375729152"
+      "../oapi/openapi.json": {
+        "version": "2c54e77592ed2a06f8bebec397a6afd39818124349e06d8282d771c3f0ecd5bd",
+        "signature": "3b102d4dcf68f87b5b25cda9474fab7993dcdefe21a05e2e2f02a789fe0bdd08"
       },
       "../src/fastify/fastify.ts": {
-        "version": "68a29da5930da0922efbb7dde2cb8f3afc66b334bb47d495ae23a34cd31e6b63",
+        "version": "69fdafd239e634a2e0e16c3c31ac752dabfc8ea28d9095cd33c3cd9de15efc1c",
         "signature": "27e484f87ff7a60c9a3224d7db16229515cbf026cb95a9e47824fb62eb035967"
       },
       "../src/server.ts": {
@@ -1716,54 +1868,6 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../../../users/евросеть/appdata/roaming/npm/node_modules/typescript/lib/lib.esnext.bigint.d.ts": [
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/vnode.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/options.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/vue/types/vnode.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/plugin.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/vue.d.ts": [
-        "../node_modules/vue/types/options.d.ts",
-        "../node_modules/vue/types/vnode.d.ts",
-        "../node_modules/vue/types/plugin.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/index.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/vue/types/options.d.ts",
-        "../node_modules/vue/types/plugin.d.ts",
-        "../node_modules/vue/types/vnode.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../vue.d.ts": [
-        "../node_modules/vue/types/index.d.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -3947,7 +4051,149 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../node_modules/class-validator/validation/validationerror.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validatoroptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation-schema/validationschema.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/container.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/validator/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validationtypeoptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validationarguments.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/decorator/validationoptions.d.ts": [
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/decorator/decorators.d.ts": [
+        "../node_modules/class-validator/validation/validationtypeoptions.d.ts",
+        "../node_modules/class-validator/decorator/validationoptions.d.ts",
+        "../node_modules/@types/validator/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts": [
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validationtypes.d.ts": [
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/validationmetadataargs.d.ts": [
+        "../node_modules/class-validator/decorator/validationoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/validationmetadata.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadataargs.d.ts",
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validator.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/class-validator/validation/validationerror.d.ts",
+        "../node_modules/class-validator/validation/validationtypeoptions.d.ts",
+        "../node_modules/class-validator/validation/validatoroptions.d.ts",
+        "../node_modules/@types/validator/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/register-decorator.d.ts": [
+        "../node_modules/class-validator/validation/validatoroptions.d.ts",
+        "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/constraintmetadata.d.ts": [
+        "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/metadatastorage.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/class-validator/metadata/constraintmetadata.d.ts",
+        "../node_modules/class-validator/validation-schema/validationschema.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/index.d.ts": [
+        "../node_modules/class-validator/validation/validationerror.d.ts",
+        "../node_modules/class-validator/validation/validatoroptions.d.ts",
+        "../node_modules/class-validator/validation-schema/validationschema.d.ts",
+        "../node_modules/class-validator/container.d.ts",
+        "../node_modules/class-validator/decorator/decorators.d.ts",
+        "../node_modules/class-validator/decorator/validationoptions.d.ts",
+        "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts",
+        "../node_modules/class-validator/validation/validationtypeoptions.d.ts",
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/class-validator/validation/validationtypes.d.ts",
+        "../node_modules/class-validator/validation/validator.d.ts",
+        "../node_modules/class-validator/register-decorator.d.ts",
+        "../node_modules/class-validator/metadata/metadatastorage.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/entity/token.ts": [
+        "../node_modules/class-validator/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
         "../src/entity/user.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -3956,6 +4202,7 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/entity/user.ts": [
+        "../node_modules/class-validator/index.d.ts",
         "../node_modules/typeorm/index.d.ts",
         "../src/entity/token.ts",
         "../node_modules/@types/node/fs.d.ts",
@@ -3977,6 +4224,228 @@
         "../src/entity/token.ts",
         "../src/fastify/fastify.config.ts",
         "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/openapi.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/server.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/openapi.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/index.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts",
+        "../node_modules/openapi3-ts/dist/model/openapi.d.ts",
+        "../node_modules/openapi3-ts/dist/model/server.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/dsl/openapibuilder.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/dsl/index.d.ts": [
+        "../node_modules/openapi3-ts/dist/dsl/openapibuilder.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/index.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/index.d.ts",
+        "../node_modules/openapi3-ts/dist/dsl/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/typemetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/exposemetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/excludemetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/classtransformoptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/transformoperationexecutor.d.ts": [
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/class-transformer/metadata/typemetadata.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/transformmetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/class-transformer/transformoperationexecutor.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/metadatastorage.d.ts": [
+        "../node_modules/class-transformer/metadata/typemetadata.d.ts",
+        "../node_modules/class-transformer/metadata/exposemetadata.d.ts",
+        "../node_modules/class-transformer/metadata/excludemetadata.d.ts",
+        "../node_modules/class-transformer/transformoperationexecutor.d.ts",
+        "../node_modules/class-transformer/metadata/transformmetadata.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/defaultconverters.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/openapi3-ts/dist/index.d.ts",
+        "../node_modules/reflect-metadata/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/options.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/options.d.ts": [
+        "../node_modules/class-transformer/metadata/metadatastorage.d.ts",
+        "../node_modules/class-validator/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/defaultconverters.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/decorators.d.ts": [
+        "../node_modules/openapi3-ts/dist/index.d.ts",
+        "../node_modules/reflect-metadata/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/options.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/index.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/openapi3-ts/dist/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/options.d.ts",
+        "../node_modules/class-validator-jsonschema/build/decorators.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/storage.d.ts": [
+        "../node_modules/class-transformer/metadata/metadatastorage.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/entity/image.ts": [
+        "../node_modules/class-validator/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/classtransformer.d.ts": [
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/decorators.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/class-transformer/transformoperationexecutor.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/index.d.ts": [
+        "../node_modules/class-transformer/classtransformer.d.ts",
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/class-transformer/decorators.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/entity/catalgitemoption.ts": [
+        "../node_modules/class-validator/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../src/entity/catalogitem.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/entity/catalogitem.ts": [
+        "../node_modules/class-validator/index.d.ts",
+        "../node_modules/class-transformer/index.d.ts",
+        "../node_modules/typeorm/index.d.ts",
+        "../src/entity/catalgitemoption.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/schema.ts": [
+        "../node_modules/class-validator-jsonschema/build/index.d.ts",
+        "../node_modules/class-validator/index.d.ts",
+        "../node_modules/class-transformer/storage.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../src/entity/image.ts",
+        "../src/entity/token.ts",
+        "../src/entity/user.ts",
+        "../src/entity/catalogitem.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
@@ -4394,13 +4863,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/entity/image.ts": [
-        "../node_modules/typeorm/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../src/fastify/imagesmanager.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/path.d.ts",
@@ -4435,12 +4897,14 @@
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "../src/service.ts": [
+        "../src/entity/catalogitem.ts",
+        "../src/entity/catalgitemoption.ts",
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/openapi.json": [
+      "../oapi/openapi.json": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
@@ -4461,7 +4925,7 @@
         "../src/fastify/user.ts",
         "../node_modules/ajv/lib/ajv.d.ts",
         "../src/service.ts",
-        "../src/openapi.json",
+        "../oapi/openapi.json",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
@@ -4938,13 +5402,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../vue.d.ts": [
-        "../node_modules/vue/types/index.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../node_modules/reflect-metadata/index.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
@@ -7123,6 +7580,147 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../node_modules/class-validator/validation/validationerror.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validatoroptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation-schema/validationschema.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/container.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/@types/validator/index.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validationtypeoptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validationarguments.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/decorator/validationoptions.d.ts": [
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/decorator/decorators.d.ts": [
+        "../node_modules/class-validator/validation/validationtypeoptions.d.ts",
+        "../node_modules/class-validator/decorator/validationoptions.d.ts",
+        "../node_modules/@types/validator/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts": [
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validationtypes.d.ts": [
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/validationmetadataargs.d.ts": [
+        "../node_modules/class-validator/decorator/validationoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/validationmetadata.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadataargs.d.ts",
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/validation/validator.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/class-validator/validation/validationerror.d.ts",
+        "../node_modules/class-validator/validation/validationtypeoptions.d.ts",
+        "../node_modules/class-validator/validation/validatoroptions.d.ts",
+        "../node_modules/@types/validator/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/register-decorator.d.ts": [
+        "../node_modules/class-validator/validation/validatoroptions.d.ts",
+        "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/constraintmetadata.d.ts": [
+        "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/metadata/metadatastorage.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/class-validator/metadata/constraintmetadata.d.ts",
+        "../node_modules/class-validator/validation-schema/validationschema.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator/index.d.ts": [
+        "../node_modules/class-validator/validation/validationerror.d.ts",
+        "../node_modules/class-validator/validation/validatoroptions.d.ts",
+        "../node_modules/class-validator/validation-schema/validationschema.d.ts",
+        "../node_modules/class-validator/container.d.ts",
+        "../node_modules/class-validator/decorator/decorators.d.ts",
+        "../node_modules/class-validator/decorator/validationoptions.d.ts",
+        "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts",
+        "../node_modules/class-validator/validation/validationtypeoptions.d.ts",
+        "../node_modules/class-validator/validation/validationarguments.d.ts",
+        "../node_modules/class-validator/validation/validationtypes.d.ts",
+        "../node_modules/class-validator/validation/validator.d.ts",
+        "../node_modules/class-validator/register-decorator.d.ts",
+        "../node_modules/class-validator/metadata/metadatastorage.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/entity/token.ts": [
         "../src/entity/user.ts"
       ],
@@ -7131,6 +7729,196 @@
       ],
       "../src/adduser.ts": [
         "../node_modules/reflect-metadata/index.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/openapi.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/server.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/openapi.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/model/index.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts",
+        "../node_modules/openapi3-ts/dist/model/openapi.d.ts",
+        "../node_modules/openapi3-ts/dist/model/server.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/dsl/openapibuilder.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/dsl/index.d.ts": [
+        "../node_modules/openapi3-ts/dist/dsl/openapibuilder.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/openapi3-ts/dist/index.d.ts": [
+        "../node_modules/openapi3-ts/dist/model/index.d.ts",
+        "../node_modules/openapi3-ts/dist/dsl/index.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/typemetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/exposemetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/excludemetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/classtransformoptions.d.ts": [
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/transformoperationexecutor.d.ts": [
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/class-transformer/metadata/typemetadata.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/transformmetadata.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/class-transformer/transformoperationexecutor.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/metadata/metadatastorage.d.ts": [
+        "../node_modules/class-transformer/metadata/typemetadata.d.ts",
+        "../node_modules/class-transformer/metadata/exposemetadata.d.ts",
+        "../node_modules/class-transformer/metadata/excludemetadata.d.ts",
+        "../node_modules/class-transformer/transformoperationexecutor.d.ts",
+        "../node_modules/class-transformer/metadata/transformmetadata.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/defaultconverters.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/openapi3-ts/dist/index.d.ts",
+        "../node_modules/reflect-metadata/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/options.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/options.d.ts": [
+        "../node_modules/class-validator/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/defaultconverters.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/decorators.d.ts": [
+        "../node_modules/openapi3-ts/dist/index.d.ts",
+        "../node_modules/reflect-metadata/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/options.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-validator-jsonschema/build/index.d.ts": [
+        "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+        "../node_modules/openapi3-ts/dist/index.d.ts",
+        "../node_modules/class-validator-jsonschema/build/options.d.ts",
+        "../node_modules/class-validator-jsonschema/build/decorators.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/storage.d.ts": [
+        "../node_modules/class-transformer/metadata/metadatastorage.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/classtransformer.d.ts": [
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/decorators.d.ts": [
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/class-transformer/transformoperationexecutor.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../node_modules/class-transformer/index.d.ts": [
+        "../node_modules/class-transformer/classtransformer.d.ts",
+        "../node_modules/class-transformer/classtransformoptions.d.ts",
+        "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+        "../node_modules/class-transformer/decorators.d.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/entity/catalgitemoption.ts": [
+        "../src/entity/catalogitem.ts"
+      ],
+      "../src/schema.ts": [
+        "../src/entity/image.ts",
+        "../src/entity/token.ts",
+        "../src/entity/user.ts",
+        "../src/entity/catalogitem.ts"
       ],
       "../node_modules/@types/node/globals.d.ts": [
         "../node_modules/@types/node/fs.d.ts",
@@ -7537,6 +8325,9 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../src/service.ts": [
+        "../src/entity/catalogitem.ts"
+      ],
       "../src/fastify/fastify.ts": [
         "../node_modules/reflect-metadata/index.d.ts"
       ],
@@ -7840,47 +8631,6 @@
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/vnode.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/index.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/vue/types/options.d.ts",
-        "../node_modules/vue/types/plugin.d.ts",
-        "../node_modules/vue/types/vnode.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/vue.d.ts": [
-        "../node_modules/vue/types/options.d.ts",
-        "../node_modules/vue/types/vnode.d.ts",
-        "../node_modules/vue/types/plugin.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/plugin.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../node_modules/vue/types/options.d.ts": [
-        "../node_modules/vue/types/vue.d.ts",
-        "../node_modules/vue/types/vnode.d.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
@@ -8157,10 +8907,54 @@
       "../node_modules/typeorm/naming-strategy/defaultnamingstrategy.d.ts",
       "../node_modules/typeorm/util/promiseutils.d.ts",
       "../node_modules/typeorm/index.d.ts",
+      "../node_modules/class-validator/validation/validationerror.d.ts",
+      "../node_modules/class-validator/validation/validatoroptions.d.ts",
+      "../node_modules/class-validator/validation-schema/validationschema.d.ts",
+      "../node_modules/class-validator/container.d.ts",
+      "../node_modules/@types/validator/index.d.ts",
+      "../node_modules/class-validator/validation/validationtypeoptions.d.ts",
+      "../node_modules/class-validator/validation/validationarguments.d.ts",
+      "../node_modules/class-validator/decorator/validationoptions.d.ts",
+      "../node_modules/class-validator/decorator/decorators.d.ts",
+      "../node_modules/class-validator/validation/validatorconstraintinterface.d.ts",
+      "../node_modules/class-validator/validation/validationtypes.d.ts",
+      "../node_modules/class-validator/metadata/validationmetadataargs.d.ts",
+      "../node_modules/class-validator/metadata/validationmetadata.d.ts",
+      "../node_modules/class-validator/validation/validator.d.ts",
+      "../node_modules/class-validator/register-decorator.d.ts",
+      "../node_modules/class-validator/metadata/constraintmetadata.d.ts",
+      "../node_modules/class-validator/metadata/metadatastorage.d.ts",
+      "../node_modules/class-validator/index.d.ts",
       "../src/entity/token.ts",
       "../src/entity/user.ts",
       "../src/fastify/fastify.config.ts",
       "../src/adduser.ts",
+      "../node_modules/openapi3-ts/dist/model/specificationextension.d.ts",
+      "../node_modules/openapi3-ts/dist/model/openapi.d.ts",
+      "../node_modules/openapi3-ts/dist/model/server.d.ts",
+      "../node_modules/openapi3-ts/dist/model/index.d.ts",
+      "../node_modules/openapi3-ts/dist/dsl/openapibuilder.d.ts",
+      "../node_modules/openapi3-ts/dist/dsl/index.d.ts",
+      "../node_modules/openapi3-ts/dist/index.d.ts",
+      "../node_modules/class-transformer/metadata/exposeexcludeoptions.d.ts",
+      "../node_modules/class-transformer/metadata/typemetadata.d.ts",
+      "../node_modules/class-transformer/metadata/exposemetadata.d.ts",
+      "../node_modules/class-transformer/metadata/excludemetadata.d.ts",
+      "../node_modules/class-transformer/classtransformoptions.d.ts",
+      "../node_modules/class-transformer/transformoperationexecutor.d.ts",
+      "../node_modules/class-transformer/metadata/transformmetadata.d.ts",
+      "../node_modules/class-transformer/metadata/metadatastorage.d.ts",
+      "../node_modules/class-validator-jsonschema/build/defaultconverters.d.ts",
+      "../node_modules/class-validator-jsonschema/build/options.d.ts",
+      "../node_modules/class-validator-jsonschema/build/decorators.d.ts",
+      "../node_modules/class-validator-jsonschema/build/index.d.ts",
+      "../node_modules/class-transformer/storage.d.ts",
+      "../src/entity/image.ts",
+      "../node_modules/class-transformer/classtransformer.d.ts",
+      "../node_modules/class-transformer/decorators.d.ts",
+      "../node_modules/class-transformer/index.d.ts",
+      "../src/entity/catalgitemoption.ts",
+      "../src/entity/catalogitem.ts",
       "../node_modules/@types/node/globals.d.ts",
       "../node_modules/@types/node/assert.d.ts",
       "../node_modules/@types/node/async_hooks.d.ts",
@@ -8212,13 +9006,12 @@
       "../src/fastify/currentuser.ts",
       "../src/fastify/isadmin.ts",
       "../src/fastify/auth.ts",
-      "../src/entity/image.ts",
       "../src/fastify/imagesmanager.ts",
       "../src/fastify/catalog.ts",
       "../src/fastify/user.ts",
       "../node_modules/ajv/lib/ajv.d.ts",
       "../src/service.ts",
-      "../src/openapi.json",
+      "../oapi/openapi.json",
       "../src/fastify/fastify.ts",
       "../src/server.ts",
       "../node_modules/@types/anymatch/index.d.ts",
@@ -8262,80 +9055,7 @@
       "../node_modules/loglevel/index.d.ts",
       "../node_modules/@types/webpack-dev-middleware/index.d.ts",
       "../node_modules/@types/webpack-hot-middleware/index.d.ts",
-      [
-        "../node_modules/vue/types/options.d.ts",
-        [
-          {
-            "file": "../node_modules/vue/types/options.d.ts",
-            "start": 3489,
-            "length": 7,
-            "messageText": "Cannot find name 'Element'.",
-            "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "../node_modules/vue/types/options.d.ts",
-            "start": 6552,
-            "length": 11,
-            "messageText": "Cannot find name 'HTMLElement'.",
-            "category": 1,
-            "code": 2304
-          }
-        ]
-      ],
-      [
-        "../node_modules/vue/types/vnode.d.ts",
-        [
-          {
-            "file": "../node_modules/vue/types/vnode.d.ts",
-            "start": 813,
-            "length": 4,
-            "messageText": "Cannot find name 'Node'.",
-            "category": 1,
-            "code": 2304
-          }
-        ]
-      ],
-      "../node_modules/vue/types/plugin.d.ts",
-      [
-        "../node_modules/vue/types/vue.d.ts",
-        [
-          {
-            "file": "../node_modules/vue/types/vue.d.ts",
-            "start": 834,
-            "length": 7,
-            "messageText": "Cannot find name 'Element'.",
-            "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "../node_modules/vue/types/vue.d.ts",
-            "start": 1005,
-            "length": 7,
-            "messageText": "Cannot find name 'Element'.",
-            "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "../node_modules/vue/types/vue.d.ts",
-            "start": 1023,
-            "length": 7,
-            "messageText": "Cannot find name 'Element'.",
-            "category": 1,
-            "code": 2304
-          },
-          {
-            "file": "../node_modules/vue/types/vue.d.ts",
-            "start": 1473,
-            "length": 7,
-            "messageText": "Cannot find name 'Element'.",
-            "category": 1,
-            "code": 2304
-          }
-        ]
-      ],
-      "../node_modules/vue/types/index.d.ts",
-      "../vue.d.ts"
+      "../src/schema.ts"
     ]
   },
   "version": "3.7.2"

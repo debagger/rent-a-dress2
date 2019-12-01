@@ -27,38 +27,29 @@
             "post": {
                 "operationId": "newCatalogItem",
                 "requestBody": {
-                    "content": { "application/json": {
+                    "content": {
+                        "application/json": {
                             "schema": { "$ref": "#/components/schemas/catalogItem" }
-                        } }
+                        }
+                    }
                 },
-                "responses": { "200": {
+                "responses": {
+                    "200": {
                         "description": "Return savead catalogItem",
-                        "content": { "application/json": {
+                        "content": {
+                            "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/catalogItem"
                                 }
-                            } }
-                    } }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
     "components": {
-        "schemas": {
-            "catalogItem": {
-                "type": "object",
-                "required": ["id", "caption", "desc", "img"],
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "format": "int32"
-                    },
-                    "caption": {
-                        "type": "string"
-                    },
-                    "desc": { "type": "string" },
-                    "img": { "type": "string" }
-                }
-            }
+        "schemas": { "$ref": "oapi/definitions.json#/definitions"
         }
     }
 }

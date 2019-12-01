@@ -1,0 +1,105 @@
+{
+ "definitions": {
+  "Image": {
+   "properties": {
+    "id": {
+     "type": "integer"
+    },
+    "imageName": {
+     "type": "string"
+    }
+   },
+   "type": "object",
+   "required": [
+    "id",
+    "imageName"
+   ]
+  },
+  "User": {
+   "properties": {
+    "id": {
+     "type": "integer"
+    },
+    "username": {
+     "type": "string"
+    },
+    "email": {
+     "format": "email",
+     "type": "string"
+    },
+    "role": {
+     "type": "string"
+    },
+    "password": {
+     "type": "string"
+    }
+   },
+   "type": "object",
+   "required": [
+    "id",
+    "username",
+    "email",
+    "role",
+    "password"
+   ]
+  },
+  "Token": {
+   "properties": {
+    "id": {
+     "type": "integer"
+    },
+    "token": {
+     "type": "string"
+    }
+   },
+   "type": "object",
+   "required": [
+    "id",
+    "token"
+   ]
+  },
+  "catalogItemOption": {
+   "properties": {
+    "id": {
+     "type": "integer"
+    },
+    "size": {
+     "type": "string"
+    },
+    "color": {
+     "type": "string"
+    }
+   },
+   "type": "object",
+   "required": [
+    "id",
+    "size",
+    "color"
+   ]
+  },
+  "catalogItem": {
+   "properties": {
+    "id": {
+     "type": "integer"
+    },
+    "caption": {
+     "type": "string"
+    },
+    "desc": {
+     "type": "string"
+    },
+    "img": {
+     "type": "string"
+    },
+    "options": {}
+   },
+   "type": "object",
+   "required": [
+    "id",
+    "caption",
+    "desc",
+    "img"
+   ]
+  }
+ }
+}

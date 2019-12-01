@@ -36,14 +36,28 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var catalogItem_1 = require("./entity/catalogItem");
+var catalgItemOption_1 = require("./entity/catalgItemOption");
 var catalogItems = [];
 for (var index = 0; index < 10; index++) {
-    var item = {
-        id: index,
-        caption: "Платье",
-        desc: "Описание платья",
-        img: "image.jpg"
-    };
+    var item = new catalogItem_1.catalogItem();
+    item.id = index;
+    item.caption = "Платье";
+    item.desc = "Описание платья";
+    item.img = "image.jpg";
+    var options = [
+        Object.assign(new catalgItemOption_1.catalogItemOption(), {
+            id: 123,
+            size: "xl",
+            color: "red"
+        }),
+        Object.assign(new catalgItemOption_1.catalogItemOption(), {
+            id: 321,
+            size: "xs",
+            color: "white"
+        })
+    ];
+    item.options = options;
     catalogItems.push(item);
 }
 var Service = /** @class */ (function () {
@@ -52,58 +66,18 @@ var Service = /** @class */ (function () {
     Service.prototype.getCatalog = function (req, reply) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log("getCatalog", catalogItems);
-                reply.send(catalogItems);
-                return [2 /*return*/];
+                console.log("getCatalog");
+                return [2 /*return*/, catalogItems];
             });
         });
     };
     Service.prototype.newCatalogItem = function (req, reply) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                console.log("newCatalogItem", req.body);
+                console.log("newCatalogItem");
+                req.body.id = catalogItems.length + 1;
                 catalogItems.push(req.body);
                 return [2 /*return*/, req.body];
-            });
-        });
-    };
-    Service.prototype.catalog = function (req, reply) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("catalog", req.params);
-                return [2 /*return*/, { key: "value" }];
-            });
-        });
-    };
-    Service.prototype.getCatalogItem = function (req, reply) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("getCatalogItem", req.params);
-                return [2 /*return*/, { key: "value" }];
-            });
-        });
-    };
-    Service.prototype.updateCatalogItem = function (req, reply) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("updateCatalogItem", req.params);
-                return [2 /*return*/, { key: "value" }];
-            });
-        });
-    };
-    Service.prototype.deleteCatalogItem = function (req, reply) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("deleteCatalogItem", req.params);
-                return [2 /*return*/, { key: "value" }];
-            });
-        });
-    };
-    Service.prototype.catalogById = function (req, reply) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                console.log("catalogById", req.params);
-                return [2 /*return*/, { key: "value" }];
             });
         });
     };

@@ -53,8 +53,9 @@ const run = fastifyRun => {
         .then(() => {
           console.log("Fastify instance closed");
           clearCache();
+          require("./build/src/schema").generateSchemas();
           try {
-            run(require("./build/fastify/fastify").myFastify(nuxt));
+            run(require("./build/src/fastify/fastify").myFastify(nuxt));
           } catch (error) {
             console.log("error catched");
             console.log(error);
@@ -68,8 +69,8 @@ const run = fastifyRun => {
     });
   });
 };
-
-const { myFastify } = require("./build/fastify/fastify");
+require("./build/src/schema").generateSchemas();
+const { myFastify } = require("./build/src/fastify/fastify");
 const server = myFastify(nuxt);
 run(server);
 builder

@@ -1,6 +1,8 @@
+import { IsString, IsInt } from "class-validator";
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+
 @Entity()
 export class Image {
-  @PrimaryGeneratedColumn() id: number;
-  @Column() imageName: String;
+  @PrimaryGeneratedColumn() @IsInt() id: number;
+  @Column() @IsString() imageName: String;
 }

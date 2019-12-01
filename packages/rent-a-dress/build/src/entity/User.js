@@ -9,29 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var class_validator_1 = require("class-validator");
 var typeorm_1 = require("typeorm");
 var Token_1 = require("./Token");
 var User = /** @class */ (function () {
     function User() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
+        typeorm_1.PrimaryGeneratedColumn(), class_validator_1.IsInt(),
         __metadata("design:type", Number)
     ], User.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column(), class_validator_1.IsString(),
         __metadata("design:type", String)
     ], User.prototype, "username", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column(), class_validator_1.IsEmail(),
         __metadata("design:type", String)
     ], User.prototype, "email", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column(), class_validator_1.IsString(),
         __metadata("design:type", String)
     ], User.prototype, "role", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column(), class_validator_1.IsString(),
         __metadata("design:type", String)
     ], User.prototype, "password", void 0);
     __decorate([

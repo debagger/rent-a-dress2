@@ -9,22 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+var class_validator_1 = require("class-validator");
 var typeorm_1 = require("typeorm");
-var Image = /** @class */ (function () {
-    function Image() {
+var User_1 = require("./User");
+var Token = /** @class */ (function () {
+    function Token() {
     }
     __decorate([
-        typeorm_1.PrimaryGeneratedColumn(),
+        typeorm_1.PrimaryGeneratedColumn(), class_validator_1.IsInt(),
         __metadata("design:type", Number)
-    ], Image.prototype, "id", void 0);
+    ], Token.prototype, "id", void 0);
     __decorate([
-        typeorm_1.Column(),
+        typeorm_1.Column(), class_validator_1.IsString(),
         __metadata("design:type", String)
-    ], Image.prototype, "imageName", void 0);
-    Image = __decorate([
+    ], Token.prototype, "token", void 0);
+    __decorate([
+        typeorm_1.ManyToOne(function (type) { return User_1.User; }, function (user) { return user.id; }, {
+            eager: true
+        }),
+        __metadata("design:type", User_1.User)
+    ], Token.prototype, "user", void 0);
+    Token = __decorate([
         typeorm_1.Entity()
-    ], Image);
-    return Image;
+    ], Token);
+    return Token;
 }());
-exports.Image = Image;
-//# sourceMappingURL=Image.js.map
+exports.Token = Token;
+//# sourceMappingURL=Token.js.map

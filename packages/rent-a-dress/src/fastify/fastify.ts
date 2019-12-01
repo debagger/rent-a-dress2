@@ -16,7 +16,7 @@ import Ajv from "ajv";
 
 import {Service} from "../service";
 
-import swaggerConf from "../openapi.json";
+import swaggerConf from "../../oapi/openapi.json"; 
 
 export function myFastify(nuxt): any {
   return () => {
