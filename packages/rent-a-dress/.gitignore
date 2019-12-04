@@ -1,17 +1,10 @@
-# dependencies
+wwwroot/*.js
 node_modules
-
-# logs
-npm-debug.log
-
-# Nuxt build
-.nuxt
-
-# Nuxt generate
+typings
 dist
-
-logs
-
-data
-
 ssl
+data
+logs
+.vscode
+.nuxt
+server/build

@@ -1,4 +1,4 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 module.exports = {
   /*
    ** Headers of the page
@@ -27,18 +27,18 @@ module.exports = {
     /*
      ** Run ESLint on save
      */
-    extend(config, { isDev, isClient }) {
-      if (isDev && isClient) {
-        config.module.rules.push({
-          enforce: "pre",
-          test: /\.(js|vue)$/,
-          loader: "eslint-loader",
-          exclude: /(node_modules)/
-        });
-      }
-    }
+    // extend(config, { isDev, isClient }) {
+    //   if (isDev && isClient) {
+    //     config.module.rules.push({
+    //       enforce: "pre",
+    //       test: /\.(js|vue)$/,
+    //       loader: "eslint-loader",
+    //       exclude: /(node_modules)/
+    //     });
+    //   }
+    // }
   },
-  buildModules: ["@nuxtjs/vuetify"],
+  buildModules: ["@nuxtjs/vuetify", '@nuxt/typescript-build'],
   modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
   axios: {
     baseURL: "",
@@ -63,5 +63,8 @@ module.exports = {
     }
   },
   css: ["swiper/dist/css/swiper.css"],
-  plugins: [{ src: "~/plugins/swiper.js", ssr: false }]
+  plugins: [
+    { src: "~/plugins/swiper.js", ssr: false },
+    { src: "~/plugins/api.ts", ssr: false }
+  ]
 };

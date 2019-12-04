@@ -19,8 +19,10 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropOptions } from "vue";
+
+export default Vue.extend({
   props: ["imgs"],
   data() {
     return {
@@ -64,7 +66,7 @@ export default {
     // );
     // this.mySwiper.slideTo(3);
   }
-};
+});
 </script>
 
 

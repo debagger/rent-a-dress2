@@ -19,7 +19,9 @@
   </v-row>
 </template>
 
-<script>
+<script lang="ts">
+import Vue, { PropOptions } from "vue";
+
 export default {
   data: () => ({
     show: false,

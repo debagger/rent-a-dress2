@@ -1,1 +1,0 @@
-{"version":3,"file":"Image.js","sourceRoot":"","sources":["../../../src/entity/Image.ts"],"names":[],"mappings":";;;;;;;;;;;AAAA,mDAAkD;AAClD,mCAAiE;AAGjE;IAAA;IAGA,CAAC;IAFoC;QAAlC,gCAAsB,EAAE,EAAE,uBAAK,EAAE;;qCAAY;IACxB;QAArB,gBAAM,EAAE,EAAE,0BAAQ,EAAE;kCAAY,MAAM;4CAAC;IAF7B,KAAK;QADjB,gBAAM,EAAE;OACI,KAAK,CAGjB;IAAD,YAAC;CAAA,AAHD,IAGC;AAHY,sBAAK"}

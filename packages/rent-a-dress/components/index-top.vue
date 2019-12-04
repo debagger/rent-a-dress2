@@ -1,10 +1,6 @@
 <template>
   <v-window :height="'100vh'" v-model="window" style="background: pink">
-    <v-window-item
-      v-for="(img, i) in imgs"
-      :key="i"
-      transition="fade-transition"
-    >
+    <v-window-item v-for="(img, i) in imgs" :key="i" transition="fade-transition">
       <v-img
         :src="img"
         height="100vh"
@@ -22,10 +18,8 @@
           <v-container>
             <v-row justify="center">
               <v-col class="text-center">
-              <h1
-                class="font-weight-light display-1"
-              >Прокат модной одежды в Новоуральске</h1>
-              <p class="overline font-italic">Мы меняем правила</p>
+                <h1 class="font-weight-light display-1">Прокат модной одежды в Новоуральске</h1>
+                <p class="overline font-italic">Мы меняем правила</p>
               </v-col>
             </v-row>
             <v-row justify="center">
@@ -56,7 +50,7 @@
             </v-col>
 
             <v-col class="mr-12 text-right">
-              <v-icon>mdi-phone</v-icon> Контакты
+              <v-icon>mdi-phone</v-icon>Контакты
             </v-col>
           </v-row>
         </div>
@@ -89,21 +83,27 @@
   </v-window>
 </template>
 
-<script>
-export default {
-  props: ["imgs"],
+<script lang="ts">
+import Vue, { PropOptions } from "vue";
+
+export default Vue.extend({
+  props: { imgs: <PropOptions<string[]>>{ type: Array, default: () => [] } },
   data() {
     return {
       window: 0
     };
   },
-
+  methods: {
+    run: function() {
+      this.window;
+    }
+  },
   mounted() {
     setInterval(() => {
       if (++this.window >= this.imgs.length) this.window = 0;
     }, 6000);
   }
-};
+});
 </script>
 
 <style>
