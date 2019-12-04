@@ -21,40 +21,43 @@
 
 <script lang="ts">
 import Vue, { PropOptions } from "vue";
-
-export default {
-  data: () => ({
-    show: false,
-    login: {
-      username: "",
-      password: ""
-    }
-  }),
+ 
+export default Vue.extend({
+  data() {
+    return {
+      show: false,
+      login: {
+        username: "",
+        password: ""
+      }
+    };
+  },
   methods: {
     showForm() {
       this.show = true;
+      
     },
-    loginLocal: function() {
-      this.$auth
+    loginLocal() {
+      this.$auth 
         .loginWith("local", {
-          data: { 
-            username: this.login.username, 
-            password: this.login.password 
+          data: {
+            username: this.login.username,
+            password: this.login.password
           }
         })
         .then(
-          function() {
+          () => {
             this.show = false;
             this.login.username = "";
             this.login.password = "";
-          }.apply(this)
+          }
         );
     },
     logout: function() {
       this.$auth.logout();
     }
   }
-};
+});
 </script>
 
 <style>

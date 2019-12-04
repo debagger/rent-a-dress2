@@ -25,7 +25,8 @@
      },
      "types": [
        "@types/node",
-       "@nuxt/types"
+       "@nuxt/types",
+       "./node_modules/@types/nuxtjs__auth"
      ]
    },
    "exclude": [

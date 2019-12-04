@@ -65,7 +65,7 @@
 import IndexTop from "~/components/index-top.vue";
 import Swiper from "~/components/Swiper.vue";
 import Vue, { PropOptions } from 'vue';
-import "../plugins/api";
+// import "../plugins/api";
 
 export default Vue.extend({
   components: { Swiper, IndexTop },
