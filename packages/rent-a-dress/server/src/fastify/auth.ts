@@ -58,7 +58,7 @@ export async function authPlugin(fastify: FastifyInstance, config, done) {
         let item = await Users.findOne({
           username: foundUser.username,
           password: foundUser.password
-        });
+        }); 
         if (item) {
           const newToken = new Token();
           newToken.user = item;

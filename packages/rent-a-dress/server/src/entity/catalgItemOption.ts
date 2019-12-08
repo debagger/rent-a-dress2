@@ -11,13 +11,14 @@ import { catalogItem } from "./catalogItem";
 @Entity()
 export class catalogItemOption {
   @PrimaryGeneratedColumn() @IsInt() id: number;
+
   @ManyToOne(
     type => catalogItem,
     catalogItem => catalogItem.options
   )
   catalogItem: catalogItem;
 
-  @IsString() size: string;
-  @IsString() color: string;
+  @IsString() @Column() size: string;
+  @IsString() @Column() color: string;
 
 }

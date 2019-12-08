@@ -5,7 +5,10 @@
     "description": "This is API for rent-a-dress.ru service",
     "version": "1.0.1"
   },
-  "servers": [{ "url": "https://rent-a-dress.ru" }, {"url": "https://localhost"}],
+  "servers": [
+    { "url": "https://rent-a-dress.ru" },
+    { "url": "https://localhost" }
+  ],
   "paths": {
     "/api/catalog": {
       "get": {
@@ -62,14 +65,16 @@
               }
             }
           },
-          "404":{
+          "404": {
             "description": "id not found",
-            "content": {"text/plain": {
-              "schema":{
-                "type": "string",
-                "default": "id not found"
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "default": "id not found"
+                }
               }
-            }}
+            }
           }
         }
       },
@@ -81,9 +86,112 @@
           "schema": { "type": "integer" }
         }
       ]
+    },
+    "/api/auth/user": {
+      "get": {
+        "operationId": "getUserByToken",
+        "responses": {
+          "200": {
+            "description": "If token found return User",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "user": { "$ref": "#/components/schemas/User" }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If token not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "default": "User or token not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/login": {
+      "post": {
+        "operationId": "userLogin",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "username": { "type": "string" },
+                  "password": { "type": "string" }
+                },
+                "required": ["username", "password"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "If login accepted return token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": { "token": { "type": "string" } }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found or password incorrect",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "default": "User not found or password incorrect"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "operationId": "userLogout",
+        "responses": {
+          "200": {
+            "description": "If token found return User",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "default": "User logged out"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "If token not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "default": "User or token not found"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
-    "schemas": {  }
+    "schemas": {}
   }
 }

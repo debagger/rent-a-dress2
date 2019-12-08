@@ -10,7 +10,6 @@ import {
 import { catalogItemOption } from "./catalgItemOption";
 
 @Entity()
-@TableInheritance({ column: "type" })
 export class catalogItem {
   @PrimaryGeneratedColumn() @IsInt() id: number;
   @Column() @IsString() caption: string;

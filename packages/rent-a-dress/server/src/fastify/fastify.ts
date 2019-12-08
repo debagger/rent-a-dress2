@@ -27,10 +27,11 @@ export function myFastify(nuxt): any {
     // Require the framework and instantiate it
     const fastify = Fastify(config.fastify);
 
-    const ajv = new Ajv(config.ajv);
-    fastify.setSchemaCompiler(function(schema) {
-      return ajv.compile(schema);
-    });
+    // const ajv = new Ajv(config.ajv);
+    // fastify.setSchemaCompiler(function(schema) {
+    //   console.log(schema);
+    //   return ajv.compile(schema);
+    // });
 
     fastify.register(require("fastify-cookie"));
 
@@ -56,31 +57,31 @@ export function myFastify(nuxt): any {
       service: new Service()
     });
 
-    fastify.register(dbPlugin, config).after(err => {
-      if (err) {
-        console.log(err);
-      } else {
-        fastify.register(currentUserPlugin, config).after(err => {
-          if (err) {
-            console.log(err);
-          } else {
-            fastify.register(isAdminPlugin, config).after(err => {
-              if (err) {
-                console.log(err);
-              } else {
-                const logErr = err => {
-                  if (err) console.log(err);
-                };
-                // fastify.register(authPlugin, config).after(logErr);
-                // fastify.register(userPlugin, config).after(logErr);
-                // fastify.register(CatalogPlugin, config).after(logErr);
-                // fastify.register(imagesManagerPlugin, config).after(logErr);
-              }
-            });
-          }
-        });
-      }
-    });
+    // fastify.register(dbPlugin, config).after(err => {
+    //   if (err) {
+    //     console.log(err);
+    //   } else {
+    //     fastify.register(currentUserPlugin, config).after(err => {
+    //       if (err) {
+    //         console.log(err);
+    //       } else {
+    //         fastify.register(isAdminPlugin, config).after(err => {
+    //           if (err) {
+    //             console.log(err);
+    //           } else {
+    //             const logErr = err => {
+    //               if (err) console.log(err);
+    //             };
+    //             // fastify.register(authPlugin, config).after(logErr);
+    //             // fastify.register(userPlugin, config).after(logErr);
+    //             // fastify.register(CatalogPlugin, config).after(logErr);
+    //             // fastify.register(imagesManagerPlugin, config).after(logErr);
+    //           }
+    //         });
+    //       }
+    //     });
+    //   }
+    // });
 
     fastify.post("/webhook", function(request, reply) {
       const exec = require("child_process").exec;

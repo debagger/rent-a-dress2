@@ -15,7 +15,7 @@ async function dbPlugin(fastify: FastifyInstance, config, done) {
         .catch(console.log);
     });
   } catch (error) {
-    console.log(error);
+    console.log(error); 
   }
 }
 

@@ -2,6 +2,18 @@ import { catalogItem } from "./entity/catalogItem";
 import { catalogItemOption } from "./entity/catalgItemOption";
 import { FastifyRequest, FastifyReply } from "fastify";
 
+import { User } from "./entity/User";
+import { Token } from "./entity/Token";
+
+import {
+  createConnection,
+  Connection,
+  getConnectionManager,
+  getConnection
+} from "typeorm";
+import { config as fastifyConfig } from "./fastify/fastify.config";
+import { ServerResponse } from "http";
+
 let catalogItems: catalogItem[] = [];
 for (let index = 0; index < 10; index++) {
   const item = new catalogItem();
@@ -28,33 +40,126 @@ for (let index = 0; index < 10; index++) {
 
   catalogItems.push(item);
 }
+
+let _db: Connection;
+
+async function getDB(): Promise<Connection> {
+  if (!_db) {
+    const mgr = getConnectionManager();
+    if (mgr.has("default")) {
+      _db = mgr.get("default");
+    } else {
+      _db = await createConnection();
+    }
+  }
+  return _db;
+}
+
 export class Service {
   constructor() {}
 
-  async getCatalog(req, reply) {
-    console.log("getCatalog");
-    return catalogItems;
+  async getCatalog(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const db = await getDB();
+    const catalogItems = db.getRepository(catalogItem);
+    return await catalogItems.find();
   }
 
-  async newCatalogItem(req, reply) {
-    console.log("newCatalogItem");
-    req.body.id = catalogItems.length + 1;
-    catalogItems.push(req.body);
-    return req.body;
+  async newCatalogItem(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const db = await getDB();
+    const catalogItems = db.getRepository(catalogItem);
+    delete request.body.id;
+    const newItem = catalogItems.create(request.body);
+    const savedItem = await catalogItems.insert(newItem);
+    return newItem;
   }
 
-  async deleteCatalogItem(req: FastifyRequest, reply) {
-    const id = req.params["id"];
-    console.log(`deleteCatalogItem(${id})`);
-const leng = catalogItems.length;
-    catalogItems = catalogItems.filter(item => item.id != id);
-    if(leng>catalogItems.length){
+  async deleteCatalogItem(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const idToDelete = request.params["id"];
+    console.log(`deleteCatalogItem(${idToDelete})`);
+    const db = await getDB();
+    const catalogItems = db.getRepository(catalogItem);
+    const itemToDelete = await catalogItems.findOne(idToDelete);
+    if (itemToDelete) {
+      await catalogItems.remove(itemToDelete);
       reply.code(204);
       return "deleted";
-    }else{
+    } else {
       reply.code(404);
-      return "not found";
+      return "Item not found";
     }
-    
+  }
+
+  async getUserByToken(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const token: string = request["cookies"]["auth._token.local"];
+    console.log("token = ", token);
+    const db = await getDB();
+    const tokens = db.getRepository(Token);
+
+    const dbToken = await tokens.findOne({ token: token });
+    if (dbToken) {
+      return { user: dbToken.user };
+    }
+    reply.code(404);
+    return "Token not found";
+  }
+
+  async userLogin(request, reply) {
+    const userLogin: { username: string; password: string } = request.body;
+    console.log(userLogin);
+    const db = await getDB();
+    const users = db.getRepository(User);
+    const dbUser = await users.findOne({ username: userLogin.username });
+    if (dbUser) {
+      const inputHash = fastifyConfig.hash(userLogin.password);
+      if (dbUser.password === inputHash) {
+        const Tokens = db.getRepository(Token);
+
+        const token = fastifyConfig.hash(
+          `${Date.now()}.${dbUser.username}.${dbUser.password}`
+        );
+
+        const newToken = new Token();
+        newToken.user = dbUser;
+        newToken.token = token;
+        const savedToken = await Tokens.manager.save(newToken);
+
+        return { token: savedToken.token };
+      } else {
+        reply.code(404);
+        return "Password incorrect";
+      }
+    } else {
+      reply.code(404);
+      return "User not found";
+    }
+  }
+  async userLogout(request, reply) {
+    const cookieToken: string = request["cookies"]["auth._token.local"];
+    if (cookieToken) {
+      const db = await getDB();
+      const tokens = db.getRepository(Token);
+      const dbToken = await tokens.findOne({ token: cookieToken });
+
+      if (dbToken) {
+        const result = await tokens.remove(dbToken);
+        return "User logged out";
+      }
+      reply.code(404);
+      return "Token not found";
+    }
+    reply.code(404);
+    return "'auth._token.local' needed";
   }
 }

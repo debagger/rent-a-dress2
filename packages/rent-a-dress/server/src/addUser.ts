@@ -8,7 +8,7 @@ import {config} from  "./fastify/fastify.config";
 createConnection()
   .then(async connection => {
     const user = new User();
-    user.username = "debagger";
+    user.username = "admin";
     user.email = "debagger@gmail.com";
     user.role = "admin";
     user.password = config.hash("123");
