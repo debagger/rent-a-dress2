@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-row>
-      <v-col class=" text-center grey darken-4 white--text">
+      <v-col class="text-center grey darken-4 white--text">
         <h2 class="font-weight-thin display-2">RENT-A-DRESS</h2>
       </v-col>
     </v-row>
@@ -23,10 +23,13 @@
   </v-content>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend( {
   data() {
     return {
+      items: [],
       dialog: false,
       headers: [
         { text: "id", value: "id" },
@@ -37,15 +40,12 @@ export default {
       ]
     };
   },
-  async asyncData({ $axios }) {
-    const ids = await $axios.$get("/api/catalog/items");
-    const data = [];
-    for (const id of ids) {
-      data.push(await $axios.$get(`/api/catalog/item/${id}`));
-    }
-    return { items: data };
+  async asyncData() {},
+  async mounted() {
+    const items = await this.$api.getCatalog();
+    this.items = items.data;
   }
-};
+});
 </script>
 
 <style>
