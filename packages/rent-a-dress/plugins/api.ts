@@ -7,6 +7,7 @@ declare module 'vue/types/vue' {
     }
   }
 const hostname = window.location.origin;
+console.log("hostname = ", hostname);
 const api = new DefaultApi(undefined, hostname);
 Vue.prototype.$api = api;
   
