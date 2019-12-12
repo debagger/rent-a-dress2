@@ -272,6 +272,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCatalogItem(id: number, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getCatalogItem.');
+            }
+            const localVarPath = `/api/catalog/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -312,6 +346,39 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 baseOptions = configuration.baseOptions;
             }
             const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
+            const needsSerialization = (typeof catalogItem !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(catalogItem !== undefined ? catalogItem : {}) : (catalogItem || "");
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {CatalogItem} [catalogItem] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCatalogItem(catalogItem?: CatalogItem, options: any = {}): RequestArgs {
+            const localVarPath = `/api/catalog`;
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'PUT', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
@@ -428,6 +495,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCatalogItem(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CatalogItem> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).getCatalogItem(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -446,6 +526,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         newCatalogItem(catalogItem?: CatalogItem, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CatalogItem> {
             const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).newCatalogItem(catalogItem, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {CatalogItem} [catalogItem] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCatalogItem(catalogItem?: CatalogItem, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CatalogItem> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).updateCatalogItem(catalogItem, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -504,6 +597,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getCatalogItem(id: number, options?: any) {
+            return DefaultApiFp(configuration).getCatalogItem(id, options)(axios, basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -518,6 +620,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         newCatalogItem(catalogItem?: CatalogItem, options?: any) {
             return DefaultApiFp(configuration).newCatalogItem(catalogItem, options)(axios, basePath);
+        },
+        /**
+         * 
+         * @param {CatalogItem} [catalogItem] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        updateCatalogItem(catalogItem?: CatalogItem, options?: any) {
+            return DefaultApiFp(configuration).updateCatalogItem(catalogItem, options)(axios, basePath);
         },
         /**
          * 
@@ -569,6 +680,17 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getCatalogItem(id: number, options?: any) {
+        return DefaultApiFp(this.configuration).getCatalogItem(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
@@ -586,6 +708,17 @@ export class DefaultApi extends BaseAPI {
      */
     public newCatalogItem(catalogItem?: CatalogItem, options?: any) {
         return DefaultApiFp(this.configuration).newCatalogItem(catalogItem, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * 
+     * @param {CatalogItem} [catalogItem] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public updateCatalogItem(catalogItem?: CatalogItem, options?: any) {
+        return DefaultApiFp(this.configuration).updateCatalogItem(catalogItem, options)(this.axios, this.basePath);
     }
 
     /**

@@ -56,9 +56,70 @@
       }
      }
     }
+   },
+   "put": {
+    "operationId": "updateCatalogItem",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/catalogItem"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Return updated item",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/catalogItem"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Item not found",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "default": "Item not found"
+        }
+       }
+      }
+     }
+    }
    }
   },
   "/api/catalog/{id}": {
+   "get": {
+    "operationId": "getCatalogItem",
+    "responses": {
+     "200": {
+      "description": "Return all items from catalog",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/catalogItem"
+        }
+       }
+      }
+     },
+     "404": {
+      "description": "Return if item not found",
+      "content": {
+       "text/plain": {
+        "schema": {
+         "type": "string",
+         "default": "Item not found"
+        }
+       }
+      }
+     }
+    }
+   },
    "delete": {
     "operationId": "deleteCatalogItem",
     "responses": {

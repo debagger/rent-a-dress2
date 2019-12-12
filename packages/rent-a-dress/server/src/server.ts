@@ -1,7 +1,7 @@
 const { Nuxt } = require("nuxt");
 const nuxtConfig = require("./nuxt.config");
 const path = require("path");
-import {myFastify} from "./fastify/fastify"
+import {myFastify} from "./fastify/fastify" 
 nuxtConfig.dev = false;
 const nuxt = new Nuxt(nuxtConfig);
 

@@ -43,7 +43,7 @@ module.exports = {
   axios: {
     baseURL: "",
     https: true,
-    debug: true
+    debug: false
   },
   auth: {
     strategies: {

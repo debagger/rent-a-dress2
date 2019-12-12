@@ -1,15 +1,16 @@
 <template>
-  <v-row>
-    <v-col>
+  <v-row class="d-flex justify-between">
+    <v-col cols="8">
       <v-form>
+        <v-text-field class="mr-4 ml-4" v-model="item.id" readonly label="id"></v-text-field>
         <v-text-field class="mr-4 ml-4" v-model="item.caption" label="Название"></v-text-field>
         <v-text-field class="mr-4 ml-4" v-model="item.price" label="Цена"></v-text-field>
-        <v-text-field class="mr-4 ml-4" v-model="item.details.desc" label="Описание"></v-text-field>
+        <v-text-field class="mr-4 ml-4" v-model="item.desc" label="Описание"></v-text-field>
       </v-form>
     </v-col>
-    <v-col>
-      <v-img contain max-height="100vh" max-width="50vw" :src="'/img/' + item.img"></v-img>
-      <v-slide-group>
+    <v-col cols="4">
+      <v-img contain max-height="60vh" :src="'/img/' + item.img"></v-img>
+      <!-- <v-slide-group>
         <v-slide-item v-for="(img, i) in item.details.otherImgs" :key="i">
           <v-img max-height="200px" max-width="100px" :src="'/img/' + img"></v-img>
         </v-slide-item>
@@ -46,81 +47,53 @@
             </v-card>
           </v-dialog>
         </v-slide-item>
-      </v-slide-group>
+      </v-slide-group> -->
     </v-col>
   </v-row>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropOptions } from "vue";
+import { CatalogItem } from "oapi-client-typescript-axios";
+export default Vue.extend({
   data() {
     return {
       filesToUpload: [],
       loading: false,
-      dialog: false,
-      item: {
-        id: -1,
-        caption: "",
-        price: 0,
-        img: "",
-        details: {
-          otherImgs: [],
-          desc: ""
-        }
-      }
+      dialog: false
     };
   },
-  props: ["itemid"],
+  props: { item: <PropOptions<CatalogItem>>{ type: Object } },
   methods: {
-    upload: function() {
-      this.loading = true;
-      const formData = new FormData();
-      formData.append("itemId", this.item.id);
-      for (var i = 0; i < this.filesToUpload.length; i++) {
-        let file = this.filesToUpload[i];
-        formData.append( i, file);
-      }
-
-      this.$axios
-        .$post("/api/images/upload", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
-        })
-        .then(function(result) {
-          console.log(result);
-          this.loading = false;
-          this.dialog = false;
-          this.item.details.otherImgs.push(...result.result);
-        }.bind(this))
-        .catch(function(err) {
-          this.loading = false;
-          console.error(err);
-        }.bind(this));
-    }
-  },
-  mounted() {
-    if (this.$props.itemid === "new") {
-      this.item = {
-        id: -1,
-        caption: "Красивое платье № 1",
-        price: 1000,
-        img: "1.jpg",
-        details: {
-          otherImgs: ["1.jpg", "2.jpg", "3.jpg"],
-          desc: "Самое замечательное что может быть 1"
-        }
-      };
-    } else {
-      this.$axios
-        .$get(`/api/catalog/item/${this.$props.itemid}`)
-        .then(result => {
-          this.item = result;
-        });
-    }
-  }
-};
+    // upload: function() {
+    //   this.loading = true;
+    //   const formData = new FormData();
+    //   formData.append("itemId", this.item.id);
+    //   for (var i = 0; i < this.filesToUpload.length; i++) {
+    //     let file = this.filesToUpload[i];
+    //     formData.append( i, file);
+    //   }
+    //   this.$axios
+    //     .$post("/api/images/upload", formData, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data"
+    //       }
+    //     })
+    //     .then(function(result) {
+    //       console.log(result);
+    //       this.loading = false;
+    //       this.dialog = false;
+    //       this.item.details.otherImgs.push(...result.result);
+    //     }.bind(this))
+    //     .catch(function(err) {
+    //       this.loading = false;
+    //       console.error(err);
+    //     }.bind(this));
+    // }
+  } 
+});
 </script>
 
 <style>
+
 </style>

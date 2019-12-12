@@ -66,7 +66,22 @@ export class Service {
     const catalogItems = db.getRepository(catalogItem);
     return await catalogItems.find();
   }
-
+  async getCatalogItem(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const id = request.params["id"];
+    const db = await getDB();
+    const catalogItems = db.getRepository(catalogItem);
+    const foundItem = await catalogItems.findOne(id);
+    if (foundItem) {
+      return foundItem;
+    } else {
+      reply.code(404);
+      return "Item not found";
+    }
+  }
+   
   async newCatalogItem(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
@@ -77,6 +92,22 @@ export class Service {
     const newItem = catalogItems.create(request.body);
     const savedItem = await catalogItems.insert(newItem);
     return newItem;
+  }
+
+  async updateCatalogItem(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const db = await getDB();
+    const catalogItems = db.getRepository(catalogItem);
+    const dbItem = await catalogItems.findOne(request.body.id);
+    if (dbItem) {
+      const result = await catalogItems.save(request.body);
+      return result;
+    } else {
+      reply.code(404);
+      return "Item not found";
+    }
   }
 
   async deleteCatalogItem(
