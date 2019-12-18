@@ -39,48 +39,55 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import itemEditor from "~/components/itemEditor.vue";
 import { CatalogItem } from "~/oapi-client-typescript-axios";
+import { Component, Vue } from "nuxt-property-decorator";
+@Component({ components: { itemEditor } })
+export default class Index extends Vue {
+  public dialog = false;
 
-export default Vue.extend({
-  components: { itemEditor },
-  data() {
-    return {
-      items: <CatalogItem[]>[],
-      dialog: false,
-      dialogItem: <CatalogItem>{ id: 0, caption: "", desc: "", img: "" },
-      headers: [
-        { text: "id", value: "id" },
-        { text: "Изображение", value: "img" },
-        { text: "Название", value: "caption" },
-        { text: "Описание", value: "desc" },
-        { text: "Actions", value: "action", sortable: false }
-      ]
-    };
-  },
-  methods: {
-    edit(item: CatalogItem) {
-      this.dialogItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-    async save() {
-      const result = await this.$api.updateCatalogItem(this.dialogItem);
-      debugger;
-      if (result.status == 200) {
-        const updatedItem = result.data;
-        const index = this.items.findIndex(item => item.id == updatedItem.id);
-        Object.assign(this.items[index], updatedItem);
-        this.dialog = false;
-      }
-    }
-  },
-  async asyncData() {},
-  async mounted() {
-    const items = await this.$api.getCatalog();
-    this.items = items.data;
+  public dialogItem: CatalogItem = <CatalogItem>{
+    id: 0,
+    caption: "",
+    desc: "",
+    img: ""
+  };
+
+  public headers = [
+    { text: "id", value: "id" },
+    { text: "Изображение", value: "img" },
+    { text: "Название", value: "caption" },
+    { text: "Цена", value: "price" },
+    { text: "Описание", value: "desc" },
+    { text: "Actions", value: "action", sortable: false }
+  ];
+
+  get items() {
+    return this.$accessor.catalog;
   }
-});
+
+  public edit(item: CatalogItem) {
+    this.dialogItem = Object.assign({}, item);
+    this.dialog = true;
+  }
+  public async save() {
+    const result = await this.$api.updateCatalogItem(this.dialogItem);
+    if (result.status == 200) {
+      const updatedItem = result.data;
+      const index = this.items.findIndex(item => item.id == updatedItem.id);
+      Object.assign(this.items[index], updatedItem);
+      this.dialog = false;
+    }
+  }
+  public async asyncData() {}
+  public async mounted() {
+    // const items = await this.$api.getCatalog();
+    // this.items = items.data;
+
+    console.log("this.$accessor = ", this.$accessor);
+    await this.$accessor.fetchCatalog();
+  }
+}
 </script>
 
 <style>

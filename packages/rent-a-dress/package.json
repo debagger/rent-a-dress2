@@ -5,10 +5,13 @@
   "author": "debagger <debagger@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "nuxt-ts",
+    "dev": "nuxt",
+    "dev2": "node ./server/dev-server.js",
     "build": "nuxt-ts build",
     "generate": "nuxt-ts generate",
-    "start": "nuxt-ts start"
+    "start": "node server.js",
+    "migrate": "typeorm migration:run",
+    "gen-client": "openapi-generator generate -g typescript-axios -i ./server/oapi/openapi-defs.json --skip-validate-spec -o oapi-client-typescript-axios"
   },
   "dependencies": {
     "@nuxt/types": "^0.3.4",
@@ -26,17 +29,23 @@
     "fastify-openapi-glue": "^1.3.0",
     "fastify-static": "^2.5.0",
     "node-watch": "^0.6.3",
-    "nuxt": "^2.10.0",
+    "nuxt": "^2.11.0",
+    "nuxt-property-decorator": "^2.5.0",
+    "nuxt-ts": "^2.8.1",
+    "nuxt-typed-vuex": "^0.1.15",
     "reflect-metadata": "^0.1.13",
     "sqlite3": "^4.1.0",
     "superagent": "^5.1.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typeorm": "^0.2.20",
-    "vue-awesome-swiper": "^3.1.3"
+    "vue": "^2.6.11",
+    "vue-awesome-swiper": "^3.1.3",
+    "vuex": "^3.1.2",
+    "vuex-module-decorators": "^0.11.0"
   },
   "devDependencies": {
     "@nuxt/typescript-build": "^0.3.10",
-    "@nuxtjs/vuetify": "^1.9.0",
+    "@nuxtjs/vuetify": "^1.9.1",
     "@types/node": "^12.12.12",
     "babel-eslint": "^10.0.1",
     "eslint": "^4.19.1",

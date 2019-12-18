@@ -91,6 +91,9 @@
         "img": {
           "type": "string"
         },
+        "price": {
+          "type": "integer"
+        },
         "options": {}
       },
       "type": "object",
@@ -98,7 +101,8 @@
         "id",
         "caption",
         "desc",
-        "img"
+        "img",
+        "price"
       ]
     }
   }

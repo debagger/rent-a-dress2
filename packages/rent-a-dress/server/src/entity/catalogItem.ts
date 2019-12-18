@@ -15,6 +15,7 @@ export class catalogItem {
   @Column() @IsString() caption: string;
   @Column() @IsString() desc: string;
   @Column() @IsString() img: string;
+  @Column({nullable:true}) @IsInt() price?: number; 
 
   @OneToMany(
     type => catalogItemOption,

@@ -7,14 +7,14 @@
        "server/build/src/entity/**/*.js"
     ],
     "migrations": [
-       "src/migration/**/*.ts"
+       "server/build/src/migration/**/*.js"
     ],
     "subscribers": [
        "src/subscriber/**/*.ts"
     ],
     "cli": {
        "entitiesDir": "server/build/src/entity",
-       "migrationsDir": "src/migration",
+       "migrationsDir": "server/src/migration",
        "subscribersDir": "src/subscriber"
     }
  }

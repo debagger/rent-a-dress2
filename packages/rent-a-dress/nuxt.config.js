@@ -1,5 +1,6 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 module.exports = {
+  mode: "universal",
   /*
    ** Headers of the page
    */
@@ -37,8 +38,15 @@ module.exports = {
     //     });
     //   }
     // }
+    additionalExtensions:["ts"],
+    watch:["~/store/**/*"],
+    transpile: [/nuxt-typed-vuex/]
   },
-  buildModules: ["@nuxtjs/vuetify", '@nuxt/typescript-build'],
+  buildModules: [
+    "nuxt-typed-vuex",
+    "@nuxtjs/vuetify",
+    "@nuxt/typescript-build"
+  ],
   modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
   axios: {
     baseURL: "",

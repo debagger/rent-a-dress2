@@ -51,6 +51,12 @@ export interface CatalogItem {
     img: string;
     /**
      * 
+     * @type {number}
+     * @memberof CatalogItem
+     */
+    price: number;
+    /**
+     * 
      * @type {object}
      * @memberof CatalogItem
      */

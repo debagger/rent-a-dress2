@@ -1,6 +1,6 @@
 "use strict";
-const { Nuxt, Builder } = require("nuxt");
-const nuxtConfig = require("../nuxt.config");
+const {Nuxt, Builder } = require("nuxt");
+const nuxtConfig = require("./nuxt.config");
 const nuxt = new Nuxt(nuxtConfig);
 const builder = new Builder(nuxt);
 const path = require("path");
@@ -53,9 +53,9 @@ const run = fastifyRun => {
         .then(() => {
           console.log("Fastify instance closed");
           clearCache();
-          require("./build/src/schema").generateSchemas();
+          require("./server/build/src/schema").generateSchemas();
           try {
-            run(require("./build/src/fastify/fastify").myFastify(nuxt));
+            run(require("./server/build/src/fastify/fastify").myFastify(nuxt));
           } catch (error) {
             console.log("error catched");
             console.log(error);
@@ -69,11 +69,14 @@ const run = fastifyRun => {
     });
   });
 };
-require("./build/src/schema").generateSchemas();
-const { myFastify } = require("./build/src/fastify/fastify");
-const server = myFastify(nuxt);
-run(server);
-builder
-  .build()
-  .then(function() {})
-  .catch(console.error);
+require("./server/build/src/schema").generateSchemas();
+const { myFastify } = require("./server/build/src/fastify/fastify");
+nuxt.ready().then(function(){
+  console.log(nuxt);
+  const server = myFastify(nuxt);
+  run(server);
+  builder
+    .build()
+    .then(function() {})
+    .catch(console.error);
+})
