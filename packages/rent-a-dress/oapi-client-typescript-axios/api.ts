@@ -128,6 +128,19 @@ export interface InlineObject {
 /**
  * 
  * @export
+ * @interface InlineObject1
+ */
+export interface InlineObject1 {
+    /**
+     * 
+     * @type {any}
+     * @memberof InlineObject1
+     */
+    file?: any;
+}
+/**
+ * 
+ * @export
  * @interface InlineResponse200
  */
 export interface InlineResponse200 {
@@ -406,6 +419,43 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {any} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadImage(file?: any, options: any = {}): RequestArgs {
+            const localVarPath = `/api/images/upload`;
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
+
+
+            if (file !== undefined) { 
+                localVarFormParams.append('file', file as any);
+            }
+    
+    
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {InlineObject} [inlineObject] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -552,6 +602,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {any} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadImage(file?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).uploadImage(file, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {InlineObject} [inlineObject] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -635,6 +698,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         updateCatalogItem(catalogItem?: CatalogItem, options?: any) {
             return DefaultApiFp(configuration).updateCatalogItem(catalogItem, options)(axios, basePath);
+        },
+        /**
+         * 
+         * @param {any} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        uploadImage(file?: any, options?: any) {
+            return DefaultApiFp(configuration).uploadImage(file, options)(axios, basePath);
         },
         /**
          * 
@@ -725,6 +797,17 @@ export class DefaultApi extends BaseAPI {
      */
     public updateCatalogItem(catalogItem?: CatalogItem, options?: any) {
         return DefaultApiFp(this.configuration).updateCatalogItem(catalogItem, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * 
+     * @param {any} [file] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public uploadImage(file?: any, options?: any) {
+        return DefaultApiFp(this.configuration).uploadImage(file, options)(this.axios, this.basePath);
     }
 
     /**

@@ -193,4 +193,13 @@ export class Service {
     reply.code(404);
     return "'auth._token.local' needed";
   }
+
+  
+
+  async uploadImage(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    console.log("uploadImage");
+  }
 }

@@ -12,7 +12,6 @@ import { CatalogItem } from "~/oapi-client-typescript-axios";
 // import * as submodule from '~/store/submodule'
 
 // Keep your existing vanilla Vuex code for state, getters, mutations, actions, plugins, etc.
-console.log("In store/index.ts");
 export const state = () => ({
   catalog: <CatalogItem[]>[],
   name: "Me"
@@ -31,6 +30,13 @@ export const mutations = mutationTree(state, {
   UPDATE_CATALOGITEM(state, item: CatalogItem) {
     const index = state.catalog.findIndex(i => i.id === item.id);
     if (index >= 0) Object.assign(state.catalog[index], item);
+  },
+  DELETE_CATALOGITEM(state, id: number) {
+    const index = state.catalog.findIndex(i => i.id === id);
+    state.catalog.splice(index, 1);
+  },
+  APPEND_CATALOGITEM(state, item: CatalogItem) {
+    state.catalog.push(item);
   }
 });
 
@@ -38,9 +44,24 @@ export const actions = actionTree(
   { state, getters, mutations },
   {
     async fetchCatalog({ commit }) {
-      debugger;
       const catalog = await this.$api.getCatalog();
       commit("SET_CATALOG", catalog.data);
+    },
+    async updateCatalogItem({ commit }, item: CatalogItem) {
+      const updatedItem = await this.$api.updateCatalogItem(item);
+      commit("UPDATE_CATALOGITEM", updatedItem.data);
+    },
+    async deleteCatalogItem({ commit }, id: number) {
+      const result = await this.$api.deleteCatalogItem(id);
+      if (result.status == 204) {
+        commit("DELETE_CATALOGITEM", id);
+      }
+    },
+    async newCatalogItem({ commit }, item: CatalogItem) {
+      const result = await this.$api.newCatalogItem(item);
+      if (result.status == 200) {
+        commit("APPEND_CATALOGITEM", result.data);
+      }
     }
   }
 );

@@ -6,6 +6,7 @@
         <v-text-field class="mr-4 ml-4" v-model="item.caption" label="Название"></v-text-field>
         <v-text-field class="mr-4 ml-4" v-model="item.price" label="Цена"></v-text-field>
         <v-text-field class="mr-4 ml-4" v-model="item.desc" label="Описание"></v-text-field>
+        <v-file-input></v-file-input>
       </v-form>
     </v-col>
     <v-col cols="4">

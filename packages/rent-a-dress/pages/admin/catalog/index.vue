@@ -7,12 +7,15 @@
     </v-row>
     <v-row>
       <v-col class="pt-0">
-        <v-btn to="catalog/new">Добавить</v-btn>
+        <v-btn v-on:click.stop="addNewCatalogItem()">Добавить</v-btn>
         <v-data-table :headers="headers" :items="items">
           <template v-slot:item.action="{ item }">
-            <div class="text-center">
-              <v-btn v-on:click.stop="edit(item)">
-                <v-icon small class="mr-2">mdi-account-edit-outline</v-icon>
+            <div class="text-center d-flex">
+              <v-btn icon v-on:click.stop="edit(item)">
+                <v-icon>mdi-playlist-edit</v-icon>
+              </v-btn>
+              <v-btn icon v-on:click.stop="deleteItem(item)">
+                <v-icon class="mr-2">mdi-delete</v-icon>
               </v-btn>
             </div>
           </template>
@@ -47,7 +50,7 @@ export default class Index extends Vue {
   public dialog = false;
 
   public dialogItem: CatalogItem = <CatalogItem>{
-    id: 0,
+    id: -1,
     caption: "",
     desc: "",
     img: ""
@@ -66,25 +69,33 @@ export default class Index extends Vue {
     return this.$accessor.catalog;
   }
 
+  public addNewCatalogItem() {
+    this.dialogItem = <CatalogItem>{
+      id: -1,
+      caption: "",
+      desc: "",
+      img: ""
+    };
+    this.dialog = true;
+  }
   public edit(item: CatalogItem) {
     this.dialogItem = Object.assign({}, item);
     this.dialog = true;
   }
+  public deleteItem(item: CatalogItem) {
+    this.$accessor.deleteCatalogItem(item.id);
+  }
+
   public async save() {
-    const result = await this.$api.updateCatalogItem(this.dialogItem);
-    if (result.status == 200) {
-      const updatedItem = result.data;
-      const index = this.items.findIndex(item => item.id == updatedItem.id);
-      Object.assign(this.items[index], updatedItem);
-      this.dialog = false;
+    if (this.items.find(item => item.id === this.dialogItem.id)) {
+      await this.$accessor.updateCatalogItem(this.dialogItem);
+    } else {
+      await this.$accessor.newCatalogItem(this.dialogItem);
     }
+    this.dialog = false;
   }
   public async asyncData() {}
   public async mounted() {
-    // const items = await this.$api.getCatalog();
-    // this.items = items.data;
-
-    console.log("this.$accessor = ", this.$accessor);
     await this.$accessor.fetchCatalog();
   }
 }
