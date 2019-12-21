@@ -8,3 +8,4 @@ logs
 .vscode
 .nuxt
 server/build
+static/img/catalog

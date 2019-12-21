@@ -283,9 +283,11 @@
        "schema": {
         "type": "object",
         "properties": {
-         "file": {
-          "format": "binary",
-          "type": "string"
+         "files": {
+          "type": "array"
+         },
+         "itemId": {
+          "type": "integer"
          }
         }
        }
@@ -309,12 +311,20 @@
      },
      "imageName": {
       "type": "string"
+     },
+     "hash": {
+      "type": "string"
+     },
+     "catalogItemId": {
+      "type": "integer"
      }
     },
     "type": "object",
     "required": [
      "id",
-     "imageName"
+     "imageName",
+     "hash",
+     "catalogItemId"
     ]
    },
    "User": {

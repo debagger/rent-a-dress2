@@ -3,7 +3,7 @@ import * as path from "path";
 import { Connection } from "typeorm";
 import { Image } from "../entity/Image";
 import { FastifyInstance } from "fastify";
-import * as fFileUpload from  "fastify-file-upload"
+const fFileUpload = require("fastify-file-upload")
 
 const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
@@ -14,8 +14,8 @@ export function imagesManagerPlugin(fastify: FastifyInstance, config, done) {
       console.log(err);
     } else {
       const db: Connection = fastify["db"];
-      const Images = db.getRepository(Image);
-    
+      const Images = db.getRepository(Image); 
+      
       fastify.get(
         "/api/images",
         { preHandler: fastify["isAdmin"] },

@@ -28,7 +28,7 @@ const connectionControl = fastify => {
 
 function clearCache() {
   Object.keys(require.cache)
-    .filter(item => item.startsWith(path.join(__dirname, "build")))
+    .filter(item => item.startsWith(path.join(__dirname, "server")))
     .forEach(item => {
       delete require.cache[item];
       console.log(`${item} deleted from cache`);

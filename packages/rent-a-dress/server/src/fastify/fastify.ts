@@ -18,6 +18,7 @@ import {Service} from "../service";
 
 import swaggerConf from "../../oapi/openapi-defs.json"; 
 
+
 export function myFastify(nuxt): any {
   return () => {
     //Create directory and file for log if not exist
@@ -47,15 +48,20 @@ export function myFastify(nuxt): any {
     // Enable the fastify CORS plugin
     // fastify.register(require('fastify-cors'), {
     //   origin: '*',
-    //   credentials: true
+    //   credentials: true  
     // })
 
+    fastify.register(require('fastify-multipart'), {addToBody: true});
+
     const openapiGlue = require("fastify-openapi-glue");
+
 
     fastify.register(openapiGlue, {
       specification: swaggerConf,
       service: new Service()
     });
+
+    
 
     // fastify.register(dbPlugin, config).after(err => {
     //   if (err) {
@@ -121,6 +127,7 @@ export function myFastify(nuxt): any {
     fastify.ready(() => {
       fastify.log.info(fastify.printRoutes());
       console.log(fastify.printRoutes());
+      fastify.hasContentTypeParser("multipart")? console.log("Fastify has multipart/form-data parser") : console.log("Fastify has no multipart/form-data parser") 
     });
 
     // Declare a route

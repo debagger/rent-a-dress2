@@ -5,4 +5,6 @@ import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 export class Image {
   @PrimaryGeneratedColumn() @IsInt() id: number;
   @Column() @IsString() imageName: String;
+  @Column() @IsString() hash: String;
+  @Column() @IsInt() catalogItemId: number;
 }

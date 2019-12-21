@@ -7,12 +7,20 @@
         },
         "imageName": {
           "type": "string"
+        },
+        "hash": {
+          "type": "string"
+        },
+        "catalogItemId": {
+          "type": "integer"
         }
       },
       "type": "object",
       "required": [
         "id",
-        "imageName"
+        "imageName",
+        "hash",
+        "catalogItemId"
       ]
     },
     "User": {
