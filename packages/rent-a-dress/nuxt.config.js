@@ -49,7 +49,7 @@ module.exports = {
       "@nuxt/typescript-build",
       {
         typeCheck: {
-          memoryLimit: 128,
+          memoryLimit: 1024,
           workers: 2
         },
         ignoreNotFoundWarnings: false
