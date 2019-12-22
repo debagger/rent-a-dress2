@@ -50,7 +50,7 @@ module.exports = {
       {
         typeCheck: {
           memoryLimit: 512,
-          workers: 1
+          workers: 2
         },
         ignoreNotFoundWarnings: false
       }
