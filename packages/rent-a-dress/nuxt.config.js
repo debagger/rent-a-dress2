@@ -38,14 +38,23 @@ module.exports = {
     //     });
     //   }
     // }
-    additionalExtensions:["ts"],
-    watch:["~/store/**/*"],
+    additionalExtensions: ["ts"],
+    watch: ["~/store/**/*"],
     transpile: [/nuxt-typed-vuex/]
   },
   buildModules: [
     "nuxt-typed-vuex",
     "@nuxtjs/vuetify",
-    "@nuxt/typescript-build"
+    [
+      "@nuxt/typescript-build",
+      {
+        typeCheck: {
+          memoryLimit: 512,
+          workers: 1
+        },
+        ignoreNotFoundWarnings: false
+      }
+    ]
   ],
   modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
   axios: {
