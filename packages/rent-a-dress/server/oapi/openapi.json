@@ -253,7 +253,7 @@
                   "files": {
                     "type": "array"
                   },
-                  "itemId":{
+                  "itemId": {
                     "type": "integer"
                   }
                 }
@@ -261,7 +261,10 @@
             }
           }
         },
-        "responses": { "200": { "description": "OK" } }
+        "responses": {
+          "200": { "description": "OK" },
+          "404": { "description": "Item not found" }
+        }
       }
     }
   },

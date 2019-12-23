@@ -224,6 +224,9 @@ export class Service {
         });
       }
       return "OK";
+    } else {
+      reply.code(404);
+      return "Item not found";
     }
   }
 }
