@@ -15,7 +15,15 @@ import { config as fastifyConfig } from "./fastify/fastify.config";
 import { ServerResponse } from "http";
 
 import { createHash, HashOptions } from "crypto";
-import { createWriteStream, writeFile, mkdirSync } from "fs";
+import {
+  createWriteStream,
+  writeFile,
+  mkdirSync,
+  exists,
+  readFile,
+  unlinkSync,
+  existsSync
+} from "fs";
 import { Readable } from "stream";
 import { Image } from "./entity/Image";
 import * as path from "path";
@@ -191,6 +199,8 @@ export class Service {
         mimetype: string;
       }[] = request.body.files;
 
+      const result: Image[] = [];
+
       for (const file of files) {
         const hash = createHash("md5");
         hash.update(file.data);
@@ -201,6 +211,9 @@ export class Service {
         image.catalogItemId = catItem.id;
         image.hash = hashDigest;
         await images.save(image);
+
+        result.push(image);
+
         const dirName = `./static/img/catalog/${catItem.id}`;
         mkdirSync(dirName, { recursive: true });
         const fileName = path.join(dirName, `${image.id}.jpg`);
@@ -223,10 +236,75 @@ export class Service {
             });
         });
       }
-      return "OK";
+      return result;
     } else {
       reply.code(404);
       return "Item not found";
+    }
+  }
+  async getImage(request: FastifyRequest, reply: FastifyReply<ServerResponse>) {
+    const db = await getDB();
+    const images = db.getRepository(Image);
+    const id = request.params["id"];
+    const image = await images.findOne(id);
+    if (image) {
+      const dirName = `./static/img/catalog/${image.catalogItemId}`;
+      const fileName = path.join(dirName, `${image.id}.jpg`);
+      exists(fileName, exists => {
+        if (exists) {
+          readFile(fileName, (err, data) => {
+            if (err) {
+              reply.code(404);
+              return err;
+            } else {
+              reply.type("image/jpeg").send(data);
+              return;
+            }
+          });
+        } else {
+          reply.code(404);
+          return "File not found";
+        }
+      });
+    } else {
+      reply.code(404);
+      return "Image not found in db";
+    }
+  }
+
+  async getImagesForCatalogItem(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const db = await getDB();
+    const images = db.getRepository(Image);
+    const id = request.params["id"];
+    const foundImages = await images.find({ catalogItemId: id });
+    return foundImages;
+  }
+
+  async deleteImage(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const db = await getDB();
+    const images = db.getRepository(Image);
+    const id = request.params["id"];
+    const image = await images.findOne(id);
+    if (image) {
+      const dirName = `./static/img/catalog/${image.catalogItemId}`;
+      const fileName = path.join(dirName, `${image.id}.jpg`);
+      if (existsSync(fileName)) unlinkSync(fileName);
+ 
+      const thumbDir = path.join(dirName, "thumbs");
+      const thumbFilename = path.join(thumbDir, `${image.id}.jpg`);
+      if (existsSync(thumbFilename)) unlinkSync(thumbFilename);  
+      await images.delete(image); 
+      reply.code(204);
+      return;
+    } else {
+      reply.code(404);
+      return "Image not found";
     }
   }
 }

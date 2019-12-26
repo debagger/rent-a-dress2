@@ -63,7 +63,7 @@ export const actions = actionTree(
         commit("APPEND_CATALOGITEM", result.data);
       }
     }
-  }
+  } 
 );
 
 const store = {

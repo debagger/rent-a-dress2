@@ -251,7 +251,8 @@
                 "type": "object",
                 "properties": {
                   "files": {
-                    "type": "array"
+                    "type": "array",
+                    "items":{"type": "object"}
                   },
                   "itemId": {
                     "type": "integer"
@@ -262,10 +263,91 @@
           }
         },
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Image"
+                  }
+                }
+              }
+            }
+          },
           "404": { "description": "Item not found" }
         }
       }
+    },
+    "/api/images/{id}": {
+      "get": {
+        "operationId": "getImage",
+        "responses": {
+          "200": {
+            "description": "Return image",
+            "content": {
+              "image/jpeg": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          },
+          "404": {
+            "description": "Image not found",
+            "content": { "text/plain": { "schema": { "type": "string" } } }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteImage",
+        "responses": {
+          "204": {
+            "description": "Image deleted",
+            "content": {
+              "text/plain": {
+                "schema": { "type": "string" }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "integer" }
+        }
+      ]
+    },
+    "/api/images/catalog/{id}": {
+      "get": {
+        "description": "Return images for catalog item",
+        "operationId": "getImagesForCatalogItem",
+        "responses": {
+          "200": {
+            "description": "Return imagelist for catalogItem id",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Image"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "integer" }
+        }
+      ]
     }
   },
   "components": {

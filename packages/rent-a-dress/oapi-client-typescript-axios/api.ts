@@ -51,6 +51,12 @@ export interface CatalogItem {
     img: string;
     /**
      * 
+     * @type {number}
+     * @memberof CatalogItem
+     */
+    price: number;
+    /**
+     * 
      * @type {object}
      * @memberof CatalogItem
      */
@@ -99,6 +105,18 @@ export interface Image {
      * @memberof Image
      */
     imageName: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Image
+     */
+    hash: string;
+    /**
+     * 
+     * @type {number}
+     * @memberof Image
+     */
+    catalogItemId: number;
 }
 /**
  * 
@@ -127,10 +145,16 @@ export interface InlineObject {
 export interface InlineObject1 {
     /**
      * 
-     * @type {any}
+     * @type {Array<object>}
      * @memberof InlineObject1
      */
-    file?: any;
+    files?: Array<object>;
+    /**
+     * 
+     * @type {number}
+     * @memberof InlineObject1
+     */
+    itemId?: number;
 }
 /**
  * 
@@ -257,6 +281,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteImage(id: number, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling deleteImage.');
+            }
+            const localVarPath = `/api/images/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -295,6 +353,74 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 throw new RequiredError('id','Required parameter id was null or undefined when calling getCatalogItem.');
             }
             const localVarPath = `/api/catalog/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImage(id: number, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getImage.');
+            }
+            const localVarPath = `/api/images/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Return images for catalog item
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImagesForCatalogItem(id: number, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getImagesForCatalogItem.');
+            }
+            const localVarPath = `/api/images/catalog/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
             let baseOptions;
@@ -413,11 +539,12 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {any} [file] 
+         * @param {Array<object>} [files] 
+         * @param {number} [itemId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadImage(file?: any, options: any = {}): RequestArgs {
+        uploadImage(files?: Array<object>, itemId?: number, options: any = {}): RequestArgs {
             const localVarPath = `/api/images/upload`;
             const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
             let baseOptions;
@@ -429,9 +556,13 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             const localVarQueryParameter = {} as any;
             const localVarFormParams = new FormData();
 
-
-            if (file !== undefined) { 
-                localVarFormParams.append('file', file as any);
+            if (files) {
+            
+                localVarFormParams.append('files', files.join(COLLECTION_FORMATS.csv));
+            }
+    
+            if (itemId !== undefined) { 
+                localVarFormParams.append('itemId', itemId as any);
             }
     
     
@@ -533,6 +664,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteImage(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<string> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).deleteImage(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -551,6 +695,32 @@ export const DefaultApiFp = function(configuration?: Configuration) {
          */
         getCatalogItem(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<CatalogItem> {
             const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).getCatalogItem(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImage(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<any> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).getImage(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Return images for catalog item
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImagesForCatalogItem(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Image>> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).getImagesForCatalogItem(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -596,12 +766,13 @@ export const DefaultApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {any} [file] 
+         * @param {Array<object>} [files] 
+         * @param {number} [itemId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadImage(file?: any, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<void> {
-            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).uploadImage(file, options);
+        uploadImage(files?: Array<object>, itemId?: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Image>> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).uploadImage(files, itemId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -652,6 +823,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteImage(id: number, options?: any) {
+            return DefaultApiFp(configuration).deleteImage(id, options)(axios, basePath);
+        },
+        /**
+         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -666,6 +846,24 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         getCatalogItem(id: number, options?: any) {
             return DefaultApiFp(configuration).getCatalogItem(id, options)(axios, basePath);
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImage(id: number, options?: any) {
+            return DefaultApiFp(configuration).getImage(id, options)(axios, basePath);
+        },
+        /**
+         * Return images for catalog item
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImagesForCatalogItem(id: number, options?: any) {
+            return DefaultApiFp(configuration).getImagesForCatalogItem(id, options)(axios, basePath);
         },
         /**
          * 
@@ -695,12 +893,13 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
-         * @param {any} [file] 
+         * @param {Array<object>} [files] 
+         * @param {number} [itemId] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        uploadImage(file?: any, options?: any) {
-            return DefaultApiFp(configuration).uploadImage(file, options)(axios, basePath);
+        uploadImage(files?: Array<object>, itemId?: number, options?: any) {
+            return DefaultApiFp(configuration).uploadImage(files, itemId, options)(axios, basePath);
         },
         /**
          * 
@@ -742,6 +941,17 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public deleteImage(id: number, options?: any) {
+        return DefaultApiFp(this.configuration).deleteImage(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
@@ -759,6 +969,28 @@ export class DefaultApi extends BaseAPI {
      */
     public getCatalogItem(id: number, options?: any) {
         return DefaultApiFp(this.configuration).getCatalogItem(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getImage(id: number, options?: any) {
+        return DefaultApiFp(this.configuration).getImage(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * Return images for catalog item
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getImagesForCatalogItem(id: number, options?: any) {
+        return DefaultApiFp(this.configuration).getImagesForCatalogItem(id, options)(this.axios, this.basePath);
     }
 
     /**
@@ -795,13 +1027,14 @@ export class DefaultApi extends BaseAPI {
 
     /**
      * 
-     * @param {any} [file] 
+     * @param {Array<object>} [files] 
+     * @param {number} [itemId] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof DefaultApi
      */
-    public uploadImage(file?: any, options?: any) {
-        return DefaultApiFp(this.configuration).uploadImage(file, options)(this.axios, this.basePath);
+    public uploadImage(files?: Array<object>, itemId?: number, options?: any) {
+        return DefaultApiFp(this.configuration).uploadImage(files, itemId, options)(this.axios, this.basePath);
     }
 
     /**

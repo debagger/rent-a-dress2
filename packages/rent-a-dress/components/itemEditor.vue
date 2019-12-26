@@ -1,70 +1,65 @@
 <template>
-  <v-row class="d-flex justify-between">
-    <v-col cols="8">
-      <v-form>
-        <v-text-field class="mr-4 ml-4" v-model="item.id" readonly label="id"></v-text-field>
-        <v-text-field class="mr-4 ml-4" v-model="item.caption" label="Название"></v-text-field>
-        <v-text-field class="mr-4 ml-4" v-model="item.price" label="Цена"></v-text-field>
-        <v-text-field class="mr-4 ml-4" v-model="item.desc" label="Описание"></v-text-field>
-        <v-file-input></v-file-input>
-      </v-form>
-    </v-col>
-    <v-col cols="4">
-      <v-img contain max-height="60vh" :src="'/img/' + item.img"></v-img>
-      <!-- <v-slide-group>
-        <v-slide-item v-for="(img, i) in item.details.otherImgs" :key="i">
-          <v-img max-height="200px" max-width="100px" :src="'/img/' + img"></v-img>
-        </v-slide-item>
-        <v-slide-item>
-          <v-dialog v-model="dialog" persistent max-width="600px">
-            <template v-slot:activator="{ on }">
-              <v-btn color="primary" dark v-on="on">Open Dialog</v-btn>
-            </template>
-            <v-card>
-              <v-card-title>
-                <span class="headline">User Profile</span>
-              </v-card-title>
-              <v-card-text>
-                <v-container>
-                  <v-row>
-                    <v-col>
-                      <v-form ref="imgform">
-                        <v-file-input
-                          multiple
-                          :loading="loading"
-                          v-model="filesToUpload"
-                          label="Изображение"
-                        ></v-file-input>
-                      </v-form>
-                    </v-col>
-                  </v-row>
-                </v-container>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-                <v-btn color="blue darken-1" text @click="upload">Save</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-slide-item>
-      </v-slide-group> -->
-    </v-col>
-  </v-row>
+  <div>
+    <v-tabs right fixed-tabs v-model="tab">
+      <v-tabs-slider></v-tabs-slider>
+      <v-tab href="#data">Основные данные</v-tab>
+      <v-tab href="#imgs">Изображения</v-tab>
+    </v-tabs>
+    <v-tabs-items v-model="tab">
+      <v-tab-item value="data" key="0">
+        <v-row class="d-flex justify-between">
+          <v-col cols="8">
+            <v-form>
+              <v-text-field class="mr-4 ml-4" v-model="item.id" readonly label="id"></v-text-field>
+              <v-text-field class="mr-4 ml-4" v-model="item.caption" label="Название"></v-text-field>
+              <v-text-field class="mr-4 ml-4" v-model="item.price" label="Цена"></v-text-field>
+              <v-text-field class="mr-4 ml-4" v-model="item.desc" label="Описание"></v-text-field>
+              <v-file-input></v-file-input>
+            </v-form>
+          </v-col>
+          <v-col cols="4">
+            <v-img contain max-height="60vh" :src="'/img/' + item.img"></v-img>
+          </v-col>
+        </v-row>
+      </v-tab-item>
+      <v-tab-item value="imgs" key="1">
+        <v-container>
+          <v-row>
+            <v-col cols="2" v-for="image in images" :key="image.id">
+              <v-img class="ml-1 mr-1" :src="`/api/images/${image.id}`" max-width="100px"></v-img>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-tab-item>
+    </v-tabs-items>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue, { PropOptions } from "vue";
-import { CatalogItem } from "oapi-client-typescript-axios";
+import { CatalogItem, Image } from "oapi-client-typescript-axios";
 export default Vue.extend({
   data() {
     return {
+      tab: null,
       filesToUpload: [],
       loading: false,
-      dialog: false
+      dialog: false,
+      images: <Image[]>[]
     };
   },
   props: { item: <PropOptions<CatalogItem>>{ type: Object } },
+  watch: {
+    item: {
+      handler: async function(oldItem, newItem) {
+        this.images = <Image[]>[];
+        const result = await this.$api.getImagesForCatalogItem(this.item.id);
+        console.log(result.data);
+        this.images = result.data;
+      },
+      immediate: true
+    }
+  },
   methods: {
     // upload: function() {
     //   this.loading = true;
@@ -91,10 +86,9 @@ export default Vue.extend({
     //       console.error(err);
     //     }.bind(this));
     // }
-  } 
+  }
 });
 </script>
 
 <style>
-
 </style>

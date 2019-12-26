@@ -72,7 +72,6 @@ const run = fastifyRun => {
 require("./server/build/src/schema").generateSchemas();
 const { myFastify } = require("./server/build/src/fastify/fastify");
 nuxt.ready().then(function(){
-  console.log(nuxt);
   const server = myFastify(nuxt);
   run(server);
   builder
