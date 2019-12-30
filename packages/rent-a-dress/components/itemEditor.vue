@@ -25,10 +25,22 @@
       <v-tab-item value="imgs" key="1">
         <v-container>
           <v-row>
+            <v-col cols="2">
+              <v-card class="ml-1 mr-1" @dragover.prevent @drop="fileDrop">
+                <v-responsive
+                  class="d-flex align-center justify-content-center text-center"
+                  aspect-ratio="0.8"
+                >
+                  <v-icon large>mdi-tray-plus</v-icon>
+                </v-responsive>
+
+                <v-card-subtitle>Dropzone</v-card-subtitle>
+              </v-card>
+            </v-col>
             <v-col cols="2" v-for="image in images" :key="image.id">
               <v-card class="ml-1 mr-1">
                 <v-img :src="`/api/images/${image.id}`" aspect-ratio="0.8"></v-img>
-                
+
                 <v-card-actions>
                   <v-btn v-on:click="deleteImage(image)">Delete</v-btn>
                 </v-card-actions>
@@ -44,10 +56,11 @@
 <script lang="ts">
 import Vue, { PropOptions } from "vue";
 import { CatalogItem, Image } from "oapi-client-typescript-axios";
+import { NuxtAxiosInstance } from "@nuxtjs/axios";
 export default Vue.extend({
   data() {
     return {
-      tab: null,
+      tab: "data",
       filesToUpload: [],
       loading: false,
       dialog: false,
@@ -59,6 +72,7 @@ export default Vue.extend({
     item: {
       handler: async function(oldItem, newItem) {
         this.images = <Image[]>[];
+        this.tab = "data";
         const result = await this.$api.getImagesForCatalogItem(this.item.id);
         console.log(result.data);
         this.images = result.data;
@@ -67,13 +81,33 @@ export default Vue.extend({
     }
   },
   methods: {
-    async deleteImage(image: Image){
+    fileDrop: async function(e: any) {
+      e.stopPropagation();
+      e.preventDefault();
+      const files = e.dataTransfer.files;
+      console.log(files);
+      const itemId = this.item.id;
+      const fd = new FormData();
+      for (const file of files) {
+        fd.append("files", file, file.name);
+      }
+      fd.append("itemId", `${itemId}`);
+      debugger;
+      const result = await this.$axios.post("/api/images/upload", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+      debugger;
+      // console.log(result.data);
+      this.images.push(...result.data);
+    },
+
+    async deleteImage(image: Image) {
       await this.$api.deleteImage(image.id);
-      const imgIndex = this.images.findIndex(item => item.id ===image.id);
+      const imgIndex = this.images.findIndex(item => item.id === image.id);
       this.images.splice(imgIndex, 1);
     }
-
-
   }
 });
 </script>
