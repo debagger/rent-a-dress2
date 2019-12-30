@@ -26,7 +26,13 @@
         <v-container>
           <v-row>
             <v-col cols="2" v-for="image in images" :key="image.id">
-              <v-img class="ml-1 mr-1" :src="`/api/images/${image.id}`" max-width="100px"></v-img>
+              <v-card class="ml-1 mr-1">
+                <v-img :src="`/api/images/${image.id}`" aspect-ratio="0.8"></v-img>
+                
+                <v-card-actions>
+                  <v-btn v-on:click="deleteImage(image)">Delete</v-btn>
+                </v-card-actions>
+              </v-card>
             </v-col>
           </v-row>
         </v-container>
@@ -61,31 +67,13 @@ export default Vue.extend({
     }
   },
   methods: {
-    // upload: function() {
-    //   this.loading = true;
-    //   const formData = new FormData();
-    //   formData.append("itemId", this.item.id);
-    //   for (var i = 0; i < this.filesToUpload.length; i++) {
-    //     let file = this.filesToUpload[i];
-    //     formData.append( i, file);
-    //   }
-    //   this.$axios
-    //     .$post("/api/images/upload", formData, {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data"
-    //       }
-    //     })
-    //     .then(function(result) {
-    //       console.log(result);
-    //       this.loading = false;
-    //       this.dialog = false;
-    //       this.item.details.otherImgs.push(...result.result);
-    //     }.bind(this))
-    //     .catch(function(err) {
-    //       this.loading = false;
-    //       console.error(err);
-    //     }.bind(this));
-    // }
+    async deleteImage(image: Image){
+      await this.$api.deleteImage(image.id);
+      const imgIndex = this.images.findIndex(item => item.id ===image.id);
+      this.images.splice(imgIndex, 1);
+    }
+
+
   }
 });
 </script>
