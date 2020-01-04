@@ -17,8 +17,8 @@
             </v-form>
           </v-col>
           <v-col cols="4">
-            <v-img contain max-height="60vh" :src="'/img/' + item.img"></v-img>
-          </v-col>
+            <v-img contain max-height="60vh" :src="`/api/images/${item.img}`"></v-img>
+          </v-col>  
         </v-row>
       </v-tab-item>
       <v-tab-item value="imgs" key="1">
@@ -45,6 +45,10 @@
                 <v-card-actions>
                   <v-btn small icon v-on:click.stop="deleteImage(image)">
                     <v-icon>mdi-delete</v-icon>
+                  </v-btn>
+                   <v-btn small icon v-on:click.stop="setCoverImage(image)">
+                    <v-icon v-if="item.img==image.id">mdi-check-box-outline</v-icon>
+                    <v-icon v-else>mdi-checkbox-blank-outline</v-icon>
                   </v-btn>
                 </v-card-actions>
               </v-card>
@@ -94,16 +98,17 @@ export default Vue.extend({
   },
   methods: {
     imageClick: function() {
-      debugger;
       this.showImageDialog.contain = !this.showImageDialog.contain;
       this.showImageDialog.height = this.showImageDialog.contain ? "80vh" : "";
     },
     showImage: function(image: Image) {
-      debugger;
       this.showImageDialog.src = `/api/images/${image.id}`;
       this.showImageDialog.contain = true;
       this.showImageDialog.height = "80vh";
       this.showImageDialog.show = true;
+    },
+    setCoverImage(image:Image){
+      this.item.img = `${image.id}`
     },
     fileDrop: async function(e: any) {
       e.stopPropagation();
@@ -116,14 +121,11 @@ export default Vue.extend({
         fd.append("files", file, file.name);
       }
       fd.append("itemId", `${itemId}`);
-      debugger;
       const result = await this.$axios.post("/api/images/upload", fd, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
       });
-      debugger;
-      // console.log(result.data);
       this.images.push(...result.data);
     },
 

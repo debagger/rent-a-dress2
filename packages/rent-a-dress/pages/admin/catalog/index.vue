@@ -20,7 +20,7 @@
             </div>
           </template>
           <template v-slot:item.img="{ value }">
-            <v-img class="mt-2 mb-2" width="120px" :src="'/img/' + value"></v-img>
+            <v-img class="mt-2 mb-2" width="120px" :src="`/api/images/${value}`"></v-img>
           </template>
         </v-data-table>
       </v-col>
