@@ -15,7 +15,7 @@
                 <v-icon>mdi-playlist-edit</v-icon>
               </v-btn>
               <v-btn icon v-on:click.stop="deleteItem(item)">
-                <v-icon class="mr-2">mdi-delete</v-icon>
+                <v-icon>mdi-delete</v-icon>
               </v-btn>
             </div>
           </template>
