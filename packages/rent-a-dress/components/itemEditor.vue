@@ -14,7 +14,6 @@
               <v-text-field class="mr-4 ml-4" v-model="item.caption" label="Название"></v-text-field>
               <v-text-field class="mr-4 ml-4" v-model="item.price" label="Цена"></v-text-field>
               <v-text-field class="mr-4 ml-4" v-model="item.desc" label="Описание"></v-text-field>
-              <v-file-input></v-file-input>
             </v-form>
           </v-col>
           <v-col cols="4">
@@ -33,16 +32,20 @@
                 >
                   <v-icon large>mdi-tray-plus</v-icon>
                 </v-responsive>
-
                 <v-card-subtitle>Dropzone</v-card-subtitle>
               </v-card>
             </v-col>
             <v-col cols="2" v-for="image in images" :key="image.id">
               <v-card class="ml-1 mr-1">
-                <v-img :src="`/api/images/${image.id}`" aspect-ratio="0.8"></v-img>
-
+                <v-img
+                  :src="`/api/images/${image.id}`"
+                  aspect-ratio="0.8"
+                  v-on:click="showImage(image)"
+                ></v-img>
                 <v-card-actions>
-                  <v-btn v-on:click="deleteImage(image)">Delete</v-btn>
+                  <v-btn small icon v-on:click.stop="deleteImage(image)">
+                    <v-icon>mdi-delete</v-icon>
+                  </v-btn>
                 </v-card-actions>
               </v-card>
             </v-col>
@@ -50,6 +53,14 @@
         </v-container>
       </v-tab-item>
     </v-tabs-items>
+    <v-dialog v-model="showImageDialog.show">
+      <v-img
+        :src="showImageDialog.src"
+        :contain="showImageDialog.contain"
+        :height="showImageDialog.height"
+        v-on:click="imageClick"
+      ></v-img>
+    </v-dialog>
   </div>
 </template>
 
@@ -60,6 +71,7 @@ import { NuxtAxiosInstance } from "@nuxtjs/axios";
 export default Vue.extend({
   data() {
     return {
+      showImageDialog: { show: false, src: "", contain: true, height: "80vh" },
       tab: "data",
       filesToUpload: [],
       loading: false,
@@ -81,6 +93,18 @@ export default Vue.extend({
     }
   },
   methods: {
+    imageClick: function() {
+      debugger;
+      this.showImageDialog.contain = !this.showImageDialog.contain;
+      this.showImageDialog.height = this.showImageDialog.contain ? "80vh" : "";
+    },
+    showImage: function(image: Image) {
+      debugger;
+      this.showImageDialog.src = `/api/images/${image.id}`;
+      this.showImageDialog.contain = true;
+      this.showImageDialog.height = "80vh";
+      this.showImageDialog.show = true;
+    },
     fileDrop: async function(e: any) {
       e.stopPropagation();
       e.preventDefault();

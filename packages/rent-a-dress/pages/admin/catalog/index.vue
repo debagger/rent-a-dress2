@@ -45,6 +45,7 @@
 import itemEditor from "~/components/itemEditor.vue";
 import { CatalogItem } from "~/oapi-client-typescript-axios";
 import { Component, Vue } from "nuxt-property-decorator";
+
 @Component({ components: { itemEditor } })
 export default class Index extends Vue {
   public dialog = false;
