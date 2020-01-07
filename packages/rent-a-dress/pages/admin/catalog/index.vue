@@ -5,27 +5,38 @@
         <h2 class="font-weight-thin display-2">RENT-A-DRESS</h2>
       </v-col>
     </v-row>
+
     <v-row>
-      <v-col class="pt-0">
+      <v-col>
         <v-btn v-on:click.stop="addNewCatalogItem()">Добавить</v-btn>
-        <v-data-table :headers="headers" :items="items">
-          <template v-slot:item.action="{ item }">
-            <div class="text-center d-flex">
-              <v-btn icon v-on:click.stop="edit(item)">
-                <v-icon>mdi-playlist-edit</v-icon>
-              </v-btn>
-              <v-btn icon v-on:click.stop="deleteItem(item)">
-                <v-icon>mdi-delete</v-icon>
-              </v-btn>
-            </div>
-          </template>
-          <template v-slot:item.img="{ value }">
-            <v-img class="mt-2 mb-2" width="120px" :src="`/api/images/${value}`"></v-img>
-          </template>
-        </v-data-table>
       </v-col>
     </v-row>
-    <v-dialog v-model="dialog" width="80vw">
+
+    <v-row>
+      <v-col>
+        <v-item-group>
+          <v-container>
+            <v-row>
+              <v-col xl="2" lg="3" md="4" v-for="item in items" :key="item.id">
+                <v-card>
+                  <v-img :src="`/api/images/${item.img}`"></v-img>
+                  <v-card-text>{{item.caption}}</v-card-text>
+                  <v-card-actions>
+                    <v-btn icon v-on:click.stop="edit(item)">
+                      <v-icon>mdi-playlist-edit</v-icon>
+                    </v-btn>
+                    <v-btn icon v-on:click.stop="deleteItem(item)">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-item-group>
+      </v-col>
+    </v-row>
+    <v-dialog v-model="dialog" :fullscreen="true" width="80vw">
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>{{dialogItem.caption}}</v-card-title>
         <v-card-text>

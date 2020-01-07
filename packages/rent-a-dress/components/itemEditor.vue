@@ -24,7 +24,7 @@
       <v-tab-item value="imgs" key="1">
         <v-container>
           <v-row>
-            <v-col cols="2">
+            <v-col xl="1" lg="2" md="4" sm="6">
               <input
                 type="file"
                 style="display: none"
@@ -43,7 +43,7 @@
                 <v-card-subtitle>Dropzone</v-card-subtitle>
               </v-card>
             </v-col>
-            <v-col cols="2" v-for="image in images" :key="image.id">
+            <v-col xl="1" lg="2" md="4" sm="6" v-for="image in images" :key="image.id">
               <v-card class="ml-1 mr-1">
                 <v-img
                   :src="`/api/images/${image.id}`"
@@ -77,13 +77,14 @@
 </template>
 
 <script lang="ts">
-import { PropOptions } from "vue";
 import { CatalogItem, Image } from "oapi-client-typescript-axios";
 import { NuxtAxiosInstance } from "@nuxtjs/axios";
 import { Component, Vue, Prop, Watch } from "nuxt-property-decorator";
+
 interface DropEvent extends Event {
   dataTransfer: DataTransfer;
 }
+
 @Component({ components: {} })
 export default class itemEditor extends Vue {
   @Prop() item: CatalogItem;
