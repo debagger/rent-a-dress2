@@ -81,7 +81,9 @@ import { PropOptions } from "vue";
 import { CatalogItem, Image } from "oapi-client-typescript-axios";
 import { NuxtAxiosInstance } from "@nuxtjs/axios";
 import { Component, Vue, Prop, Watch } from "nuxt-property-decorator";
-
+interface DropEvent extends Event {
+  dataTransfer: DataTransfer;
+}
 @Component({ components: {} })
 export default class itemEditor extends Vue {
   @Prop() item: CatalogItem;
@@ -96,22 +98,24 @@ export default class itemEditor extends Vue {
     console.log(result.data);
     this.images = result.data;
   }
+
   public showImageDialog = {
     show: false,
     src: "",
     contain: true,
     height: "80vh"
   };
+
   public tab = "data";
   public loading = false;
   public dialog = false;
   public images = <Image[]>[];
 
-  async fileInputChange(e: any) {
+  async fileInputChange(e: Event) {
     e.stopPropagation();
     e.preventDefault();
     const fileInputElement = <any>this.$refs["fileinp"];
-    const files = <File[]>fileInputElement.files;
+    const files = fileInputElement.files;
     await this.uploadFiles(files);
   }
 
@@ -135,13 +139,15 @@ export default class itemEditor extends Vue {
     this.item.img = `${image.id}`;
   }
 
-  async uploadFiles(files: File[]) {
+  async uploadFiles(files: FileList) {
     const itemId = this.item.id;
     const fd = new FormData();
-    
-    for (const file of files) {
+
+    for (let index = 0; index < files.length; index++) {
+      const file = files.item(index);
       fd.append("files", file, file.name);
     }
+
     fd.append("itemId", `${itemId}`);
     const result = await this.$axios.post("/api/images/upload", fd, {
       headers: {
@@ -151,7 +157,7 @@ export default class itemEditor extends Vue {
     this.images.push(...result.data);
   }
 
-  async fileDrop(e: any) {
+  async fileDrop(e: DropEvent) {
     e.stopPropagation();
     e.preventDefault();
     const files = e.dataTransfer.files;
