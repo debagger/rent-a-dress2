@@ -5,18 +5,12 @@ import { FastifyRequest, FastifyReply } from "fastify";
 import { User } from "./entity/User";
 import { Token } from "./entity/Token";
 import sharp from "sharp";
-import {
-  createConnection,
-  Connection,
-  getConnectionManager,
-  getConnection
-} from "typeorm";
+import { createConnection, Connection, getConnectionManager } from "typeorm";
 import { config as fastifyConfig } from "./fastify/fastify.config";
 import { ServerResponse } from "http";
 
-import { createHash, HashOptions } from "crypto";
+import { createHash } from "crypto";
 import {
-  createWriteStream,
   writeFile,
   mkdirSync,
   exists,
@@ -24,9 +18,9 @@ import {
   unlinkSync,
   existsSync
 } from "fs";
-import { Readable } from "stream";
 import { Image } from "./entity/Image";
 import * as path from "path";
+
 let _db: Connection;
 
 async function getDB(): Promise<Connection> {
@@ -101,7 +95,6 @@ export class Service {
     reply: FastifyReply<ServerResponse>
   ) {
     const idToDelete = request.params["id"];
-    console.log(`deleteCatalogItem(${idToDelete})`);
     const db = await getDB();
     const catalogItems = db.getRepository(catalogItem);
     const itemToDelete = await catalogItems.findOne(idToDelete);
@@ -120,7 +113,6 @@ export class Service {
     reply: FastifyReply<ServerResponse>
   ) {
     const token: string = request["cookies"]["auth._token.local"];
-    console.log("token = ", token);
     const db = await getDB();
     const tokens = db.getRepository(Token);
 
@@ -134,7 +126,6 @@ export class Service {
 
   async userLogin(request, reply) {
     const userLogin: { username: string; password: string } = request.body;
-    console.log(userLogin);
     const db = await getDB();
     const users = db.getRepository(User);
     const dbUser = await users.findOne({ username: userLogin.username });
@@ -182,6 +173,14 @@ export class Service {
     reply.code(404);
     return "'auth._token.local' needed";
   }
+  async getUsersList(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const db = await getDB();
+    const users = db.getRepository(User);
+    return users.find(); 
+  }
 
   async uploadImage(
     request: FastifyRequest,
@@ -205,7 +204,6 @@ export class Service {
         const hash = createHash("md5");
         hash.update(file.data);
         const hashDigest = hash.digest("base64");
-        console.log(file.filename + ": " + hashDigest);
         const image = images.create();
         image.imageName = file.filename;
         image.catalogItemId = catItem.id;
@@ -217,10 +215,13 @@ export class Service {
         const dirName = `./static/img/catalog/${catItem.id}`;
         mkdirSync(dirName, { recursive: true });
         const fileName = path.join(dirName, `${image.id}.jpg`);
-        writeFile(fileName, file.data, err => {
+        sharp(file.data).toFile(fileName, async (err, info) => {
           if (err) {
             throw err;
           }
+          image.Height = info.height;
+          image.Width = info.width;
+          await images.save(image);
           const thumbDir = path.join(dirName, "thumbs");
           mkdirSync(thumbDir, { recursive: true });
           const thumbFilename = path.join(thumbDir, `${image.id}.jpg`);
@@ -231,7 +232,6 @@ export class Service {
               if (err) {
                 throw err;
               } else {
-                console.log(info);
               }
             });
         });
@@ -295,11 +295,11 @@ export class Service {
       const dirName = `./static/img/catalog/${image.catalogItemId}`;
       const fileName = path.join(dirName, `${image.id}.jpg`);
       if (existsSync(fileName)) unlinkSync(fileName);
- 
+
       const thumbDir = path.join(dirName, "thumbs");
       const thumbFilename = path.join(thumbDir, `${image.id}.jpg`);
-      if (existsSync(thumbFilename)) unlinkSync(thumbFilename);  
-      await images.delete(image); 
+      if (existsSync(thumbFilename)) unlinkSync(thumbFilename);
+      await images.delete(image);
       reply.code(204);
       return;
     } else {

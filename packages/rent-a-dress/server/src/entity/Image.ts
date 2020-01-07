@@ -7,4 +7,6 @@ export class Image {
   @Column() @IsString() imageName: String;
   @Column() @IsString() hash: String;
   @Column() @IsInt() catalogItemId: number;
+  @Column({default: "0", type: "int", nullable:true}) @IsInt() Width?: number;
+  @Column({default: "0", type: "int", nullable:true}) @IsInt() Height?: number; 
 }

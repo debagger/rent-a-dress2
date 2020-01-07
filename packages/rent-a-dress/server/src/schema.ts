@@ -23,7 +23,7 @@ writeFileSync(`server/oapi/definitions.json`, JSON.stringify({definitions:schema
   spec["components"]["schemas"] = schemas;
 
   writeFileSync(`server/oapi/openapi-defs.json`, JSON.stringify(spec, null, 1), {
-    encoding: "utf8"
+    encoding: "utf8" 
   });
 
 }

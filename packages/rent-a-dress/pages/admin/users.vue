@@ -59,7 +59,8 @@
   </v-content>
 </template>
 
-<script>
+<script lang="ts">
+import {User} from "oapi-client-typescript-axios"
 export default {
   data() {
     return {
@@ -70,12 +71,14 @@ export default {
         { text: "E-mail", value: "email" },
         { text: "Роль", value: "role" },
         { text: "Actions", value: "action", sortable: false }
-      ]
+      ],
+      users: <User[]>[]
     };
   },
-  async asyncData({ $axios }) {
-    const data = await $axios.$get("/api/auth/users");
-    return { users: data };
+  async mounted() {
+    debugger;
+     const result = await this.$api.getUsersList();
+     this.users = result.data;
   },
   methods: {
     newUser() {
