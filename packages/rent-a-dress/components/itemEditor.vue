@@ -18,14 +18,22 @@
           </v-col>
           <v-col cols="4">
             <v-img contain max-height="60vh" :src="`/api/images/${item.img}`"></v-img>
-          </v-col>  
+          </v-col>
         </v-row>
       </v-tab-item>
       <v-tab-item value="imgs" key="1">
         <v-container>
           <v-row>
             <v-col cols="2">
-              <v-card class="ml-1 mr-1" @dragover.prevent @drop="fileDrop">
+              <input
+                type="file"
+                style="display: none"
+                accept="image/jpeg"
+                ref="fileinp"
+                multiple="multiple"
+                @change="fileInputChange"
+              />
+              <v-card class="ml-1 mr-1" @dragover.prevent @drop="fileDrop" @click="dropzoneClick">
                 <v-responsive
                   class="d-flex align-center justify-content-center text-center"
                   aspect-ratio="0.8"
@@ -46,7 +54,7 @@
                   <v-btn small icon v-on:click.stop="deleteImage(image)">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
-                   <v-btn small icon v-on:click.stop="setCoverImage(image)">
+                  <v-btn small icon v-on:click.stop="setCoverImage(image)">
                     <v-icon v-if="item.img==image.id">mdi-check-box-outline</v-icon>
                     <v-icon v-else>mdi-checkbox-blank-outline</v-icon>
                   </v-btn>
@@ -69,73 +77,93 @@
 </template>
 
 <script lang="ts">
-import Vue, { PropOptions } from "vue";
+import { PropOptions } from "vue";
 import { CatalogItem, Image } from "oapi-client-typescript-axios";
 import { NuxtAxiosInstance } from "@nuxtjs/axios";
-export default Vue.extend({
-  data() {
-    return {
-      showImageDialog: { show: false, src: "", contain: true, height: "80vh" },
-      tab: "data",
-      filesToUpload: [],
-      loading: false,
-      dialog: false,
-      images: <Image[]>[]
-    };
-  },
-  props: { item: <PropOptions<CatalogItem>>{ type: Object } },
-  watch: {
-    item: {
-      handler: async function(oldItem, newItem) {
-        this.images = <Image[]>[];
-        this.tab = "data";
-        const result = await this.$api.getImagesForCatalogItem(this.item.id);
-        console.log(result.data);
-        this.images = result.data;
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    imageClick: function() {
-      this.showImageDialog.contain = !this.showImageDialog.contain;
-      this.showImageDialog.height = this.showImageDialog.contain ? "80vh" : "";
-    },
-    showImage: function(image: Image) {
-      this.showImageDialog.src = `/api/images/${image.id}`;
-      this.showImageDialog.contain = true;
-      this.showImageDialog.height = "80vh";
-      this.showImageDialog.show = true;
-    },
-    setCoverImage(image:Image){
-      this.item.img = `${image.id}`
-    },
-    fileDrop: async function(e: any) {
-      e.stopPropagation();
-      e.preventDefault();
-      const files = e.dataTransfer.files;
-      console.log(files);
-      const itemId = this.item.id;
-      const fd = new FormData();
-      for (const file of files) {
-        fd.append("files", file, file.name);
-      }
-      fd.append("itemId", `${itemId}`);
-      const result = await this.$axios.post("/api/images/upload", fd, {
-        headers: {
-          "Content-Type": "multipart/form-data"
-        }
-      });
-      this.images.push(...result.data);
-    },
+import { Component, Vue, Prop, Watch } from "nuxt-property-decorator";
 
-    async deleteImage(image: Image) {
-      await this.$api.deleteImage(image.id);
-      const imgIndex = this.images.findIndex(item => item.id === image.id);
-      this.images.splice(imgIndex, 1);
-    }
+@Component({ components: {} })
+export default class itemEditor extends Vue {
+  @Prop() item: CatalogItem;
+
+  @Watch("item") async onItemChange(
+    oldItem: CatalogItem,
+    newItem: CatalogItem
+  ) {
+    this.images = <Image[]>[];
+    this.tab = "data";
+    const result = await this.$api.getImagesForCatalogItem(this.item.id);
+    console.log(result.data);
+    this.images = result.data;
   }
-});
+  public showImageDialog = {
+    show: false,
+    src: "",
+    contain: true,
+    height: "80vh"
+  };
+  public tab = "data";
+  public loading = false;
+  public dialog = false;
+  public images = <Image[]>[];
+
+  async fileInputChange(e: any) {
+    e.stopPropagation();
+    e.preventDefault();
+    const fileInputElement = <any>this.$refs["fileinp"];
+    const files = <File[]>fileInputElement.files;
+    await this.uploadFiles(files);
+  }
+
+  dropzoneClick() {
+    (<any>this.$refs["fileinp"]).click();
+  }
+
+  imageClick() {
+    this.showImageDialog.contain = !this.showImageDialog.contain;
+    this.showImageDialog.height = this.showImageDialog.contain ? "80vh" : "";
+  }
+
+  showImage(image: Image) {
+    this.showImageDialog.src = `/api/images/${image.id}`;
+    this.showImageDialog.contain = true;
+    this.showImageDialog.height = "80vh";
+    this.showImageDialog.show = true;
+  }
+
+  setCoverImage(image: Image) {
+    this.item.img = `${image.id}`;
+  }
+
+  async uploadFiles(files: File[]) {
+    const itemId = this.item.id;
+    const fd = new FormData();
+    
+    for (const file of files) {
+      fd.append("files", file, file.name);
+    }
+    fd.append("itemId", `${itemId}`);
+    const result = await this.$axios.post("/api/images/upload", fd, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
+    this.images.push(...result.data);
+  }
+
+  async fileDrop(e: any) {
+    e.stopPropagation();
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    await this.uploadFiles(files);
+  }
+
+  async deleteImage(image: Image) {
+    await this.$api.deleteImage(image.id);
+    const imgIndex = this.images.findIndex(item => item.id === image.id);
+    this.images.splice(imgIndex, 1);
+  }
+}
 </script>
 
 <style>
