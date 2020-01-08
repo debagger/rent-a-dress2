@@ -241,17 +241,85 @@
         }
       }
     },
-    "/api/users":{
-      "get":{
+    "/api/users": {
+      "get": {
         "operationId": "getUsersList",
         "responses": {
-          "200":{
+          "200": {
             "description": "Returns list of users",
-            "content": {"application/json": {
-              "schema":{"type": "array",
-                "items":{"$ref": "#/components/schemas/User"}
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": { "$ref": "#/components/schemas/User" }
+                }
               }
-            }}
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "addNewUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteUser",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "User deleted"
           }
         }
       }
@@ -267,7 +335,7 @@
                 "properties": {
                   "files": {
                     "type": "array",
-                    "items":{"type": "object"}
+                    "items": { "type": "object" }
                   },
                   "itemId": {
                     "type": "integer"

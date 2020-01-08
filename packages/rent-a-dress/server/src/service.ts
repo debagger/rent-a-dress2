@@ -179,7 +179,54 @@ export class Service {
   ) {
     const db = await getDB();
     const users = db.getRepository(User);
-    return users.find(); 
+    return users.find();
+  }
+
+  async addNewUser(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const user: User = request.body;
+    const db = await getDB();
+    const users = db.getRepository(User);
+    const checkUsername = await users.find({ username: user.username });
+    if (checkUsername.length!==0) {
+      reply.code(400);
+      return "Username exist";
+    }
+    delete user.id;
+    const dbUser = await users.save(user);
+    return dbUser; 
+  }
+
+  async updateUser(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const user: User = request.body;
+
+    const db = await getDB();
+    const users = db.getRepository(User);
+    const dbUser = await users.findOne({ id: user.id });
+    if (user.username === dbUser.username) {
+      const result = await users.save(user);
+      return result;
+    }
+    return dbUser;
+  }
+
+  async deleteUser(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
+    const user: User = request.body;
+
+    const db = await getDB();
+    const users = db.getRepository(User);
+    const dbUser = await users.findOne({ id: user.id });
+    await users.delete(dbUser);
+    reply.code(204);
+    return;
   }
 
   async uploadImage(

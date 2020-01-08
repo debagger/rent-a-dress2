@@ -1,7 +1,7 @@
 <template>
   <v-content>
     <v-row>
-      <v-col class=" text-center grey darken-4 white--text">
+      <v-col class="text-center grey darken-4 white--text">
         <h2 class="font-weight-thin display-2">RENT-A-DRESS</h2>
       </v-col>
     </v-row>
@@ -17,7 +17,7 @@
               <v-dialog v-model="dialog" max-width="500px">
                 <v-card>
                   <v-card-title>
-                    <span class="headline">{{ formTitle }}</span>
+                    <span class="headline">formTitle</span>
                   </v-card-title>
 
                   <v-card-text>
@@ -60,69 +60,82 @@
 </template>
 
 <script lang="ts">
-import {User} from "oapi-client-typescript-axios"
-export default {
-  data() {
-    return {
-      dialog: false,
-      editedItem: {},
-      headers: [
-        { text: "Имя пользователя", value: "username" },
-        { text: "E-mail", value: "email" },
-        { text: "Роль", value: "role" },
-        { text: "Actions", value: "action", sortable: false }
-      ],
-      users: <User[]>[]
-    };
-  },
-  async mounted() {
-    debugger;
-     const result = await this.$api.getUsersList();
-     this.users = result.data;
-  },
-  methods: {
-    newUser() {
-      this.editedItem = {
-        isnew: true,
-        username: "",
-        email: "",
-        role: "",
-        password: ""
-      };
-      this.dialog = true;
-    },
+import { User } from "~/oapi-client-typescript-axios";
+import { Component, Vue, Prop, Watch } from "nuxt-property-decorator";
 
-    editItem(item) {
-      this.editedItem = Object.assign({}, item);
-      this.dialog = true;
-    },
-    deleteItem(item) {
-      confirm("Are you sure you want to delete this item?");
-    },
-    async save() {
-      debugger;
-      if (this.editedItem.isnew) {
-        const data = await this.$axios.$post("/api/auth/adduser", {
-          username: this.editedItem.username,
-          email: this.editedItem.email,
-          password: this.editedItem.password
-        });
-        this.users = await this.$axios.$get("/api/auth/users");
-      } else {
-        const data = await this.$axios.$post(
-          "/api/auth/edituser",
-          this.editedItem
-        );
-        const user = this.users.find(item => item.username === data.username);
-        Object.assign(user, data);
-      }
-      this.dialog = false;
-    },
-    close() {
-      this.dialog = false;
-    }
+interface UserItem extends User {
+  isnew: boolean;
+}
+class UserItemClass implements UserItem {
+  public isnew = false;
+  public id = -1;
+  public username = "";
+  public password = "";
+  public role = "";
+  public email = "";
+}
+
+@Component({ components: {} })
+export default class Users extends Vue {
+  public dialog = false;
+  public editedItem: UserItem = new UserItemClass();
+  public headers = [
+    { text: "Имя пользователя", value: "username" },
+    { text: "E-mail", value: "email" },
+    { text: "Роль", value: "role" },
+    { text: "Actions", value: "action", sortable: false }
+  ];
+  public users: User[] = [];
+
+  async mounted() {
+    const result = await this.$api.getUsersList();
+    this.users = result.data;
   }
-};
+
+  newUser() {
+    this.editedItem = new UserItemClass();
+    this.editedItem.isnew = true;
+    this.dialog = true;
+  }
+
+  editItem(item: UserItem) {
+    this.editedItem = Object.assign({}, item);
+    this.dialog = true;
+  }
+
+  async deleteItem(item: UserItem) {
+    if(confirm("Are you sure you want to delete this item?")){
+      const result = await this.$api.deleteUser(item);
+      if(result.status===204){
+        const index = this.users.findIndex(i=>item.id===i.id);
+        this.users.splice(index,1);
+      }
+    };
+  }
+  async save() {
+    if (this.editedItem.isnew) {
+      const data = await this.$api.addNewUser({
+        username: this.editedItem.username,
+        email: this.editedItem.email,
+        password: this.editedItem.password,
+        role: "",
+        id: -1
+      });
+      const result = await this.$api.getUsersList();
+      this.users = result.data;
+    } else {
+      const result = await this.$api.updateUser(this.editedItem);
+      const user = this.users.find(
+        item => item.username === result.data.username
+      );
+      Object.assign(user, result.data);
+    }
+    this.dialog = false;
+  }
+  close() {
+    this.dialog = false;
+  }
+}
 </script>
 
 <style>

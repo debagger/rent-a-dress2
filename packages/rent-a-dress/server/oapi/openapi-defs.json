@@ -292,6 +292,71 @@
       }
      }
     }
+   },
+   "post": {
+    "operationId": "addNewUser",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/User"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "User created",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/User"
+        }
+       }
+      }
+     }
+    }
+   },
+   "put": {
+    "operationId": "updateUser",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/User"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "User updated",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/User"
+        }
+       }
+      }
+     }
+    }
+   },
+   "delete": {
+    "operationId": "deleteUser",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/User"
+       }
+      }
+     }
+    },
+    "responses": {
+     "204": {
+      "description": "User deleted"
+     }
+    }
    }
   },
   "/api/images/upload": {
