@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-tabs right fixed-tabs v-model="tab">
+    <v-tabs v-model="tab">
       <v-tabs-slider></v-tabs-slider>
       <v-tab href="#data">Основные данные</v-tab>
-      <v-tab href="#imgs">Изображения</v-tab>
+      <v-tab href="#imgs" @change="loadImages">Изображения</v-tab>
     </v-tabs>
     <v-tabs-items v-model="tab">
       <v-tab-item value="data" key="0">
@@ -46,7 +46,7 @@
             <v-col xl="1" lg="2" md="4" sm="6" v-for="image in images" :key="image.id">
               <v-card class="ml-1 mr-1">
                 <v-img
-                  :src="`/api/images/${image.id}`"
+                  :src="`/api/images/thumbs/${image.id}`"
                   aspect-ratio="0.8"
                   v-on:click="showImage(image)"
                 ></v-img>
@@ -88,16 +88,25 @@ interface DropEvent extends Event {
 @Component({ components: {} })
 export default class itemEditor extends Vue {
   @Prop() item: CatalogItem;
+  
+  public tab = "data";
+  public loading = false;
+  public dialog = false;
+  public images = <Image[]>[];
 
-  @Watch("item") async onItemChange(
-    oldItem: CatalogItem,
-    newItem: CatalogItem
-  ) {
+  async loadImages() {
     this.images = <Image[]>[];
     this.tab = "data";
     const result = await this.$api.getImagesForCatalogItem(this.item.id);
     console.log(result.data);
     this.images = result.data;
+  }
+
+  @Watch("item") async onItemChange(
+    oldItem: CatalogItem,
+    newItem: CatalogItem
+  ) {
+    await this.loadImages();
   }
 
   public showImageDialog = {
@@ -106,11 +115,6 @@ export default class itemEditor extends Vue {
     contain: true,
     height: "80vh"
   };
-
-  public tab = "data";
-  public loading = false;
-  public dialog = false;
-  public images = <Image[]>[];
 
   async fileInputChange(e: Event) {
     e.stopPropagation();

@@ -403,6 +403,33 @@
         }
       ]
     },
+    "/api/images/thumbs/{id}": {
+      "get": {
+        "operationId": "getImageThumb",
+        "responses": {
+          "200": {
+            "description": "Return image",
+            "content": {
+              "image/jpeg": {
+                "schema": { "type": "string", "format": "binary" }
+              }
+            }
+          },
+          "404": {
+            "description": "Image not found",
+            "content": { "text/plain": { "schema": { "type": "string" } } }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema": { "type": "integer" }
+        }
+      ]
+    },
     "/api/images/catalog/{id}": {
       "get": {
         "description": "Return images for catalog item",

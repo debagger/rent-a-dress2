@@ -7,29 +7,44 @@
     </v-row>
     <v-row>
       <v-col>
+        <v-btn @click="$router.back()">Назад</v-btn>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
         <itemEditor v-if="item" :item="item"></itemEditor>
+      </v-col>
+    </v-row>
+    <v-spacer></v-spacer>
+    <v-row>
+      <v-col>
+        <v-btn color="primary" text @click="save">I accept</v-btn>
       </v-col>
     </v-row>
   </v-content>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import itemEditor from "../../../components/itemEditor.vue";
 import { CatalogItem } from "~/oapi-client-typescript-axios";
+import { Component, Vue } from "nuxt-property-decorator";
 
-export default Vue.extend({
-  components: { itemEditor },
-  data() {
-    return { item: <CatalogItem>null };
-  },
+@Component({ components: { itemEditor } })
+export default class catalogDetails extends Vue {
+  public item: CatalogItem = null;
+
   async mounted() {
-    const result = await this.$api.getCatalogItem(
-      Number(this.$route.params.id)
+    this.item = Object.assign({},
+      this.$accessor.catalog.find(
+        item => item.id == Number(this.$route.params.id)
+      )
     );
-    this.item = result.data;
   }
-});
+  async save() {
+    await this.$accessor.updateCatalogItem(this.item);
+    this.$router.back();
+  }
+}
 </script>
 
 <style>

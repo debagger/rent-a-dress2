@@ -22,9 +22,12 @@
                   <v-img :src="`/api/images/${item.img}`"></v-img>
                   <v-card-text>{{item.caption}}</v-card-text>
                   <v-card-actions>
-                    <v-btn icon v-on:click.stop="edit(item)">
+                    <!-- <v-btn icon v-on:click.stop="edit(item)" :to="`/admin/catalog/${item.id}`">
                       <v-icon>mdi-playlist-edit</v-icon>
-                    </v-btn>
+                    </v-btn> -->
+                    <v-btn icon :to="`/admin/catalog/${item.id}`">
+                      <v-icon>mdi-playlist-edit</v-icon>
+                    </v-btn>                    
                     <v-btn icon v-on:click.stop="deleteItem(item)">
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
@@ -67,7 +70,6 @@ export default class Index extends Vue {
     desc: "",
     img: ""
   };
-
   public headers = [
     { text: "id", value: "id" },
     { text: "Изображение", value: "img" },

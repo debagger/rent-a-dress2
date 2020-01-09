@@ -318,6 +318,36 @@ export class Service {
       return "Image not found in db";
     }
   }
+  async getImageThumb(request: FastifyRequest, reply: FastifyReply<ServerResponse>) {
+    const db = await getDB();
+    const images = db.getRepository(Image);
+    const id = request.params["id"];
+    const image = await images.findOne(id);
+    if (image) {
+      const dirName = `./static/img/catalog/${image.catalogItemId}/thumbs`;
+      const fileName = path.join(dirName, `${image.id}.jpg`);
+      exists(fileName, exists => {
+        if (exists) {
+          readFile(fileName, (err, data) => {
+            if (err) {
+              reply.code(404);
+              return err;
+            } else { 
+              reply.type("image/jpeg").send(data);
+              return;
+            }
+          });
+        } else {
+          reply.code(404);
+          return "File not found";
+        }
+      });
+    } else {
+      reply.code(404);
+      return "Image not found in db";
+    }
+  }
+  
 
   async getImagesForCatalogItem(
     request: FastifyRequest,
