@@ -13,7 +13,7 @@
               <v-text-field class="mr-4 ml-4" v-model="item.id" readonly label="id"></v-text-field>
               <v-text-field class="mr-4 ml-4" v-model="item.caption" label="Название"></v-text-field>
               <v-text-field class="mr-4 ml-4" v-model="item.price" label="Цена"></v-text-field>
-              <v-text-field class="mr-4 ml-4" v-model="item.desc" label="Описание"></v-text-field>
+              <v-textarea class="mr-4 ml-4" v-model="item.desc" label="Описание"></v-textarea>
             </v-form>
           </v-col>
           <v-col cols="4">
@@ -38,7 +38,8 @@
                   class="d-flex align-center justify-content-center text-center"
                   aspect-ratio="0.8"
                 >
-                  <v-icon large>mdi-tray-plus</v-icon>
+                  <v-progress-circular indeterminate size="64" v-if="loading"></v-progress-circular>
+                  <v-icon large v-else>mdi-tray-plus</v-icon>
                 </v-responsive>
                 <v-card-subtitle>Dropzone</v-card-subtitle>
               </v-card>
@@ -79,7 +80,7 @@
 <script lang="ts">
 import { CatalogItem, Image } from "oapi-client-typescript-axios";
 import { NuxtAxiosInstance } from "@nuxtjs/axios";
-import { Component, Vue, Prop, Watch } from "nuxt-property-decorator";
+import { Component, Vue, Prop, Watch, Ref } from "nuxt-property-decorator";
 
 interface DropEvent extends Event {
   dataTransfer: DataTransfer;
@@ -119,13 +120,14 @@ export default class itemEditor extends Vue {
   async fileInputChange(e: Event) {
     e.stopPropagation();
     e.preventDefault();
-    const fileInputElement = <any>this.$refs["fileinp"];
-    const files = fileInputElement.files;
+    const files = this.fileInput.files;
     await this.uploadFiles(files);
   }
 
+  @Ref("fileinp") readonly fileInput!: HTMLInputElement;
+
   dropzoneClick() {
-    (<HTMLBaseElement>this.$refs["fileinp"]).click();
+    this.fileInput.click();
   }
 
   imageClick() {
@@ -154,18 +156,21 @@ export default class itemEditor extends Vue {
     }
 
     fd.append("itemId", `${itemId}`);
+    this.loading = true;
     const result = await this.$axios.post("/api/images/upload", fd, {
       headers: {
         "Content-Type": "multipart/form-data"
       }
     });
     this.images.push(...result.data);
+    this.loading = false;
   }
 
   async fileDrop(e: DropEvent) {
     e.stopPropagation();
     e.preventDefault();
     const files = e.dataTransfer.files;
+    
     await this.uploadFiles(files);
   }
 

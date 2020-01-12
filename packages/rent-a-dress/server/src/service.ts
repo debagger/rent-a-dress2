@@ -190,13 +190,13 @@ export class Service {
     const db = await getDB();
     const users = db.getRepository(User);
     const checkUsername = await users.find({ username: user.username });
-    if (checkUsername.length!==0) {
+    if (checkUsername.length !== 0) {
       reply.code(400);
       return "Username exist";
     }
     delete user.id;
     const dbUser = await users.save(user);
-    return dbUser; 
+    return dbUser;
   }
 
   async updateUser(
@@ -247,43 +247,40 @@ export class Service {
 
       const result: Image[] = [];
 
-      for (const file of files) {
-        const hash = createHash("md5");
-        hash.update(file.data);
-        const hashDigest = hash.digest("base64");
-        const image = images.create();
-        image.imageName = file.filename;
-        image.catalogItemId = catItem.id;
-        image.hash = hashDigest;
-        await images.save(image);
+      const results = files.map(
+        file =>
+          new Promise<Image>(async (resolve, reject) => {
+            const hash = createHash("md5");
+            hash.update(file.data);
+            const hashDigest = hash.digest("base64");
+            const image = images.create();
+            image.imageName = file.filename;
+            image.catalogItemId = catItem.id;
+            image.hash = hashDigest;
+            await images.save(image);
+            result.push(image);
 
-        result.push(image);
+            const dirName = `./static/img/catalog/${catItem.id}`;
+            mkdirSync(dirName, { recursive: true });
+            const fileName = path.join(dirName, `${image.id}.jpg`);
 
-        const dirName = `./static/img/catalog/${catItem.id}`;
-        mkdirSync(dirName, { recursive: true });
-        const fileName = path.join(dirName, `${image.id}.jpg`);
-        sharp(file.data).toFile(fileName, async (err, info) => {
-          if (err) {
-            throw err;
-          }
-          image.Height = info.height;
-          image.Width = info.width;
-          await images.save(image);
-          const thumbDir = path.join(dirName, "thumbs");
-          mkdirSync(thumbDir, { recursive: true });
-          const thumbFilename = path.join(thumbDir, `${image.id}.jpg`);
-          sharp(file.data)
-            .resize({ width: 640, height: 640, fit: "inside" })
-            .jpeg({ quality: 50 })
-            .toFile(thumbFilename, (err, info) => {
-              if (err) {
-                throw err;
-              } else {
-              }
-            });
-        });
-      }
-      return result;
+            const info = await sharp(file.data).toFile(fileName);
+            image.Height = info.height;
+            image.Width = info.width;
+            await images.save(image);
+
+            const thumbDir = path.join(dirName, "thumbs");
+            mkdirSync(thumbDir, { recursive: true });
+            const thumbFilename = path.join(thumbDir, `${image.id}.jpg`);
+            await sharp(file.data)
+              .resize({ width: 640, height: 640, fit: "inside" })
+              .jpeg({ quality: 50 })
+              .toFile(thumbFilename);
+            resolve(image);
+          })
+      );
+      const res = await Promise.all(results);
+      reply.send(res);
     } else {
       reply.code(404);
       return "Item not found";
@@ -318,7 +315,10 @@ export class Service {
       return "Image not found in db";
     }
   }
-  async getImageThumb(request: FastifyRequest, reply: FastifyReply<ServerResponse>) {
+  async getImageThumb(
+    request: FastifyRequest,
+    reply: FastifyReply<ServerResponse>
+  ) {
     const db = await getDB();
     const images = db.getRepository(Image);
     const id = request.params["id"];
@@ -332,7 +332,7 @@ export class Service {
             if (err) {
               reply.code(404);
               return err;
-            } else { 
+            } else {
               reply.type("image/jpeg").send(data);
               return;
             }
@@ -347,7 +347,6 @@ export class Service {
       return "Image not found in db";
     }
   }
-  
 
   async getImagesForCatalogItem(
     request: FastifyRequest,
