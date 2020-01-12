@@ -14,18 +14,27 @@ import { CatalogItem } from "~/oapi-client-typescript-axios";
 // Keep your existing vanilla Vuex code for state, getters, mutations, actions, plugins, etc.
 export const state = () => ({
   catalog: <CatalogItem[]>[],
-  name: "Me"
+
 });
 
 export type RootState = ReturnType<typeof state>;
 
 export const getters = {
-  name: (state: RootState) => state.name
+  getCatalogItem: (state: RootState) => (id: number) =>
+    state.catalog.find(i => i.id === id)
 };
 
 export const mutations = mutationTree(state, {
   SET_CATALOG(state, catalog: CatalogItem[]) {
     state.catalog = catalog;
+  },
+  SET_CATALOG_ITEM(state, item: CatalogItem) {
+    const index = state.catalog.findIndex(i => i.id === item.id);
+    if (index === -1) {
+      state.catalog.push(item);
+    } else {
+      state.catalog[index] = item;
+    }
   },
   UPDATE_CATALOGITEM(state, item: CatalogItem) {
     const index = state.catalog.findIndex(i => i.id === item.id);
@@ -47,6 +56,10 @@ export const actions = actionTree(
       const catalog = await this.$api.getCatalog();
       commit("SET_CATALOG", catalog.data);
     },
+    async fetchCatalogItem({ commit }, id: number) {
+      const result = await this.$api.getCatalogItem(id);
+      commit("SET_CATALOG_ITEM", result.data);
+    },
     async updateCatalogItem({ commit }, item: CatalogItem) {
       const updatedItem = await this.$api.updateCatalogItem(item);
       commit("UPDATE_CATALOGITEM", updatedItem.data);
@@ -63,7 +76,7 @@ export const actions = actionTree(
         commit("APPEND_CATALOGITEM", result.data);
       }
     }
-  } 
+  }
 );
 
 const store = {

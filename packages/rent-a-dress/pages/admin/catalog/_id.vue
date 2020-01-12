@@ -25,20 +25,21 @@
 </template>
 
 <script lang="ts">
-import itemEditor from "../../../components/itemEditor.vue";
+import itemEditor from "~/components/itemEditor.vue";
 import { CatalogItem } from "~/oapi-client-typescript-axios";
 import { Component, Vue } from "nuxt-property-decorator";
 
 @Component({ components: { itemEditor } })
 export default class catalogDetails extends Vue {
-  public item: CatalogItem = null;
+  public item:CatalogItem = null; 
+
+  public get id() {
+    return Number(this.$route.params.id);
+  }
 
   async mounted() {
-    this.item = Object.assign({},
-      this.$accessor.catalog.find(
-        item => item.id == Number(this.$route.params.id)
-      )
-    );
+    await this.$accessor.fetchCatalogItem(this.id);
+    this.item = Object.assign({},this.$accessor.getCatalogItem(this.id));
   }
   async save() {
     await this.$accessor.updateCatalogItem(this.item);

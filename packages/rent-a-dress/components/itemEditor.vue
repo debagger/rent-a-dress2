@@ -85,17 +85,17 @@ interface DropEvent extends Event {
   dataTransfer: DataTransfer;
 }
 
-@Component({ components: {} })
+ @Component({ components: {} })
 export default class itemEditor extends Vue {
   @Prop() item: CatalogItem;
   
   public tab = "data";
   public loading = false;
   public dialog = false;
-  public images = <Image[]>[];
+  public images:Image[] = [];
 
   async loadImages() {
-    this.images = <Image[]>[];
+    this.images=[];
     this.tab = "data";
     const result = await this.$api.getImagesForCatalogItem(this.item.id);
     console.log(result.data);
@@ -125,7 +125,7 @@ export default class itemEditor extends Vue {
   }
 
   dropzoneClick() {
-    (<any>this.$refs["fileinp"]).click();
+    (<HTMLBaseElement>this.$refs["fileinp"]).click();
   }
 
   imageClick() {
