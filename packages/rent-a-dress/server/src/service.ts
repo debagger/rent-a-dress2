@@ -25,7 +25,7 @@ function parseCookie(str: string) {
   return result;
 }
 
-function Role(role?: "User"|"Admin") {
+function Role(role?: "user"|"admin") {
   return function(
     target: Object,
     propertyKey: string,
@@ -87,7 +87,7 @@ async function getDB(): Promise<Connection> {
 export class Service {
   constructor() {}
 
-  @Role("Admin") async getCatalog(
+  @Role("admin") async getCatalog(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -97,7 +97,7 @@ export class Service {
     reply.send(result);
   }
 
-  async getCatalogItem(
+  @Role("admin") async getCatalogItem(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -113,7 +113,7 @@ export class Service {
     }
   }
 
-  async newCatalogItem(
+  @Role("admin") async newCatalogItem(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -125,7 +125,7 @@ export class Service {
     return newItem;
   }
 
-  async updateCatalogItem(
+  @Role("admin") async updateCatalogItem(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -141,7 +141,7 @@ export class Service {
     }
   }
 
-  async deleteCatalogItem(
+  @Role("admin") async deleteCatalogItem(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -159,7 +159,7 @@ export class Service {
     }
   }
 
-  async getUserByToken(
+  @Role() async getUserByToken(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -204,7 +204,7 @@ export class Service {
       return "User not found";
     }
   }
-  async userLogout(
+  @Role("admin") async userLogout(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -232,8 +232,8 @@ export class Service {
     const users = db.getRepository(User);
     return users.find();
   }
-
-  async addNewUser(
+  
+  @Role("admin") async addNewUser(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -250,7 +250,7 @@ export class Service {
     return dbUser;
   }
 
-  async updateUser(
+  @Role("admin") async updateUser(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -266,7 +266,7 @@ export class Service {
     return dbUser;
   }
 
-  async deleteUser(
+  @Role("admin") async deleteUser(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -280,7 +280,7 @@ export class Service {
     return;
   }
 
-  async uploadImage(
+  @Role("admin") async uploadImage(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -337,7 +337,7 @@ export class Service {
       return "Item not found";
     }
   }
-  async getImage(request: FastifyRequest, reply: FastifyReply<ServerResponse>) {
+  @Role("admin") async getImage(request: FastifyRequest, reply: FastifyReply<ServerResponse>) {
     const db = await getDB();
     const images = db.getRepository(Image);
     const id = request.params["id"];
@@ -366,7 +366,7 @@ export class Service {
       return "Image not found in db";
     }
   }
-  async getImageThumb(
+  @Role("admin") async getImageThumb(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -399,7 +399,7 @@ export class Service {
     }
   }
 
-  async getImagesForCatalogItem(
+  @Role("admin") async getImagesForCatalogItem(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
@@ -410,7 +410,7 @@ export class Service {
     return foundImages;
   }
 
-  async deleteImage(
+  @Role("admin") async deleteImage(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
