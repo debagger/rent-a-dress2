@@ -1,5 +1,4 @@
 import { catalogItem } from "./entity/catalogItem";
-import { catalogItemOption } from "./entity/catalgItemOption";
 import { FastifyRequest, FastifyReply } from "fastify";
 
 import { User } from "./entity/User";
@@ -10,16 +9,66 @@ import { config as fastifyConfig } from "./fastify/fastify.config";
 import { ServerResponse } from "http";
 
 import { createHash } from "crypto";
-import {
-  writeFile,
-  mkdirSync,
-  exists,
-  readFile,
-  unlinkSync,
-  existsSync
-} from "fs";
+import { mkdirSync, exists, readFile, unlinkSync, existsSync } from "fs";
 import { Image } from "./entity/Image";
 import * as path from "path";
+
+function parseCookie(str: string) {
+  var result = {};
+  if (str) {
+    const SplittedString = str.split("; ");
+    for (var i = 0; i < SplittedString.length; i++) {
+      var item = SplittedString[i].split("=");
+      result[item[0]] = unescape(item[1]);
+    }
+  }
+  return result;
+}
+
+function Role(role?: "User"|"Admin") {
+  return function(
+    target: Object,
+    propertyKey: string,
+    descriptor: TypedPropertyDescriptor<
+      (
+        request: FastifyRequest,
+        reply: FastifyReply<ServerResponse>
+      ) => Promise<any>
+    >
+  ) {
+    if (descriptor === undefined) {
+      descriptor = Object.getOwnPropertyDescriptor(target, propertyKey);
+    }
+
+    const original = descriptor.value;
+
+    descriptor.value = async function(request, reply) {
+      const cookies = parseCookie(request?.headers?.cookie);
+      const cookieToken = cookies["auth._token.local"];
+      console.log(cookieToken);
+      if (cookieToken) {
+        const db = await getDB();
+        const tokens = db.getRepository(Token);
+        const token = await tokens.findOne({
+          token: cookieToken
+        });
+        if (token) {
+          if (role) {
+            if (token.user.role === role) {
+              return await original(request, reply);
+            }
+            reply.code(403).send(`Forbidden. Need role "${role}"`);
+          }
+          return await original(request, reply);
+        }
+        reply.code(403).send("Forbidden. No token exist.");
+        return;
+      }
+      reply.code(403).send("Forbidden. Auth token needed.");
+      return;
+    };
+  };
+}
 
 let _db: Connection;
 
@@ -38,14 +87,16 @@ async function getDB(): Promise<Connection> {
 export class Service {
   constructor() {}
 
-  async getCatalog(
+  @Role("Admin") async getCatalog(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
   ) {
     const db = await getDB();
     const catalogItems = db.getRepository(catalogItem);
-    return await catalogItems.find();
+    const result = await catalogItems.find({});
+    reply.send(result);
   }
+
   async getCatalogItem(
     request: FastifyRequest,
     reply: FastifyReply<ServerResponse>
