@@ -246,6 +246,7 @@ export class Service {
       return "Username exist";
     }
     delete user.id;
+    user.password = fastifyConfig.hash(user.password);
     const dbUser = await users.save(user);
     return dbUser;
   }

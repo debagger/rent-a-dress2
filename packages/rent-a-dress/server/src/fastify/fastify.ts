@@ -14,12 +14,11 @@ import { CatalogPlugin } from "./catalog";
 import { userPlugin } from "./user";
 import Ajv from "ajv";
 
-import {Service} from "../service";
+import { Service } from "../service";
 
-import swaggerConf from "../../oapi/openapi-defs.json"; 
+import swaggerConf from "../../oapi/openapi-defs.json";
 
-
-export function myFastify(nuxt): any {
+export function myFastify(nuxt) {
   return () => {
     //Create directory and file for log if not exist
     fs.mkdirSync(path.dirname(config.fastify.logger.file), { recursive: true });
@@ -28,13 +27,15 @@ export function myFastify(nuxt): any {
     // Require the framework and instantiate it
     const fastify = Fastify(config.fastify);
 
+    fastify.register(require("fastify-compress"), {threshold: 0}); 
+    
     // const ajv = new Ajv(config.ajv);
     // fastify.setSchemaCompiler(function(schema) {
     //   console.log(schema);
     //   return ajv.compile(schema);
     // });
 
-    fastify.register(require("fastify-cookie"));
+    fastify.register(require("fastify-cookie")); 
 
     const staticFolder = path.join(
       path.dirname(require.main.filename),
@@ -48,48 +49,19 @@ export function myFastify(nuxt): any {
     // Enable the fastify CORS plugin
     // fastify.register(require('fastify-cors'), {
     //   origin: '*',
-    //   credentials: true  
+    //   credentials: true
     // })
 
-    fastify.register(require('fastify-multipart'), {addToBody: true});
+    fastify.register(require("fastify-multipart"), { addToBody: true });
 
     const openapiGlue = require("fastify-openapi-glue");
-
 
     fastify.register(openapiGlue, {
       specification: swaggerConf,
       service: new Service()
     });
 
-    
-
-    // fastify.register(dbPlugin, config).after(err => {
-    //   if (err) {
-    //     console.log(err);
-    //   } else {
-    //     fastify.register(currentUserPlugin, config).after(err => {
-    //       if (err) {
-    //         console.log(err);
-    //       } else {
-    //         fastify.register(isAdminPlugin, config).after(err => {
-    //           if (err) {
-    //             console.log(err);
-    //           } else {
-    //             const logErr = err => {
-    //               if (err) console.log(err);
-    //             };
-    //             // fastify.register(authPlugin, config).after(logErr);
-    //             // fastify.register(userPlugin, config).after(logErr);
-    //             // fastify.register(CatalogPlugin, config).after(logErr);
-    //             // fastify.register(imagesManagerPlugin, config).after(logErr);
-    //           }
-    //         });
-    //       }
-    //     });
-    //   }
-    // });
-
-    fastify.post("/webhook", function(request, reply) {
+     fastify.post("/webhook", function(request, reply) {
       const exec = require("child_process").exec;
       fastify.log.warn("github webhook recieved");
       reply.send();
@@ -120,20 +92,18 @@ export function myFastify(nuxt): any {
         reply.code(404).send("Unknown route");
       } else {
         reply.sent = true;
-        return nuxt.render(rq, reply.res);
+        const result = nuxt.render(rq, reply.res);;
+        return result;
       }
     });
 
     fastify.ready(() => {
       fastify.log.info(fastify.printRoutes());
       console.log(fastify.printRoutes());
-      fastify.hasContentTypeParser("multipart")? console.log("Fastify has multipart/form-data parser") : console.log("Fastify has no multipart/form-data parser") 
+      fastify.hasContentTypeParser("multipart")
+        ? console.log("Fastify has multipart/form-data parser")
+        : console.log("Fastify has no multipart/form-data parser");
     });
-
-    // Declare a route
-    // fastify.get("/", function(request, reply) {
-    //   reply.sendFile("index.html");
-    // });
 
     return fastify;
   };
