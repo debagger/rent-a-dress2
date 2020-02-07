@@ -1,17 +1,20 @@
 {
   "name": "nuxt-test",
   "version": "1.0.0",
+  "private": true,
   "description": "Nuxt.js project",
   "author": "debagger <debagger@gmail.com>",
-  "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "dev2": "node ./server/dev-server.js",
     "build": "nuxt build",
+    "dev": "nuxt",
+    "dev:compileserver": "tsc -p server/tsconfig.json -w",
+    "dev:generateclient": "onchange -d 5000 \"server/oapi/**/*\" -- npm run gen-client",
+    "dev:server": "node ./dev-server.js",
+    "gen-client": "openapi-generator generate -g typescript-axios -i ./server/oapi/openapi-defs.json --skip-validate-spec -o oapi-client-typescript-axios",
     "generate": "nuxt-ts generate",
-    "start": "node server.js",
     "migrate": "typeorm migration:run",
-    "gen-client": "openapi-generator generate -g typescript-axios -i ./server/oapi/openapi-defs.json --skip-validate-spec -o oapi-client-typescript-axios"
+    "start": "node server.js",
+    "watch": "npm-run-all --parallel dev:*"
   },
   "dependencies": {
     "@nuxt/types": "^0.3.4",
@@ -32,12 +35,14 @@
     "fastify-multipart": "^1.0.3",
     "fastify-openapi-glue": "^1.3.0",
     "fastify-static": "^2.5.0",
+    "marked": "^0.8.0",
     "node-watch": "^0.6.3",
     "nuxt": "^2.11.0",
     "nuxt-property-decorator": "^2.5.0",
     "nuxt-typed-vuex": "^0.1.15",
     "reflect-metadata": "^0.1.13",
     "sharp": "^0.23.4",
+    "smoothscroll-polyfill": "^0.4.4",
     "sqlite3": "^4.1.0",
     "superagent": "^5.1.3",
     "ts-node-dev": "^1.0.0-pre.44",
@@ -46,20 +51,25 @@
     "vue": "^2.6.11",
     "vue-async-computed": "^3.8.1",
     "vue-awesome-swiper": "^3.1.3",
+    "vue-cli-plugin-vuetify-preset-basil": "^1.0.1",
+    "vue-sticky-directive": "0.0.10",
     "vuex": "^3.1.2",
     "vuex-module-decorators": "^0.11.0"
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.8.1",
     "@nuxt/typescript-build": "^0.3.10",
-    "@nuxtjs/vuetify": "^1.9.1",
+    "@nuxtjs/vuetify": "^1.10.2",
     "@types/node": "^12.12.21",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.0.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.1",
+    "npm-run-all": "^4.1.5",
+    "onchange": "^6.1.0",
     "ts-node": "^8.5.2",
     "tslint-config-standard": "^9.0.0",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "vue-cli-plugin-vuetify-preset-shrine": "^1.0.1"
   }
 }

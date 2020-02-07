@@ -54,11 +54,12 @@ export const actions = actionTree(
   {
     async fetchCatalog({ commit }) {
       const catalog = await this.$api.getCatalog();
+      if(catalog.status==200)
       commit("SET_CATALOG", catalog.data);
     },
     async fetchCatalogItem({ commit }, id: number) {
       const result = await this.$api.getCatalogItem(id);
-      commit("SET_CATALOG_ITEM", result.data);
+      if(result.status==200) commit("SET_CATALOG_ITEM", result.data);
     },
     async updateCatalogItem({ commit }, item: CatalogItem) {
       const updatedItem = await this.$api.updateCatalogItem(item);

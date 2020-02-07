@@ -5,7 +5,7 @@ import { Token } from "./entity/Token";
 
 import {config} from  "./fastify/fastify.config";
 
-createConnection()
+export const addUser = createConnection()
   .then(async connection => {
     const user = new User();
     user.username = "admin";

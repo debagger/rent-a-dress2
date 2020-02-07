@@ -25,6 +25,7 @@ writeFileSync(`server/oapi/definitions.json`, JSON.stringify({definitions:schema
   writeFileSync(`server/oapi/openapi-defs.json`, JSON.stringify(spec, null, 1), {
     encoding: "utf8" 
   });
+  console.log("Generated server/oapi/openapi-defs.json");
 
 }
 

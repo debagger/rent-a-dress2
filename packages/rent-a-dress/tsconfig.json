@@ -28,6 +28,7 @@
      "types": [
        "@types/node",
        "@nuxt/types",
+       "@nuxtjs/vuetify",
        "./node_modules/@types/nuxtjs__auth"
      ]
    },

@@ -488,6 +488,40 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImageThumb(id: number, options: any = {}): RequestArgs {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getImageThumb.');
+            }
+            const localVarPath = `/api/images/thumbs/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            const localVarUrlObj = globalImportUrl.parse(localVarPath, true);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarUrlObj.query = {...localVarUrlObj.query, ...localVarQueryParameter, ...options.query};
+            // fix override query string Detail: https://stackoverflow.com/a/7517673/1077943
+            delete localVarUrlObj.search;
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...options.headers};
+
+            return {
+                url: globalImportUrl.format(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Return images for catalog item
          * @param {number} id 
          * @param {*} [options] Override http request option.
@@ -879,6 +913,19 @@ export const DefaultApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImageThumb(id: number, options?: any): (axios?: AxiosInstance, basePath?: string) => AxiosPromise<any> {
+            const localVarAxiosArgs = DefaultApiAxiosParamCreator(configuration).getImageThumb(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Return images for catalog item
          * @param {number} id 
          * @param {*} [options] Override http request option.
@@ -1065,6 +1112,15 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
             return DefaultApiFp(configuration).getImage(id, options)(axios, basePath);
         },
         /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getImageThumb(id: number, options?: any) {
+            return DefaultApiFp(configuration).getImageThumb(id, options)(axios, basePath);
+        },
+        /**
          * Return images for catalog item
          * @param {number} id 
          * @param {*} [options] Override http request option.
@@ -1227,6 +1283,17 @@ export class DefaultApi extends BaseAPI {
      */
     public getImage(id: number, options?: any) {
         return DefaultApiFp(this.configuration).getImage(id, options)(this.axios, this.basePath);
+    }
+
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public getImageThumb(id: number, options?: any) {
+        return DefaultApiFp(this.configuration).getImageThumb(id, options)(this.axios, this.basePath);
     }
 
     /**

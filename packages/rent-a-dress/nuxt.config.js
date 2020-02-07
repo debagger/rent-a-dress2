@@ -1,4 +1,6 @@
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+//const preset = require("vue-cli-plugin-vuetify-preset-shrine/preset");
+
 module.exports = {
   mode: "universal",
   /*
@@ -58,6 +60,22 @@ module.exports = {
       }
     ]
   ],
+  vuetify: {
+    theme: {
+      dark: false,
+      themes: {
+        light: {
+          primary: "#673ab7",
+          secondary: "#3f51b5",
+          accent: "#2196f3",
+          error: "#f44336",
+          warning: "#e91e63",
+          info: "#9c27b0",
+          success: "#4caf50"
+        }
+      }
+    }
+  },
   modules: ["@nuxtjs/axios", "@nuxtjs/auth"],
   axios: {
     baseURL: "",
@@ -84,6 +102,9 @@ module.exports = {
   css: ["swiper/dist/css/swiper.css"],
   plugins: [
     { src: "~/plugins/swiper.js", ssr: false },
-    { src: "~/plugins/api.ts", ssr: false }
+    { src: "~/plugins/api.ts", ssr: false },
+    { src: "~/plugins/polyfills.js", ssr: false },
+    { src: "~/plugins/vue-sticky-directive.js", ssr: false },
+    { src: "~/plugins/theme.js", ssr: false }
   ]
 };

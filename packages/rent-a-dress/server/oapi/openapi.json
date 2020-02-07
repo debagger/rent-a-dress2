@@ -15,7 +15,7 @@
         "operationId": "getCatalog",
         "responses": {
           "200": {
-            "description": "Return all items from catalog",
+            "description": "Return all items from catalog ",
             "content": {
               "application/json": {
                 "schema": {

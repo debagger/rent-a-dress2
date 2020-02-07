@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <nav>
-      <v-app-bar color="transparent" fixed hide-on-scroll dark flat>
+      <v-app-bar color="" fixed hide-on-scroll flat>
         <v-app-bar-nav-icon></v-app-bar-nav-icon>
         <v-spacer></v-spacer>
         <v-toolbar-title></v-toolbar-title>
@@ -56,7 +56,8 @@
         </v-menu>
       </v-app-bar>
     </nav>
-    <v-content>
+    <v-content class="mt-12">
+
       <nuxt />
     </v-content>
     <LoginForm ref="login" />

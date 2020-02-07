@@ -76,8 +76,7 @@ export default Vue.extend({
     };
   },
    async mounted() {
-    const result = await this.$api.getCatalog();
-    console.log(result.data)
+
   }
 });
 </script>
