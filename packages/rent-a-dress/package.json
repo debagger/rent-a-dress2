@@ -1,5 +1,5 @@
 {
-  "name": "nuxt-test",
+  "name": "@rent-a-dress/app",
   "version": "1.0.0",
   "private": true,
   "description": "Nuxt.js project",
@@ -21,6 +21,7 @@
     "@nuxt/typescript-runtime": "^0.2.10",
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.9.0",
+    "@rent-a-dress/server": "^1.0.0",
     "@types/busboy": "^0.2.3",
     "@types/nuxtjs__auth": "^4.8.2",
     "@types/sharp": "^0.23.1",
