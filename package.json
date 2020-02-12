@@ -1,7 +1,11 @@
 {
   "name": "root",
   "private": true,
+  "main": "packages/rent-a-dress/server.js",
   "devDependencies": {
     "lerna": "^3.20.2"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
