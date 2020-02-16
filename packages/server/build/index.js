@@ -13,11 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fastify_1 = require("./src/fastify/fastify");
-const nuxt_1 = require("nuxt");
 const typeorm_1 = require("typeorm");
 const entity_1 = __importDefault(require("./src/entity"));
 console.log(entity_1.default);
-exports.getProdServer = function (nuxtConfig, dbPath) {
+exports.getProdServer = function (nuxt, dbPath) {
     return __awaiter(this, void 0, void 0, function* () {
         yield typeorm_1.createConnection({
             type: "sqlite",
@@ -27,7 +26,6 @@ exports.getProdServer = function (nuxtConfig, dbPath) {
             entities: [...entity_1.default]
         });
         const result = new Promise(function (resolve, reject) {
-            const nuxt = new nuxt_1.Nuxt(nuxtConfig);
             const fastify = fastify_1.myFastify(nuxt)();
             fastify.listen(443, "0.0.0.0", function (err, address) {
                 if (err) {

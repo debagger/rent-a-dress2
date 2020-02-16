@@ -51,11 +51,10 @@ module.exports = {
     [
       "@nuxt/typescript-build",
       {
-        typeCheck: true,
-        // {
-        //   memoryLimit: 256,
-        //   workers: 1
-        // },
+        typeCheck:  {
+          memoryLimit: 2048,
+          workers: 4
+        },
         ignoreNotFoundWarnings: false
       }
     ]
@@ -104,7 +103,6 @@ module.exports = {
     { src: "~/plugins/swiper.js", ssr: false },
     { src: "~/plugins/api.ts", ssr: false },
     { src: "~/plugins/polyfills.js", ssr: false },
-    { src: "~/plugins/vue-sticky-directive.js", ssr: false },
-    { src: "~/plugins/theme.js", ssr: false }
+    { src: "~/plugins/vue-sticky-directive.js", ssr: false }
   ]
 };

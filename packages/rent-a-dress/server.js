@@ -1,13 +1,13 @@
-// const { Nuxt } = require("nuxt");
 const nuxtConfig = require("./nuxt.config");
 const path = require("path");
-// const { myFastify } = require("./server/build/src/fastify/fastify");
+const {Nuxt} = require("nuxt")
 nuxtConfig.dev = false;
-// const nuxt = new Nuxt(nuxtConfig);
-const { getProdServer } = require("@rent-a-dress/server");
 
-getProdServer(nuxtConfig, path.join(__dirname, "data/database.sqlite")).then(
+const { getProdServer } = require("@rent-a-dress/server");
+const nuxt = new Nuxt(nuxtConfig);
+getProdServer(nuxt, path.join(__dirname, "data/database.sqlite")).then(
   function(fastify) {
     console.log("ready!!!");
+    
   }
 );
