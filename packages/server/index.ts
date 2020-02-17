@@ -15,10 +15,10 @@ export async function getProdServer(nuxt: any, dbPath: string) {
     entities: [...entities]
   });
   const result = new Promise<FastifyInstance>(function(resolve, reject) {
-    const fastify = myFastify(nuxt)();
+    const fastify:FastifyInstance = myFastify(nuxt)();
     fastify.listen(443, "0.0.0.0", function(err, address) {
       if (err) {
-        reject(err);
+        return reject(err);
       }
       console.log("address: ", address);
       resolve(fastify);
@@ -61,7 +61,7 @@ function clearCache() {
 }
 
 export async function runDevServer(nuxt: any, dbPath: string) {
-  const { myFastify } = require("./src/fastify/fastify");
+  const { myFastify } = require("./src/fastify");
   const entities = require("./src/entity").default;
   if (!getConnectionManager().has("default")) {
     await createConnection({

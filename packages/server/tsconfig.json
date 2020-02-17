@@ -16,7 +16,8 @@
     "types": [
       "@types/node",
       "@nuxt/types"
-    ]
+    ],
+    "incremental": true
   },
   "exclude": ["../node_modules", "build"]
 }

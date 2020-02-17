@@ -3,8 +3,6 @@ const path = require("path");
 const {Nuxt, Builder} = require("nuxt")
 nuxtConfig.dev = true;
 
-
-
 const nuxt = new Nuxt(nuxtConfig);
 const builder = new Builder(nuxt);
 builder.build();
@@ -12,7 +10,7 @@ builder.build();
 const { runDevServer } = require("@rent-a-dress/server");
 
 runDevServer(nuxt, path.join(__dirname, "data/database.sqlite")).then(
-  function(fastify) {
+  function() {
     console.log("ready!!!");
     
   }

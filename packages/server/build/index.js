@@ -26,7 +26,7 @@ function getProdServer(nuxt, dbPath) {
             const fastify = myFastify(nuxt)();
             fastify.listen(443, "0.0.0.0", function (err, address) {
                 if (err) {
-                    reject(err);
+                    return reject(err);
                 }
                 console.log("address: ", address);
                 resolve(fastify);
@@ -67,7 +67,7 @@ function clearCache() {
 }
 function runDevServer(nuxt, dbPath) {
     return __awaiter(this, void 0, void 0, function* () {
-        const { myFastify } = require("./src/fastify/fastify");
+        const { myFastify } = require("./src/fastify");
         const entities = require("./src/entity").default;
         if (!typeorm_1.getConnectionManager().has("default")) {
             yield typeorm_1.createConnection({
