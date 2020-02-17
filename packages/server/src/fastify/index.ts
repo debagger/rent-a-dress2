@@ -21,9 +21,10 @@ import swaggerConf from "../../oapi/openapi-defs.json";
 export function myFastify(nuxt) {
   return () => {
     //Create directory and file for log if not exist
+    if(config.fastify.logger.file){
     fs.mkdirSync(path.dirname(config.fastify.logger.file), { recursive: true });
     fs.closeSync(fs.openSync(config.fastify.logger.file, "as+"));
-
+} 
     // Require the framework and instantiate it
     const fastify = Fastify(config.fastify);
 

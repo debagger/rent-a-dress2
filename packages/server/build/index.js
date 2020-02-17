@@ -8,25 +8,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const fastify_1 = require("./src/fastify/fastify");
 const typeorm_1 = require("typeorm");
-const entity_1 = __importDefault(require("./src/entity"));
-console.log(entity_1.default);
-exports.getProdServer = function (nuxt, dbPath) {
+const chokidar_1 = require("chokidar");
+function getProdServer(nuxt, dbPath) {
     return __awaiter(this, void 0, void 0, function* () {
+        const { myFastify } = require("./src/fastify");
+        const entities = require("./src/entity");
         yield typeorm_1.createConnection({
             type: "sqlite",
             database: dbPath,
             synchronize: true,
             logging: false,
-            entities: [...entity_1.default]
+            entities: [...entities]
         });
         const result = new Promise(function (resolve, reject) {
-            const fastify = fastify_1.myFastify(nuxt)();
+            const fastify = myFastify(nuxt)();
             fastify.listen(443, "0.0.0.0", function (err, address) {
                 if (err) {
                     reject(err);
@@ -37,5 +34,89 @@ exports.getProdServer = function (nuxt, dbPath) {
         });
         return yield result;
     });
-};
+}
+exports.getProdServer = getProdServer;
+function getConnectionsDestroyer(fastify) {
+    let sockets = new Map(), nextSocketId = 0;
+    fastify.server.on("connection", function (socket) {
+        // Add a newly connected socket
+        const socketId = nextSocketId++;
+        sockets.set(socketId, socket);
+        // Remove the socket when it closes
+        socket.on("close", function () {
+            sockets.delete(socketId);
+        });
+    });
+    return {
+        destroyConnectons: () => {
+            for (const [id, socket] of sockets) {
+                socket.destroy(new Error("Server reloading"));
+                console.log("socket", id, "destroyed");
+            }
+        }
+    };
+}
+function clearCache() {
+    const cacheKeys = Object.keys(require.cache);
+    cacheKeys
+        .filter(item => item.startsWith(__dirname))
+        .forEach(item => {
+        delete require.cache[item];
+        console.log(`${item} deleted from cache`);
+    });
+}
+function runDevServer(nuxt, dbPath) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const { myFastify } = require("./src/fastify/fastify");
+        const entities = require("./src/entity").default;
+        if (!typeorm_1.getConnectionManager().has("default")) {
+            yield typeorm_1.createConnection({
+                type: "sqlite",
+                database: dbPath,
+                synchronize: true,
+                logging: false,
+                entities: [...entities]
+            });
+        }
+        const fastify = myFastify(nuxt)();
+        const connectionsDestroyer = getConnectionsDestroyer(fastify);
+        yield new Promise((resolve, reject) => {
+            fastify.listen(443, "0.0.0.0", function (err, address) {
+                if (err) {
+                    console.log(err);
+                    return reject(err);
+                }
+                console.log("address: ", address);
+                resolve();
+            });
+        });
+        const watcher = chokidar_1.watch(__dirname, { ignoreInitial: true });
+        const reload = (event, path) => __awaiter(this, void 0, void 0, function* () {
+            console.log(`Server reloading after ${event} on ${path}`);
+            const actions = [
+                ["Destroy fastify connections", connectionsDestroyer.destroyConnectons],
+                ["Close fastify", fastify.close],
+                ["Remove modules from cache", clearCache],
+                [
+                    "Run server",
+                    () => __awaiter(this, void 0, void 0, function* () {
+                        yield runDevServer(nuxt, dbPath);
+                    })
+                ]
+            ];
+            for (const [msg, action] of actions) {
+                console.log(msg);
+                try {
+                    yield action();
+                }
+                catch (error) {
+                    console.log(error);
+                }
+            }
+            console.log("Server reloaded");
+        });
+        watcher.once("all", reload);
+    });
+}
+exports.runDevServer = runDevServer;
 //# sourceMappingURL=index.js.map

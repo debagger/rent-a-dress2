@@ -91,4 +91,4 @@ function myFastify(nuxt) {
     };
 }
 exports.myFastify = myFastify;
-//# sourceMappingURL=fastify.js.map
+//# sourceMappingURL=index.js.map
