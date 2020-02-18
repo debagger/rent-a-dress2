@@ -15,7 +15,7 @@ export async function getProdServer(nuxt: any, dbPath: string) {
     entities: [...entities]
   });
   const result = new Promise<FastifyInstance>(function(resolve, reject) {
-    const fastify:FastifyInstance = myFastify(nuxt)();
+    const fastify: FastifyInstance = myFastify(nuxt)();
     fastify.listen(443, "0.0.0.0", function(err, address) {
       if (err) {
         return reject(err);
@@ -52,8 +52,9 @@ function getConnectionsDestroyer(fastify: FastifyInstance) {
 
 function clearCache() {
   const cacheKeys = Object.keys(require.cache);
+  const paths = [__dirname, require.resolve("typeorm")];
   cacheKeys
-    .filter(item => item.startsWith(__dirname))
+    .filter(item => paths.filter(p => item.startsWith(p)).length > 0)
     .forEach(item => {
       delete require.cache[item];
       console.log(`${item} deleted from cache`);
@@ -63,8 +64,10 @@ function clearCache() {
 export async function runDevServer(nuxt: any, dbPath: string) {
   const { myFastify } = require("./src/fastify");
   const entities = require("./src/entity").default;
-  if (!getConnectionManager().has("default")) {
-    await createConnection({
+  const to = require("typeorm");
+  if (!to.getConnectionManager().has("default")) {
+    
+    await to.createConnection({
       type: "sqlite",
       database: dbPath,
       synchronize: true,

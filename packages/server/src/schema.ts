@@ -3,11 +3,7 @@ import { getFromContainer, MetadataStorage } from "class-validator";
 import { defaultMetadataStorage } from 'class-transformer/storage'
 import { writeFileSync, readFileSync } from "fs";
 
-
-import "./entity/Image";
-import "./entity/Token";
-import "./entity/User";
-import "./entity/catalogItem";
+import "./entity";
 
 export function generateSchemas(){
 const metadatas = (getFromContainer(MetadataStorage) as any)

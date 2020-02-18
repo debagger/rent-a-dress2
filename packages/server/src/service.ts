@@ -22,7 +22,7 @@ function parseCookie(str: string) {
       result[item[0]] = unescape(item[1]);
     }
   }
-  return result;
+  return result; 
 }
 
 function Role(role?: "user"|"admin") {
