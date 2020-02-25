@@ -74,25 +74,6 @@
         "token"
       ]
     },
-    "catalogItemOption": {
-      "properties": {
-        "id": {
-          "type": "integer"
-        },
-        "size": {
-          "type": "string"
-        },
-        "color": {
-          "type": "string"
-        }
-      },
-      "type": "object",
-      "required": [
-        "id",
-        "size",
-        "color"
-      ]
-    },
     "catalogItem": {
       "properties": {
         "id": {
@@ -119,6 +100,25 @@
         "desc",
         "img",
         "price"
+      ]
+    },
+    "catalogItemOption": {
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "size": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        }
+      },
+      "type": "object",
+      "required": [
+        "id",
+        "size",
+        "color"
       ]
     }
   }

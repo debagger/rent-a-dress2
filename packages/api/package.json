@@ -1,0 +1,30 @@
+{
+  "name": "@rent-a-dress/api",
+  "version": "1.0.0",
+  "description": "> TODO: description",
+  "author": "Mikhail Sokolov <debagger@gmail.com>",
+  "homepage": "https://github.com/debagger/rent-a-dress2#readme",
+  "license": "ISC",
+  "main": "lib/api.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debagger/rent-a-dress2.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/debagger/rent-a-dress2/issues"
+  },
+  "dependencies": {
+    "@codegena/oapi3ts-cli": "^2.1.4",
+    "webpack": "^4.41.6"
+  }
+}

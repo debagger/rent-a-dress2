@@ -1,38 +1,22 @@
 {
-   "compilerOptions": {
-     "target": "esnext",
-     "module": "esnext",
-     "moduleResolution": "node",
-     "lib": [
-       "esnext",
-       "esnext.asynciterable",
-       "dom"
-     ],
-     "esModuleInterop": true,
-     "allowJs": true,
-     "sourceMap": true,
-     "noEmit": true,
-     "noImplicitThis": true,
-     "noImplicitAny": true,
-     "incremental": true,
-     "experimentalDecorators": true,
-     "baseUrl": ".",
-     "paths": {
-       "~/*": [
-         "./*"
-       ],
-       "@/*": [
-         "./*"
-       ]
-     },
-     "types": [
-       "@types/node",
-       "@nuxt/types",
-       "@nuxtjs/vuetify",
-       "@nuxtjs/auth"
-     ]
-   },
-   "exclude": [
-     "node_modules", "server"
-   ]
- }
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "lib": ["esnext", "esnext.asynciterable", "dom"],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "noEmit": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"],
+      "@/*": ["./*"]
+    },
+    "types": ["@types/node", "@nuxt/types", "@nuxtjs/vuetify", "@nuxtjs/auth"]
+  },
+  "exclude": ["node_modules", "server"]
+}

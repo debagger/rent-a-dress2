@@ -1493,17 +1493,21 @@
         "version": "097d4bf3331df1e138ffdcf92e1117f6841bc8337170d927fd955d5ee8a1674b",
         "signature": "097d4bf3331df1e138ffdcf92e1117f6841bc8337170d927fd955d5ee8a1674b"
       },
-      "../src/entity/catalgitemoption.ts": {
-        "version": "ffb895703c0bc7589c28c9df859c27f05a093ac0c2e1f34db510eeb5634a4f09",
-        "signature": "d25d53d3f36e9283acd9df9d821b24dc3b2a93f99833215b8faff17c7589f56d"
-      },
       "../src/entity/catalogitem.ts": {
         "version": "2afd49275b65d71254c6ced3c288e6e09b3f652cf29e45d03828f658d293c232",
         "signature": "d820aaf2cb9aae4380c98bbe64ff72c9f1bedd0a59eb3e31b41a3e72a3c20007"
       },
+      "../src/entity/catalgitemoption.ts": {
+        "version": "ffb895703c0bc7589c28c9df859c27f05a093ac0c2e1f34db510eeb5634a4f09",
+        "signature": "d25d53d3f36e9283acd9df9d821b24dc3b2a93f99833215b8faff17c7589f56d"
+      },
+      "../src/entity/index.ts": {
+        "version": "585320e10536a252cc2c57c7e3e17cab2b5a1fc7b8625c809f2f898b420574ff",
+        "signature": "c9780ad69b51bd2ef11467cae760ee056f6fa4959903fba259ee42a05f34856f"
+      },
       "../src/schema.ts": {
-        "version": "7f62d74f970bf03a8c3ec7c34bc1c2ea33364bef58a760f6c870540f9b341cb8",
-        "signature": "438ee233c4f98d0ed4414345cf4126760454b04f8e8da0dd06b6648d238586cd"
+        "version": "2676d6c1c182a13b7858817ab0199af250523fbe1191d87f914f6d2c3730183d",
+        "signature": "3c7e95914c007750e6f27782f7c989a1e2df57c2cf6c9549c7d5c3537e45b780"
       },
       "../../../node_modules/@types/sharp/index.d.ts": {
         "version": "bcb6efb6cf1e38c660e6be8382eab89ff7ea52d459678397916268d0efdde071",
@@ -1512,10 +1516,6 @@
       "../src/service.ts": {
         "version": "763ee5fbb19733cccaa60d6e42e3fd83042631abb9c0f3725d721a03dc349b3b",
         "signature": "020266951d71e3ab31cd9a2f35bb1c5248bb4d85962875dd33fd477d13c0a0c3"
-      },
-      "../src/entity/index.ts": {
-        "version": "585320e10536a252cc2c57c7e3e17cab2b5a1fc7b8625c809f2f898b420574ff",
-        "signature": "c9780ad69b51bd2ef11467cae760ee056f6fa4959903fba259ee42a05f34856f"
       },
       "../src/fastify/auth.ts": {
         "version": "a9e9f733e626f6ad7ac476f6389d968c76292d79f616b9c3f6b030cc8c49cf09",
@@ -1550,8 +1550,8 @@
         "signature": "3c255d9b46ad54712020adf6cc52ff5035e8d381b8fd58fab2d84f06cbbfc96a"
       },
       "../oapi/openapi-defs.json": {
-        "version": "c4fedb9326f260f153702546959ce555c78dc9f9b231b30f123468f31593ec17",
-        "signature": "b233bf15e81cbb06826de0f4b6d7dc2c9975a315fc6903f2a97f5a426dd6fcdb"
+        "version": "51920ec21e5ed203f7edf2c25ce8a29be9d5f4896ca666891f709c8273a9b326",
+        "signature": "dcfac75ed5b43a752049e39e43d3c753c54d73639ba5d2d84bef43e0387dde8b"
       },
       "../src/fastify/index.ts": {
         "version": "33bc5bef9118cfa9e6c6e5b3f7614c602a1dcb4785f7eb4992c3137e68f7fcbe",
@@ -5070,15 +5070,6 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/entity/catalgitemoption.ts": [
-        "../../../node_modules/class-validator/index.d.ts",
-        "../../../node_modules/typeorm/index.d.ts",
-        "../src/entity/catalogitem.ts",
-        "../node_modules/@types/node/fs.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "../src/entity/catalogitem.ts": [
         "../../../node_modules/class-validator/index.d.ts",
         "../../../node_modules/class-transformer/index.d.ts",
@@ -5089,15 +5080,32 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "../src/entity/catalgitemoption.ts": [
+        "../../../node_modules/class-validator/index.d.ts",
+        "../../../node_modules/typeorm/index.d.ts",
+        "../src/entity/catalogitem.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "../src/entity/index.ts": [
+        "../src/entity/image.ts",
+        "../src/entity/token.ts",
+        "../src/entity/user.ts",
+        "../src/entity/catalgitemoption.ts",
+        "../src/entity/catalogitem.ts",
+        "../node_modules/@types/node/fs.d.ts",
+        "../node_modules/@types/node/ts3.2/fs.d.ts",
+        "../node_modules/@types/node/util.d.ts",
+        "../node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "../src/schema.ts": [
         "../../../node_modules/class-validator-jsonschema/build/index.d.ts",
         "../../../node_modules/class-validator/index.d.ts",
         "../../../node_modules/class-transformer/storage.d.ts",
         "../node_modules/@types/node/fs.d.ts",
-        "../src/entity/image.ts",
-        "../src/entity/token.ts",
-        "../src/entity/user.ts",
-        "../src/entity/catalogitem.ts",
+        "../src/entity/index.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
@@ -5123,17 +5131,6 @@
         "../node_modules/@types/node/fs.d.ts",
         "../src/entity/image.ts",
         "../node_modules/@types/node/path.d.ts",
-        "../node_modules/@types/node/ts3.2/fs.d.ts",
-        "../node_modules/@types/node/util.d.ts",
-        "../node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "../src/entity/index.ts": [
-        "../src/entity/image.ts",
-        "../src/entity/token.ts",
-        "../src/entity/user.ts",
-        "../src/entity/catalgitemoption.ts",
-        "../src/entity/catalogitem.ts",
-        "../node_modules/@types/node/fs.d.ts",
         "../node_modules/@types/node/ts3.2/fs.d.ts",
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
@@ -9047,17 +9044,21 @@
         "../node_modules/@types/node/util.d.ts",
         "../node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "../src/entity/catalgitemoption.ts": [
-        "../src/entity/catalogitem.ts"
-      ],
       "../src/entity/catalogitem.ts": [
         "../src/entity/catalgitemoption.ts"
       ],
-      "../src/schema.ts": [
-        "../src/entity/image.ts",
+      "../src/entity/catalgitemoption.ts": [
+        "../src/entity/catalogitem.ts"
+      ],
+      "../src/entity/index.ts": [
         "../src/entity/token.ts",
         "../src/entity/user.ts",
+        "../src/entity/image.ts",
+        "../src/entity/catalgitemoption.ts",
         "../src/entity/catalogitem.ts"
+      ],
+      "../src/schema.ts": [
+        "../src/entity/index.ts"
       ],
       "../../../node_modules/@types/sharp/index.d.ts": [
         "../node_modules/@types/node/stream.d.ts",
@@ -9073,13 +9074,6 @@
         "../src/entity/catalogitem.ts",
         "../src/entity/user.ts",
         "../src/entity/image.ts"
-      ],
-      "../src/entity/index.ts": [
-        "../src/entity/token.ts",
-        "../src/entity/user.ts",
-        "../src/entity/image.ts",
-        "../src/entity/catalgitemoption.ts",
-        "../src/entity/catalogitem.ts"
       ],
       "../src/fastify/auth.ts": [
         "../../../node_modules/fastify/fastify.d.ts"
@@ -9824,34 +9818,7 @@
       ]
     },
     "semanticDiagnosticsPerFile": [
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es5.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2016.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.dom.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.core.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.collection.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.generator.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.promise.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2016.array.include.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.object.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.string.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.intl.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.intl.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.promise.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.regexp.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.esnext.intl.d.ts",
-      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.esnext.bigint.d.ts",
+      "../oapi/openapi-defs.json",
       "../node_modules/@types/node/globals.d.ts",
       "../node_modules/@types/node/assert.d.ts",
       "../node_modules/@types/node/async_hooks.d.ts",
@@ -10197,11 +10164,12 @@
       "../../../node_modules/class-transformer/classtransformer.d.ts",
       "../../../node_modules/class-transformer/decorators.d.ts",
       "../../../node_modules/class-transformer/index.d.ts",
-      "../src/entity/catalgitemoption.ts",
       "../src/entity/catalogitem.ts",
+      "../src/entity/catalgitemoption.ts",
+      "../src/entity/index.ts",
       "../src/schema.ts",
       "../../../node_modules/@types/sharp/index.d.ts",
-      "../src/entity/index.ts",
+      "../src/service.ts",
       "../src/fastify/auth.ts",
       "../src/fastify/catalog.ts",
       "../../../node_modules/fastify-plugin/fastify-plugin.d.ts",
@@ -10210,7 +10178,6 @@
       "../src/fastify/imagesmanager.ts",
       "../src/fastify/isadmin.ts",
       "../src/fastify/user.ts",
-      "../oapi/openapi-defs.json",
       "../src/fastify/index.ts",
       "../src/migration/1576175547078-addpricetocatalogitem.ts",
       "../src/migration/1576176360402-addpricetocatalogitem.ts",
@@ -10299,7 +10266,34 @@
       "../../../node_modules/@nuxt/types/config/watchers.d.ts",
       "../../../node_modules/@nuxt/types/config/index.d.ts",
       "../../../node_modules/@nuxt/types/index.d.ts",
-      "../src/service.ts"
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es5.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2016.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.dom.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.core.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.collection.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.generator.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.iterable.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.promise.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.proxy.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.reflect.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2015.symbol.wellknown.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2016.array.include.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.object.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.sharedmemory.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.string.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.intl.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2017.typedarrays.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.asyncgenerator.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.asynciterable.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.intl.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.promise.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.esnext.intl.d.ts",
+      "../../../../../users/debgger/appdata/roaming/npm/node_modules/typescript/lib/lib.esnext.bigint.d.ts"
     ]
   },
   "version": "3.7.5"

@@ -7,7 +7,7 @@ import { Image } from "./entity/Image";
 export declare class Service {
     constructor();
     getCatalog(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<void>;
-    getCatalogItem(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<catalogItem | "Item not found">;
+    getCatalogItem(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<"Item not found" | catalogItem>;
     newCatalogItem(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<catalogItem[]>;
     updateCatalogItem(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<any>;
     deleteCatalogItem(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<"Item not found" | "deleted">;
@@ -17,7 +17,7 @@ export declare class Service {
     userLogin(request: any, reply: any): Promise<"Password incorrect" | "User not found" | {
         token: string;
     }>;
-    userLogout(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<"Token not found" | "User logged out" | "'auth._token.local' needed">;
+    userLogout(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<"User logged out" | "Token not found" | "'auth._token.local' needed">;
     getUsersList(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<User[]>;
     addNewUser(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<User | "Username exist">;
     updateUser(request: FastifyRequest, reply: FastifyReply<ServerResponse>): Promise<User>;

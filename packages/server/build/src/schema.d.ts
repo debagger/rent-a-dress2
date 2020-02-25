@@ -1,5 +1,2 @@
-import "./entity/Image";
-import "./entity/Token";
-import "./entity/User";
-import "./entity/catalogItem";
+import "./entity";
 export declare function generateSchemas(): void;
