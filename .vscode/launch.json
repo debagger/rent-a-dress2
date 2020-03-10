@@ -11,10 +11,16 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\packages\\nest-server\\run.js",
+            "program": "${workspaceFolder}\\packages\\nest-server\\run-dev.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
-            ], "cwd": "${workspaceFolder}\\packages\\nest-server"
+            ], "cwd": "${workspaceFolder}\\packages\\nest-server",
+            "sourceMaps": true,
+            "sourceMapPathOverrides": {
+                "webpack://app/./~/*": "${workspaceRoot}/node_modules/*",
+                "webpack://app/./*": "${workspaceRoot}/packages/nest-server/*",
+                "webpack://app/*": "*"
+            }
         }
     ]
 }

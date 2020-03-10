@@ -1,17 +1,19 @@
 {
-  "name": "@rent-a-dress/api",
+  "name": "@rent-a-dress/entities",
   "version": "1.0.0",
   "description": "> TODO: description",
   "author": "Mikhail Sokolov <debagger@gmail.com>",
   "homepage": "https://github.com/debagger/rent-a-dress2#readme",
   "license": "ISC",
-  "main": "lib/api.js",
+  "main": "build/index.js",
+  "typings": "build/declarations/index",
   "directories": {
     "lib": "lib",
-    "test": "__tests__"
+    "test": "__tests__",
+    "build": "build"
   },
   "files": [
-    "lib"
+    "build"
   ],
   "repository": {
     "type": "git",
@@ -24,8 +26,7 @@
     "url": "https://github.com/debagger/rent-a-dress2/issues"
   },
   "dependencies": {
-    "@codegena/oapi3ts-cli": "^2.1.4",
-    "sqlite": "^3.0.3",
-    "webpack": "^4.41.6"
+    "class-validator": "^0.11.0",
+    "sqlite": "^3.0.3"
   }
 }

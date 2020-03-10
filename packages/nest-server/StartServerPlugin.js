@@ -9,13 +9,19 @@ class StartServerPlugin {
     if (typeof options === 'string') {
       options = { name: options };
     }
-    
+
     this.afterEmit = this.afterEmit.bind(this);
     this.apply = this.apply.bind(this);
     this.startServer = this.startServer.bind(this);
 
     this.app = null;
     this.options = options;
+    process.on('uncaughtException', function(error) {
+      console.log(error);
+    });
+    process.on('unhandledRejection', function(reason, p) {
+      console.error(reason);
+    });
   }
 
   afterEmit(compilation, callback) {
@@ -57,15 +63,24 @@ class StartServerPlugin {
     const { existsAt } = compilation.assets[name];
     this._entryPoint = existsAt;
 
-    this._startServer(app => {
-      this.app = app;
+    try {
+      this._startServer(app => {
+        this.app = app;
+        callback();
+      });
+    } catch (error) {
+      console.log(error);
       callback();
-    });
+    }
   }
 
   clearCache() {
     const cacheKeys = Object.keys(require.cache);
-    const paths = [path.join(__dirname, 'dist')];
+    const paths = [
+      path.join(__dirname, 'dist'),
+      path.dirname(require.resolve('typeorm')),
+      path.dirname(require.resolve('@nestjs/typeorm')),
+    ];
     cacheKeys
       .filter(item => paths.filter(p => item.startsWith(p)).length > 0)
       .forEach(item => {
@@ -77,19 +92,33 @@ class StartServerPlugin {
   _startServer(callback) {
     if (this.app) {
       this.app.close().then(() => {
+        this.app = null;
         this.clearCache();
         const server = require(this._entryPoint);
-        server.bootstrap(this.options.nuxt).then(app => {
-          callback(app);
-        });
+        server
+          .bootstrap(this.options.nuxt)
+          .then(app => {
+            console.log('Server bootstrap process finished');
+            callback(app);
+          })
+          .catch(err => {
+            console.log(err);
+            callback(null);
+          });
       });
     } else {
       const server = require(this._entryPoint);
-      server.bootstrap(this.options.nuxt).then(app => {
-        callback(app);
-      });
+      server
+        .bootstrap(this.options.nuxt)
+        .then(app => {
+          console.log('Server bootstrap process finished');
+          callback(app);
+        })
+        .catch(err => {
+          console.log(err);
+          callback(null);
+        });
     }
-
   }
 }
 
