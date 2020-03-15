@@ -1,8 +1,11 @@
-import { Controller, Get, UseGuards, Post, Request } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Request, SetMetadata } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
+import { RoleGuard } from './auth/roles.guard';
+import { Roles } from './auth/roles.decorator';
 @Controller()
+@UseGuards(RoleGuard)
 export class AppController {
   constructor(
     private readonly appService: AppService,
@@ -20,7 +23,7 @@ export class AppController {
     return this.authService.login(req.user);
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  @Roles()
   @Get('profile')
   async getProfile(@Request() req) {
     console.log(req.user);

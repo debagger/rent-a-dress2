@@ -5,7 +5,7 @@ import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 import { User } from '../entity';
 import { createHash } from 'crypto';
 import { Repository, DeepPartial } from 'typeorm';
-import { Override, CrudRequest } from '@nestjsx/crud';
+import { CrudRequest } from '@nestjsx/crud';
 
 @Injectable()
 export class UsersService extends TypeOrmCrudService<User> {

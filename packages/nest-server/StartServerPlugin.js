@@ -85,9 +85,10 @@ class StartServerPlugin {
       .filter(item => paths.filter(p => item.startsWith(p)).length > 0)
       .forEach(item => {
         delete require.cache[item];
+        console.
         console.log(`${item} deleted from cache`);
       });
-  }
+  } 
 
   _startServer(callback) {
     if (this.app) {

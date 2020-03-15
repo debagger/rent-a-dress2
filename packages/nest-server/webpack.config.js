@@ -15,6 +15,7 @@ module.exports = {
     'typeorm',
     '@nestjs/swagger',
     '@nestjsx/crud',
+    '@nestjs/platform-express',
     'class-validator'
   ],
   module: {
