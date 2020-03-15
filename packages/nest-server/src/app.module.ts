@@ -1,11 +1,16 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { NuxtMiddleware } from './nuxt.middleware';
 import { UsersModule } from './Users/users.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import {
+  TypeOrmModule,
+  InjectRepository,
+} from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import * as entities from './entity';
+import { Repository } from 'typeorm';
+import { User } from './entity';
+import { UsersService } from './Users/users.service';
 
 @Module({
   imports: [
@@ -23,7 +28,18 @@ import * as entities from './entity';
   providers: [AppService],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    // consumer.apply(NuxtMiddleware).forRoutes('*');
+  constructor(
+    private readonly users: UsersService,
+  ) {}
+  async configure() {
+    const admin = await this.users.findOne({ username: 'admin' });
+    if (!admin) {
+      const newAdmin = await this.users.save({
+        username: 'admin',
+        email: 'debagger@gmail.com',
+        role: 'admin',
+        password:"123"
+      });
+    }
   }
 }
