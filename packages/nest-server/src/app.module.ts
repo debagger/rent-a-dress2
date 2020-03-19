@@ -1,7 +1,7 @@
 import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { UsersModule } from './Users/users.module';
+import { UsersModule } from './users/users.module';
 import {
   TypeOrmModule,
   InjectRepository,
