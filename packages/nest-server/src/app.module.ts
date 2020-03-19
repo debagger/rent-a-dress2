@@ -10,7 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import * as entities from './entity';
 import { Repository } from 'typeorm';
 import { User } from './entity';
-import { UsersService } from './Users/users.service';
+import { UsersService } from './users/users.service';
 
 @Module({
   imports: [
