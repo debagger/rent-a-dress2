@@ -12,10 +12,10 @@ export class AppController {
     private readonly authService: AuthService,
   ) {}
 
-  @Get()
-  async getHello(): Promise<string> {
-    return this.appService.getHello();
-  }
+  // @Get()
+  // async getHello(): Promise<string> {
+  //   return this.appService.getHello();
+  // }
 
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')

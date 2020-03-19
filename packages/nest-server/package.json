@@ -27,7 +27,7 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json --watch"
   },
   "bugs": {
     "url": "https://github.com/debagger/rent-a-dress2/issues"
@@ -55,7 +55,7 @@
     "start-server-webpack-plugin": "^2.2.5",
     "swagger-ui-express": "^4.1.3",
     "ts-loader": "^6.2.1",
-    "typeorm": "^0.2.24",
+    "typeorm": "0.2.24",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-node-externals": "^1.7.2"
