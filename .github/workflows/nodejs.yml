@@ -24,8 +24,9 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: yarn global add lerna
-    - run: yarn lerna install
-    - run: yarn run test
+    - run: |
+    yarn global add lerna
+    yarn lerna install
+    yarn run test
       env:
         CI: true

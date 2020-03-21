@@ -1,14 +1,29 @@
 0 silly argv {
-0 silly argv   _: [ 'add' ],
-0 silly argv   scope: '@rent-a-dress/nest-server',
-0 silly argv   globs: [],
+0 silly argv   _: [ 'clean' ],
 0 silly argv   lernaVersion: '3.20.2',
-0 silly argv   '$0': 'C:\\Users\\debgger\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js',
-0 silly argv   pkg: 'rxjs/operators'
+0 silly argv   '$0': 'C:\\Users\\debgger\\AppData\\Roaming\\npm\\node_modules\\lerna\\cli.js'
 0 silly argv }
 1 notice cli v3.20.2
 2 verbose rootPath C:\Projects\rent-a-dress2
-3 error Error: exited with error code: 128
-3 error     at ChildProcess.<anonymous> (C:\Projects\rent-a-dress2\node_modules\@evocateur\pacote\lib\util\finished.js:12:19)
-3 error     at ChildProcess.emit (events.js:223:5)
-3 error     at maybeClose (internal/child_process.js:1021:16)
+3 info Removing the following directories:
+4 info clean packages\api\node_modules
+4 info clean packages\entities\node_modules
+4 info clean packages\nest-server\node_modules
+4 info clean packages\rent-a-dress\node_modules
+4 info clean packages\server\node_modules
+5 info clean removing C:\Projects\rent-a-dress2\packages\api\node_modules
+6 silly rimrafDir C:\Projects\rent-a-dress2\packages\api\node_modules
+7 info clean removing C:\Projects\rent-a-dress2\packages\entities\node_modules
+8 silly rimrafDir C:\Projects\rent-a-dress2\packages\entities\node_modules
+9 info clean removing C:\Projects\rent-a-dress2\packages\nest-server\node_modules
+10 silly rimrafDir C:\Projects\rent-a-dress2\packages\nest-server\node_modules
+11 info clean removing C:\Projects\rent-a-dress2\packages\rent-a-dress\node_modules
+12 silly rimrafDir C:\Projects\rent-a-dress2\packages\rent-a-dress\node_modules
+13 info clean removing C:\Projects\rent-a-dress2\packages\server\node_modules
+14 silly rimrafDir C:\Projects\rent-a-dress2\packages\server\node_modules
+15 verbose rimrafDir removed C:\Projects\rent-a-dress2\packages\api\node_modules
+16 verbose rimrafDir removed C:\Projects\rent-a-dress2\packages\server\node_modules
+17 verbose rimrafDir removed C:\Projects\rent-a-dress2\packages\rent-a-dress\node_modules
+18 error Error: Command failed: C:\Program Files\nodejs\node.exe C:\Projects\rent-a-dress2\node_modules\rimraf\bin.js --no-glob C:\Projects\rent-a-dress2\packages\nest-server\node_modules\
+18 error     at makeError (C:\Projects\rent-a-dress2\node_modules\execa\index.js:174:9)
+18 error     at C:\Projects\rent-a-dress2\node_modules\execa\index.js:278:16
