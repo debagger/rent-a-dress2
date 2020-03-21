@@ -24,4 +24,6 @@ jobs:
       #     yarn global add lerna
       #   shell: bash
       - run: npx lerna bootstrap
-      - run: yarn run test
+      - run: |
+          cd packages/nest-server
+          yarn run test
