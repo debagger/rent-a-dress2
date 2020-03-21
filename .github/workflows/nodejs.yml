@@ -26,6 +26,6 @@ jobs:
       - run: |
           yarn global dir 
           yarn global add lerna 
-          lerna bootstrap 
+          yarn global run lerna bootstrap 
           yarn run test
         shell: bash
