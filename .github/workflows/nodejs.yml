@@ -22,7 +22,10 @@ jobs:
       - run: |
           yarn global add lerna
           echo 'export PATH="$PATH:$(yarn global bin)"' >>~/.bash_profile
+        shell: bash
       - run: lerna bootstrap
+        shell: bash
       - run: |
           cd packages/nest-server
           yarn run test
+        shell: bash
