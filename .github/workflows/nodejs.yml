@@ -28,7 +28,7 @@ jobs:
           yarn global add lerna 
         shell: bash
       - run: |
-          lerna bootstrap 
+          /home/runner/.config/yarn/global/lerna bootstrap 
           yarn run test
         shell: bash
           
