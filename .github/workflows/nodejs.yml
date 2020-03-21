@@ -19,13 +19,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: |
-          yarn global add lerna
-          echo 'export PATH="$PATH:$(yarn global bin)"' >>~/.bash_profile
-        shell: bash
-      - run: lerna bootstrap
-        shell: bash
+      - run: npx lerna bootstrap
       - run: |
           cd packages/nest-server
           yarn run test
-        shell: bash
