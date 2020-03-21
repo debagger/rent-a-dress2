@@ -3,11 +3,7 @@
 
 name: Node.js CI
 
-on:
-  push:
-    branches: [master]
-  pull_request:
-    branches: [master]
+on: [push, repository_dispatch]
 
 jobs:
   build:
@@ -23,12 +19,9 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: |
-          yarn global dir 
-          yarn global add lerna 
-        shell: bash
-      - run: |
-          /home/runner/.config/yarn/global/lerna bootstrap 
-          yarn run test
-        shell: bash
-          
+      # - run: |
+      #     yarn global dir
+      #     yarn global add lerna
+      #   shell: bash
+      - run: npx lerna bootstrap
+      - run: yarn run test
