@@ -24,11 +24,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NotFoundExceptionFilter } from './notfound-exception.filter';
+import { UnauthorizedExceptionFilter } from './unauthorized-exception.filter';
 import { User, Token } from './entity';
 import * as express from 'express';
 import * as http from 'http';
 import * as fs from 'fs';
-
+import { UnauthorizedException } from '@nestjs/common';
 
 function startHttpRedirectServer() {
   const redirectExpressServer = express();
@@ -74,10 +75,12 @@ export async function bootstrap(nuxt) {
     cert: fs.readFileSync('./../../../ssl/www_rent_a_dress_ru_2020_07_10.crt'),
   };
 
-  const app = await NestFactory.create(AppModule, { httpsOptions });
+  const app = await NestFactory.create(AppModule, {
+    httpsOptions,
+  });
 
   if (nuxt) app.useGlobalFilters(new NotFoundExceptionFilter(nuxt));
-
+  app.useGlobalFilters(new UnauthorizedExceptionFilter());
   configSwagger(app);
 
   await app.listen(443);
@@ -101,7 +104,7 @@ export async function bootstrap(nuxt) {
       await app.close();
       console.log('Https server closed');
     },
-  }; 
+  };
 }
 
 //bootstrap();
