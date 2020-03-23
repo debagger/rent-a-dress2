@@ -15,9 +15,29 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
+  it('/auth/login', () => {
     return request(app.getHttpServer())
-      .get('/')
-      .expect(404)
+      .post('/auth/login')
+      .send({ username: 'admin', password: '123' })
+      .expect(201)
+      .expect(res => {
+        res.body.access_token;
+      });
   });
+  it('/profile', async () => {
+    const server = app.getHttpServer();
+    const res = await request(server)
+      .post('/auth/login')
+      .send({ username: 'admin', password: '123' });
+    const token = res.body.access_token;
+    return request(server)
+      .get('/profile')
+      .set('Authorization', `Bearer ${token}`)
+      .send()
+      .expect(200)
+      .expect(res => {
+        expect(res.body.payload).toBeDefined();
+        expect(res.body.user).toBeDefined();
+      });
+  }, 30000);
 });

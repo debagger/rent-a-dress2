@@ -26,7 +26,6 @@ export class AppController {
   @Roles()
   @Get('profile')
   async getProfile(@Request() req) {
-    console.log(req.user);
     return req.user;
   }
 }
