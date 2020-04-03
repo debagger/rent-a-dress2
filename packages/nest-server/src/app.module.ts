@@ -28,9 +28,9 @@ import { UsersService } from './users/users.service';
 export class AppModule implements NestModule {
   constructor(private readonly users: UsersService) {}
   async configure() {
-    const admin = await this.users.findOne({ username: 'admin' });
+    let admin = await this.users.findOne({ username: 'admin' });
     if (!admin) {
-      const newAdmin = await this.users.save({
+      admin = await this.users.save({
         username: 'admin',
         email: 'debagger@gmail.com',
         role: 'admin',

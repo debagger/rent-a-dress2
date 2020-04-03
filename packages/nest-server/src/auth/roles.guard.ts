@@ -20,7 +20,8 @@ export class RoleGuard extends AuthGuard('jwt') {
       return (<Promise<boolean>>result).then(res => {
         if (res) {
           const userRole = context.switchToHttp().getRequest().user?.user?.role;
-          return !!roles.find(item => item === userRole);
+          const isUserInRole = !!roles.find(item => item === userRole);
+          return isUserInRole;
         }
       });
     }

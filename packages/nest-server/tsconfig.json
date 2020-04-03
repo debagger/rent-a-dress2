@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "moduleResolution": "Node",
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -10,7 +11,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "allowJs": true
+    "allowJs": true,
+    "skipDefaultLibCheck": true
   },
-  "exclude": ["node_modules", "dist"]
+  "include": ["src/**/*"]
 }

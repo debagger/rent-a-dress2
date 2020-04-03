@@ -3,6 +3,7 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { UnauthorizedExceptionFilter } from '../src/unauthorized-exception.filter';
+import { getAdminToken } from './getAdminToken';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -39,10 +40,7 @@ describe('AppController (e2e)', () => {
 
   it('/profile', async () => {
     const server = app.getHttpServer();
-    const res = await request(server)
-      .post('/auth/login')
-      .send({ username: 'admin', password: '123' });
-    const token = res.body.access_token;
+    const token = await getAdminToken(server);
     return request(server)
       .get('/profile')
       .set('Authorization', `Bearer ${token}`)
@@ -52,18 +50,19 @@ describe('AppController (e2e)', () => {
         expect(res.body.payload).toBeDefined();
         expect(res.body.user).toBeDefined();
       });
-  }, 30000);
+  });
+
   it('/profile (wrong access token)', async () => {
     const server = app.getHttpServer();
     const res = await request(server)
       .post('/auth/login')
       .send({ username: 'admin', password: '123' });
-    const token: string = 'abc' + res.body.access_token + 'defg';
+    const token: string = 'wrong' + res.body.access_token + 'token';
 
     return request(server)
       .get('/profile')
       .set('Authorization', `Bearer ${token}`)
       .send()
       .expect(401);
-  }, 30000);
+  });
 });
