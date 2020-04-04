@@ -23,4 +23,6 @@ jobs:
       - run: |
           cd packages/nest-server
           yarn run test:e2e
-      - run: yarn run test
+      - run: |
+          cd packages/nest-server
+          yarn run test
