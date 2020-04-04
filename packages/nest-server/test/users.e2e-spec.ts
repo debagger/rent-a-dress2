@@ -5,7 +5,7 @@ import { AppModule } from './../src/app.module';
 import { UnauthorizedExceptionFilter } from './../src/unauthorized-exception.filter';
 import { getAdminToken } from './getAdminToken';
 import { User } from './../src/entity';
-import { getConnection } from 'typeorm';
+import { getConnection, getRepository } from 'typeorm';
 
 describe('User API tests (e2e)', () => {
   let app: INestApplication;
@@ -16,7 +16,7 @@ describe('User API tests (e2e)', () => {
     app = moduleFixture.createNestApplication();
     app.useGlobalFilters(new UnauthorizedExceptionFilter());
     await app.init();
-    const db = getConnection().getRepository(User);
+    const db = getRepository(User);
     const admin = await db.findOne({ username: 'admin' });
     admin.role = 'admin';
     await db.save(admin);
