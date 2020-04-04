@@ -8,6 +8,7 @@ import * as entities from './entity';
 import { Repository } from 'typeorm';
 import { User } from './entity';
 import { UsersService } from './users/users.service';
+import { CatalogModule } from './catalog/catalog.module';
 
 @Module({
   imports: [
@@ -21,9 +22,11 @@ import { UsersService } from './users/users.service';
     }),
     TypeOrmModule.forFeature(Object.values(entities)),
     AuthModule,
+    CatalogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
+  exports:[AuthModule, CatalogModule]
 })
 export class AppModule implements NestModule {
   constructor(private readonly users: UsersService) {}
