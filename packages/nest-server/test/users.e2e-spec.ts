@@ -5,7 +5,7 @@ import { AppModule } from './../src/app.module';
 import { UnauthorizedExceptionFilter } from './../src/unauthorized-exception.filter';
 import { getAdminToken } from './getAdminToken';
 import { User } from './../src/entity';
-import { createConnection, getConnection } from 'typeorm';
+import { getConnection } from 'typeorm';
 
 describe('User API tests (e2e)', () => {
   let app: INestApplication;
@@ -17,14 +17,14 @@ describe('User API tests (e2e)', () => {
     app.useGlobalFilters(new UnauthorizedExceptionFilter());
     await app.init();
     const db = getConnection().getRepository(User);
-    const admin = await db.findOne({username: "admin"});
-    admin.role = "admin";
+    const admin = await db.findOne({ username: 'admin' });
+    admin.role = 'admin';
     await db.save(admin);
   });
 
-  afterEach(async ()=>{
-      await app.close()
-  })
+  afterEach(async () => {
+    await app.close();
+  });
 
   it('/users (GET) Correct auth', async () => {
     const server = app.getHttpServer();
@@ -78,7 +78,7 @@ describe('User API tests (e2e)', () => {
       .set('Authorization', `Bearer ${token}`)
       .expect(403);
   });
-  
+
   it('/users (POST)', async () => {
     const server = app.getHttpServer();
     const token = await getAdminToken(server);

@@ -65,4 +65,39 @@ describe('AppController (e2e)', () => {
       .send()
       .expect(401);
   });
+
+  
+  it('/auth/password (POST) change password', async () => {
+    const server = app.getHttpServer();
+    const token = await getAdminToken(server);
+
+    const newPasswordRes = await request(server)
+      .post('/auth/password')
+      .set('Authorization', `Bearer ${token}`)
+      .send({ oldPassword: '123', newPassword: '1234' });
+    expect(newPasswordRes.status).toBe(201);
+
+    const oldPasswordLoginRes = await request(server)
+      .post('/auth/login')
+      .send({ username: 'admin', password: '123' });
+    expect(oldPasswordLoginRes.status).toBe(401);
+
+    const loginRes = await request(server)
+      .post('/auth/login')
+      .send({ username: 'admin', password: '1234' });
+    expect(loginRes.status).toBe(201);
+    expect(loginRes.body.access_token).toBeDefined();
+    const newToken = loginRes.body.access_token;
+
+    return request(server)
+      .get('/profile')
+      .set('Authorization', `Bearer ${newToken}`)
+      .send()
+      .expect(200)
+      .expect(res => {
+        expect(res.body.payload).toBeDefined();
+        expect(res.body.user).toBeDefined();
+        expect(res.body.user.username).toBe('admin');
+      });
+  });
 });

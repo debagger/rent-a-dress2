@@ -3,6 +3,10 @@ import {
   UseGuards,
   ExecutionContext,
   CallHandler,
+  Patch,
+  Body,
+  Post,
+  Request,
 } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 
@@ -33,4 +37,6 @@ import { Roles } from '../auth/roles.decorator';
 @Controller('users')
 export class UsersController implements CrudController<User> {
   constructor(public service: UsersService) {}
+
+ 
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 
@@ -32,6 +32,20 @@ export class UsersService extends TypeOrmCrudService<User> {
       user.password = this.hash(user.password);
     }
     return this.repo.save(user);
+  }
+  async changePassword(user: any, oldPassword: string, newPassword: string) {
+    const oldPasswordHash = this.hash(oldPassword);
+    const dbUser = await super.findOne({ username: user.username });
+    if (dbUser) {
+      if (oldPasswordHash === dbUser.password) {
+        dbUser.password = this.hash(newPassword);
+        await this.repo.save(dbUser);
+        return true;
+      } else {
+        throw new NotFoundException('Incorrect password');
+      }
+    }
+    throw new NotFoundException('User not found');
   }
 
   hash(input: string) {

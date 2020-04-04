@@ -5,12 +5,14 @@ import {
   Post,
   Request,
   UseFilters,
+  Body,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth/auth.service';
 import { RoleGuard } from './auth/roles.guard';
 import { Roles } from './auth/roles.decorator';
+import { UsersService } from './users/users.service';
 
 @Controller()
 @UseGuards(RoleGuard)
@@ -19,6 +21,7 @@ export class AppController {
   constructor(
     private readonly appService: AppService,
     private readonly authService: AuthService,
+    private readonly userService: UsersService
   ) {}
 
   @UseGuards(AuthGuard('local'))
@@ -32,4 +35,16 @@ export class AppController {
   getProfile(@Request() req) {
     return req.user;
   }
+
+  @Post('auth/password')
+  @Roles()
+  async changePassword(
+    @Request() req: any,
+    @Body('oldPassword') oldPassword: string,
+    @Body('newPassword') newPassword: string,
+  ) {
+    const user = req.user.user;
+    return await this.userService.changePassword(user, oldPassword, newPassword);
+  }
 }
+
