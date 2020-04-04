@@ -19,10 +19,13 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npx lerna bootstrap
-      - run: |
-          cd packages/nest-server
-          yarn run test:e2e
-      - run: |
+      - name: Bootstrap project using Lerna
+        run: npx lerna bootstrap
+      - name: Run nest-server module tests
+        run: |
           cd packages/nest-server
           yarn run test
+      - name: Run nest-server e2e tests
+        run: |
+          cd packages/nest-server
+          yarn run test:e2e
