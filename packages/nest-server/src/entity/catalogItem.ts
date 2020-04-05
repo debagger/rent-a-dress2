@@ -11,7 +11,7 @@ import { catalogItemOption } from "./catalogItemOption";
 
 @Entity()
 export class catalogItem {
-  @PrimaryGeneratedColumn() @IsInt() id: number;
+  @PrimaryGeneratedColumn() @IsInt() @IsOptional() id: number;
   @Column() @IsString() caption: string;
   @Column() @IsString() desc: string;
   @Column() @IsString() img: string;

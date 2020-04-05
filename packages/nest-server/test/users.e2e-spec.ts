@@ -32,7 +32,10 @@ describe('User API tests (e2e)', () => {
     return request(server)
       .get('/users')
       .set('Authorization', `Bearer ${token}`)
-      .expect(200);
+      .expect(200).expect(res=>{
+
+          expect(res.body.data[0].password).toBeUndefined();
+      });
   });
 
   it('/users (GET) No auth', async () => {
@@ -42,7 +45,7 @@ describe('User API tests (e2e)', () => {
       .expect(401);
   });
 
-  it('/users (GET) Correct auth', async () => {
+  it('/users (GET) Bad auth', async () => {
     const server = app.getHttpServer();
     const token = await getAdminToken(server);
     return request(server)
