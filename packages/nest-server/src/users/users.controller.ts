@@ -12,7 +12,7 @@ import { Crud, CrudController } from '@nestjsx/crud';
 
 import { User } from '../entity';
 import { UsersService } from './users.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiTags, ApiOkResponse, ApiCreatedResponse } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { RoleGuard } from '../auth/roles.guard';
@@ -26,10 +26,18 @@ import { Roles } from '../auth/roles.decorator';
   query: { exclude: ['tokens', 'password'], alwaysPaginate: true },
   routes: {
     only: ['createOneBase', 'getOneBase', 'getManyBase', 'updateOneBase'],
-    createOneBase: { decorators: [Roles('admin')] },
-    getOneBase: { decorators: [Roles('admin')] },
-    getManyBase: { decorators: [Roles('admin')] },
-    updateOneBase: { decorators: [Roles('admin')] },
+    createOneBase: {
+      decorators: [Roles('admin'), ApiCreatedResponse({ description: 'Ok' })],
+    },
+    getOneBase: {
+      decorators: [Roles('admin'), ApiOkResponse({ description: 'OK' })],
+    },
+    getManyBase: {
+      decorators: [Roles('admin'), ApiOkResponse({ description: 'OK' })],
+    },
+    updateOneBase: {
+      decorators: [Roles('admin'), ApiOkResponse({ description: 'OK' })],
+    },
   },
 })
 @ApiTags('dress')
@@ -37,6 +45,4 @@ import { Roles } from '../auth/roles.decorator';
 @Controller('users')
 export class UsersController implements CrudController<User> {
   constructor(public service: UsersService) {}
-
- 
 }

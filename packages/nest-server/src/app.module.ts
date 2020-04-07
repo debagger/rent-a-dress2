@@ -9,6 +9,7 @@ import { Repository } from 'typeorm';
 import { User } from './entity';
 import { UsersService } from './users/users.service';
 import { CatalogModule } from './catalog/catalog.module';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CatalogModule } from './catalog/catalog.module';
     TypeOrmModule.forFeature(Object.values(entities)),
     AuthModule,
     CatalogModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -13,13 +13,13 @@ import { Token } from './Token';
 export class User {
   @PrimaryGeneratedColumn() @IsInt() @ApiProperty() id: number;
 
-  @Column() @IsString() @ApiProperty() username: string;
+  @Column() @IsString() @ApiProperty({description:"Username"}) username: string;
 
-  @Column() @IsEmail() @ApiProperty() email: string;
+  @Column() @IsEmail() @ApiProperty({description:"email"}) email: string;
 
-  @Column() @IsString() @ApiProperty() role: string;
+  @Column() @IsString() @ApiProperty({description:"role"}) role: string;
 
-  @Column() @IsString() @ApiProperty() password: string;
+  @Column() @IsString() @ApiProperty({description:"Password hash"}) password: string;
 
   @OneToMany(
     type => Token,

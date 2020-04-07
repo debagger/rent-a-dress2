@@ -1,14 +1,14 @@
 import { Test } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from '../src/app.module';
-import { UnauthorizedExceptionFilter } from '../src/unauthorized-exception.filter';
 import { getRepository, DeepPartial } from 'typeorm';
 import { catalogItem, User } from '../src/entity';
 import * as request from 'supertest';
 import { getAdminToken } from './getAdminToken';
 import { UsersService } from '../src/users/users.service';
 import { AuthService } from '../src/auth/auth.service';
-import {AllExceptionsFilter} from "../src/exception.filter"
+import { AllExceptionsFilter } from '../src/exception.filter';
+import { type } from 'os';
 
 describe('Catalog API tests (e2e)', () => {
   let app: INestApplication;
@@ -58,17 +58,16 @@ describe('Catalog API tests (e2e)', () => {
       .expect(200)
       .expect(res => {
         expect(res.body.total).toBe(10);
-        expect(res.body.data).toHaveLength(10);
+        expect(res.body.data).toMatchSnapshot();
       });
   });
 
   it('/catalog (POST)', async () => {
     const server = app.getHttpServer();
     const token = await getAdminToken(server);
-
     return request(server)
       .post('/catalog')
-      .set('Authorization', `Bearer ${token}`)
+      .auth(token, { type: 'bearer' })
       .send(<Partial<catalogItem>>{
         caption: 'New CatalogItem',
         img: '',
@@ -89,7 +88,7 @@ describe('Catalog API tests (e2e)', () => {
 
     return request(server)
       .post('/catalog')
-      .set('Authorization', `Bearer ${userToken}`)
+      .auth(userToken, { type: 'bearer' })
       .send(<Partial<catalogItem>>{
         caption: 'New CatalogItem',
         img: '',
@@ -119,16 +118,16 @@ describe('Catalog API tests (e2e)', () => {
 
     return request(server)
       .post('/catalog')
-      .set('Authorization', `Bearer ${token}`)
+      .auth(token, { type: 'bearer' })
       .send({
         caption: 'New CatalogItem',
         img: '',
         desc: 'New CatalogItem description',
         price: '1000 руб',
       })
-      .expect(res=>{
-          expect(res.status).toBe(400);
-          expect(res.body).toMatchSnapshot();
+      .expect(res => {
+        expect(res.status).toBe(400);
+        expect(res.body).toMatchSnapshot();
       });
   });
 });

@@ -1,5 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Catalog API tests (e2e) /catalog (GET) 1`] = `
+Array [
+  Object {
+    "caption": "Item 0",
+    "desc": "Item description 0",
+    "id": 1,
+    "img": "",
+    "price": 0,
+  },
+  Object {
+    "caption": "Item 1",
+    "desc": "Item description 1",
+    "id": 2,
+    "img": "",
+    "price": 1000,
+  },
+  Object {
+    "caption": "Item 2",
+    "desc": "Item description 2",
+    "id": 3,
+    "img": "",
+    "price": 2000,
+  },
+  Object {
+    "caption": "Item 3",
+    "desc": "Item description 3",
+    "id": 4,
+    "img": "",
+    "price": 3000,
+  },
+  Object {
+    "caption": "Item 4",
+    "desc": "Item description 4",
+    "id": 5,
+    "img": "",
+    "price": 4000,
+  },
+  Object {
+    "caption": "Item 5",
+    "desc": "Item description 5",
+    "id": 6,
+    "img": "",
+    "price": 5000,
+  },
+  Object {
+    "caption": "Item 6",
+    "desc": "Item description 6",
+    "id": 7,
+    "img": "",
+    "price": 6000,
+  },
+  Object {
+    "caption": "Item 7",
+    "desc": "Item description 7",
+    "id": 8,
+    "img": "",
+    "price": 7000,
+  },
+  Object {
+    "caption": "Item 8",
+    "desc": "Item description 8",
+    "id": 9,
+    "img": "",
+    "price": 8000,
+  },
+  Object {
+    "caption": "Item 9",
+    "desc": "Item description 9",
+    "id": 10,
+    "img": "",
+    "price": 9000,
+  },
+]
+`;
+
 exports[`Catalog API tests (e2e) /catalog (POST) check validation 1`] = `
 Object {
   "path": "/catalog",

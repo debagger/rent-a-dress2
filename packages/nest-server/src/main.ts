@@ -29,7 +29,8 @@ import { User, Token } from './entity';
 import * as express from 'express';
 import * as http from 'http';
 import * as fs from 'fs';
-import { UnauthorizedException } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common';
+import { AllExceptionsFilter } from './exception.filter';
 
 function startHttpRedirectServer() {
   const redirectExpressServer = express();
@@ -71,21 +72,20 @@ function configSwagger(app) {
 
 export async function bootstrap(nuxt) {
   const httpsOptions = {
-    key: fs.readFileSync('./../../../ssl/key.txt'),
-    cert: fs.readFileSync('./../../../ssl/www_rent_a_dress_ru_2020_07_10.crt'),
+    // key: fs.readFileSync('./../../../ssl/key.txt'),
+    // cert: fs.readFileSync('./../../../ssl/www_rent_a_dress_ru_2020_07_10.crt'),
   };
 
-  const app = await NestFactory.create(AppModule, {
-    httpsOptions,
-  });
+  const app = await NestFactory.create(AppModule);
 
   if (nuxt) app.useGlobalFilters(new NotFoundExceptionFilter(nuxt));
-  app.useGlobalFilters(new UnauthorizedExceptionFilter());
+  app.useGlobalFilters(new AllExceptionsFilter());
+  app.useGlobalPipes(new ValidationPipe({}));
   configSwagger(app);
 
-  await app.listen(443);
+  await app.listen(80);//443);
 
-  const httpRedirectServer = startHttpRedirectServer();
+  // const httpRedirectServer = startHttpRedirectServer();
 
   console.log(`Server starts`);
 
@@ -93,10 +93,10 @@ export async function bootstrap(nuxt) {
     async close() {
       console.log('Closing http redirct server');
       await new Promise((resolve, reject) => {
-        httpRedirectServer.close(err => {
-          if (err) return reject(err);
-          resolve();
-        });
+        // httpRedirectServer.close(err => {
+        //   if (err) return reject(err);
+        //   resolve();
+        // });
       });
       console.log('Http redirct server closed');
 
