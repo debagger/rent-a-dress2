@@ -19,6 +19,6 @@ describe('Images test', () => {
     return request(app.getHttpServer())
       .post('/images/upload')
       .attach('file', './test/0.jpg')
-      .expect(500);
+      .expect(201);
   });
 });
