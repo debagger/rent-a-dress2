@@ -32,4 +32,4 @@ jobs:
       - name: Run schemathesis
         run: |
           cd packages/nest-server
-          node ./schemathesis-test.js
+          sudo node ./schemathesis-test.js
