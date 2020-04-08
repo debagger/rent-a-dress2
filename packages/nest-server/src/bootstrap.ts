@@ -76,13 +76,13 @@ export async function bootstrap(nuxt) {
     cert: fs.readFileSync('./../../../ssl/localhost.crt'),
   };
 
-  const app = await NestFactory.create(AppModule, {httpsOptions});
+  const app = await NestFactory.create(AppModule, { httpsOptions });
 
   if (nuxt) app.useGlobalFilters(new NotFoundExceptionFilter(nuxt));
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(new ValidationPipe({}));
   configSwagger(app);
-app.get
+  app.get;
   await app.listen(443);
 
   const httpRedirectServer = startHttpRedirectServer();
@@ -101,6 +101,23 @@ app.get
       console.log('Http redirct server closed');
 
       console.log('Closing https server');
+      await app.close();
+      console.log('Https server closed');
+    },
+  };
+}
+
+export async function bootstrap_http() {
+  const app = await NestFactory.create(AppModule);
+
+  app.useGlobalFilters(new AllExceptionsFilter());
+  app.useGlobalPipes(new ValidationPipe({}));
+  configSwagger(app);
+  await app.listen(80);
+  console.log(`Server starts in http mode on port 80`);
+  return {
+    async close() {
+      console.log('Closing http server');
       await app.close();
       console.log('Https server closed');
     },
