@@ -1,8 +1,5 @@
 import { Injectable, ExecutionContext, CanActivate } from '@nestjs/common';
 import { AuthGuard, IAuthGuard, Type } from '@nestjs/passport';
-import { Observable } from 'rxjs';
-import { AuthModule } from './auth.module';
-import { bootstrap } from 'src/main';
 import { Reflector } from '@nestjs/core';
 
 @Injectable()
