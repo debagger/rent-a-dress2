@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 
@@ -42,10 +42,10 @@ export class UsersService extends TypeOrmCrudService<User> {
         await this.repo.save(dbUser);
         return true;
       } else {
-        throw new NotFoundException('Incorrect password');
+        throw new BadRequestException('Incorrect password');
       }
     }
-    throw new NotFoundException('User not found');
+    throw new BadRequestException('User not found');
   }
 
   hash(input: string) {

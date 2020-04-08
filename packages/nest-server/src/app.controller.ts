@@ -6,6 +6,7 @@ import {
   Request,
   UseFilters,
   Body,
+  BadRequestException,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { AuthGuard } from '@nestjs/passport';
@@ -13,6 +14,21 @@ import { AuthService } from './auth/auth.service';
 import { RoleGuard } from './auth/roles.guard';
 import { Roles } from './auth/roles.decorator';
 import { UsersService } from './users/users.service';
+import { ApiUnauthorizedResponse, ApiParam, ApiBody, ApiProperty, ApiRequestTimeoutResponse, ApiResponse, ApiBearerAuth, ApiBadRequestResponse } from '@nestjs/swagger';
+
+export class changePasswordRequest {
+  @ApiProperty() oldPassword: string;
+  @ApiProperty() newPassword: string;
+};
+
+export class loginRequest {
+  @ApiProperty() username: string;
+  @ApiProperty() password: string;
+}
+
+export class loginResponse {
+  @ApiProperty() access_token: string
+}
 
 @Controller()
 @UseGuards(RoleGuard)
@@ -26,7 +42,10 @@ export class AppController {
 
   @UseGuards(AuthGuard('local'))
   @Post('auth/login')
-  async login(@Request() req): Promise<{ access_token: String }> {
+  @ApiUnauthorizedResponse({description:"Wrong creditionals recieved"})
+  @ApiBody({type: [loginRequest]})
+  @ApiResponse({status: 201, type: loginResponse})
+  async login(@Request() req): Promise<loginResponse> {
     return await this.authService.login(req.user);
   }
 
@@ -37,14 +56,13 @@ export class AppController {
   }
 
   @Post('auth/password')
+  @ApiBadRequestResponse({description: "Operation failed"})
   @Roles()
   async changePassword(
     @Request() req: any,
-    @Body('oldPassword') oldPassword: string,
-    @Body('newPassword') newPassword: string,
+    @Body() body: changePasswordRequest,
   ) {
     const user = req.user.user;
-    return await this.userService.changePassword(user, oldPassword, newPassword);
+    return this.userService.changePassword(user, body.oldPassword, body.newPassword);
   }
 }
-

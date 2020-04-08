@@ -11,7 +11,7 @@ import { Token } from './Token';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn() @IsInt() @ApiProperty() id: number;
+  @PrimaryGeneratedColumn() @IsInt() @ApiProperty({description: "Id for user. Must be positive integer"}) id: number;
 
   @Column() @IsString() @ApiProperty({description:"Username"}) username: string;
 
@@ -19,7 +19,7 @@ export class User {
 
   @Column() @IsString() @ApiProperty({description:"role"}) role: string;
 
-  @Column() @IsString() @ApiProperty({description:"Password hash"}) password: string;
+  @Column() @IsString() @ApiProperty({description:"Username"}) password: string;
 
   @OneToMany(
     type => Token,

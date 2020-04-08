@@ -4,7 +4,12 @@ import { catalogItem } from './../entity';
 import { CatalogService } from './catalog.service';
 import { RoleGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
-import { ApiOkResponse, ApiCreatedResponse } from '@nestjs/swagger';
+import {
+  ApiOkResponse,
+  ApiCreatedResponse,
+  ApiBadRequestResponse,
+  ApiNotFoundResponse,
+} from '@nestjs/swagger';
 
 @Controller('catalog')
 @UseGuards(RoleGuard)
@@ -13,19 +18,40 @@ import { ApiOkResponse, ApiCreatedResponse } from '@nestjs/swagger';
   query: { alwaysPaginate: true },
   routes: {
     createOneBase: {
-      decorators: [Roles('admin'), ApiCreatedResponse({ description: 'OK' })],
+      decorators: [
+        Roles('admin'),
+        ApiCreatedResponse({ description: 'OK' }),
+        ApiBadRequestResponse(),
+      ],
     },
     updateOneBase: {
-      decorators: [Roles('admin'), ApiOkResponse({ description: 'OK' })],
+      decorators: [
+        Roles('admin'),
+        ApiOkResponse({ description: 'OK' }),
+        ApiBadRequestResponse(),
+      ],
     },
     deleteOneBase: {
-      decorators: [Roles('admin'), ApiOkResponse({ description: 'OK' })],
+      decorators: [
+        Roles('admin'),
+        ApiOkResponse({ description: 'OK' }),
+        ApiBadRequestResponse(),
+        ApiNotFoundResponse()
+      ],
     },
     getOneBase: {
-      decorators: [ApiOkResponse({ description: 'OK' })],
+      decorators: [
+        ApiOkResponse({ description: 'OK' }),
+        ApiBadRequestResponse(),
+        ApiNotFoundResponse()
+      ],
     },
     getManyBase: {
-      decorators: [ApiOkResponse({ description: 'OK' })],
+      decorators: [
+        ApiOkResponse({ description: 'OK' }),
+        ApiBadRequestResponse(),
+        ApiNotFoundResponse()
+      ],
     },
     only: [
       'getOneBase',

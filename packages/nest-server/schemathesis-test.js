@@ -34,7 +34,7 @@ const compiler = webpack(config, (err, stats) => {
       const authHeader =
         'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoxLCJpYXQiOjE1ODQyNjg2OTksImV4cCI6MTU4NDI2ODc1OX0.9FQNp2iVCCP8W1lv950gcXHGSLjrrBw5KW3SVMTxBLA';
       exec(
-        `docker run --network="host" kiwicom/schemathesis:stable run http://${ips[0]}/api-json --header "${authHeader}"`,
+        `docker run --network="host" kiwicom/schemathesis:stable run http://${ips[0]}/api-json --checks all --exitfirst --header "${authHeader}"`,
         (error, stdout, stderr) => {
           if (error) {
             // console.log('Error when schemathesis runs: \n', error);

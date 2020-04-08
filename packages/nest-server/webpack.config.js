@@ -4,7 +4,7 @@ const nodeExternals = require('webpack-node-externals');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: ['webpack/hot/poll?100', path.join(__dirname, '/src/main.ts')],
+  entry: ['webpack/hot/poll?100', path.join(__dirname, '/src/bootstrap.ts')],
   watch: true,
   target: 'node',
   devtool: 'source-map',
