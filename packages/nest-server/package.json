@@ -43,6 +43,7 @@
     "@nestjsx/crud": "^4.4.1",
     "@nestjsx/crud-typeorm": "^4.4.1",
     "@rent-a-dress/entities": "^1.0.0",
+    "class-transformer": "^0.2.3",
     "class-validator": "^0.11.0",
     "clean-webpack-plugin": "^3.0.0",
     "jest-serial-runner": "^1.1.0",

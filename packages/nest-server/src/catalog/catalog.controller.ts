@@ -9,10 +9,13 @@ import {
   ApiCreatedResponse,
   ApiBadRequestResponse,
   ApiNotFoundResponse,
+  ApiTags,
 } from '@nestjs/swagger';
+import { ApiResponseDescription } from '../api-response-description.decorator';
 
 @Controller('catalog')
 @UseGuards(RoleGuard)
+@ApiTags('catalog')
 @Crud({
   model: { type: catalogItem },
   query: { alwaysPaginate: true },
@@ -36,21 +39,21 @@ import {
         Roles('admin'),
         ApiOkResponse({ description: 'OK' }),
         ApiBadRequestResponse(),
-        ApiNotFoundResponse()
+        ApiNotFoundResponse(),
       ],
     },
     getOneBase: {
       decorators: [
-        ApiOkResponse({ description: 'OK' }),
+        ApiResponseDescription('200', ''),
         ApiBadRequestResponse(),
-        ApiNotFoundResponse()
+        ApiNotFoundResponse(),
       ],
     },
     getManyBase: {
       decorators: [
-        ApiOkResponse({ description: 'OK' }),
+        ApiResponseDescription('200', ''),
         ApiBadRequestResponse(),
-        ApiNotFoundResponse()
+        ApiNotFoundResponse(),
       ],
     },
     only: [

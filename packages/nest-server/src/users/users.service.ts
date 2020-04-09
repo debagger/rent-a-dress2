@@ -1,11 +1,15 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TypeOrmCrudService } from '@nestjsx/crud-typeorm';
 
 import { User } from '../entity';
 import { createHash } from 'crypto';
 import { Repository, DeepPartial } from 'typeorm';
-import { CrudRequest } from '@nestjsx/crud';
+import { CrudRequest, GetManyDefaultResponse } from '@nestjsx/crud';
 
 @Injectable()
 export class UsersService extends TypeOrmCrudService<User> {
@@ -25,6 +29,18 @@ export class UsersService extends TypeOrmCrudService<User> {
       user.password = this.hash(user.password);
     }
     return super.updateOne(req, user);
+  }
+
+  async getMany(req: CrudRequest) {
+    const result:any = await super.getMany(req);
+    if(result && result.data && Array.isArray(result.data)){
+      const def = <GetManyDefaultResponse<User>>result;
+      if(!def.pageCount){
+        def.pageCount = 1;
+      }
+      return def;
+    }
+    return result;
   }
 
   async save(user: DeepPartial<User>): Promise<User> {

@@ -1,13 +1,4 @@
-import {
-  Controller,
-  UseGuards,
-  ExecutionContext,
-  CallHandler,
-  Patch,
-  Body,
-  Post,
-  Request,
-} from '@nestjs/common';
+import { Controller, UseGuards } from '@nestjs/common';
 import { Crud, CrudController } from '@nestjsx/crud';
 
 import { User } from '../entity';
@@ -18,11 +9,20 @@ import {
   ApiCreatedResponse,
   ApiBadRequestResponse,
   ApiNotFoundResponse,
+  ApiProperty,
+  ApiPropertyOptional,
 } from '@nestjs/swagger';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { RoleGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
+import { ApiResponseDescription } from '../api-response-description.decorator';
+export class UserResponse {
+  @ApiProperty() id: number;
+  @ApiPropertyOptional() username: string;
+  @ApiPropertyOptional() email: string;
+  @ApiPropertyOptional() role: string;
+}
 
 @Crud({
   model: {
@@ -30,19 +30,20 @@ import { Roles } from '../auth/roles.decorator';
   },
   params: {},
   query: { exclude: ['tokens', 'password'], alwaysPaginate: true },
+  serialize: { get: UserResponse, create: UserResponse, update: UserResponse },
   routes: {
     only: ['createOneBase', 'getOneBase', 'getManyBase', 'updateOneBase'],
     createOneBase: {
       decorators: [
         Roles('admin'),
-        ApiCreatedResponse({ description: 'Ok' }),
+        ApiCreatedResponse({ description: 'Ok', type: UserResponse }),
         ApiBadRequestResponse(),
       ],
     },
     getOneBase: {
       decorators: [
         Roles('admin'),
-        ApiOkResponse({ description: 'OK' }),
+        ApiResponseDescription('200', ''),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
@@ -50,7 +51,7 @@ import { Roles } from '../auth/roles.decorator';
     getManyBase: {
       decorators: [
         Roles('admin'),
-        ApiOkResponse({ description: 'OK' }),
+        ApiResponseDescription('200', ''),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
@@ -58,13 +59,13 @@ import { Roles } from '../auth/roles.decorator';
     updateOneBase: {
       decorators: [
         Roles('admin'),
-        ApiOkResponse({ description: 'OK' }),
+        ApiOkResponse({ description: 'OK', type: UserResponse }),
         ApiBadRequestResponse(),
       ],
     },
   },
 })
-@ApiTags('dress')
+@ApiTags('user')
 @UseGuards(RoleGuard)
 @Controller('users')
 export class UsersController implements CrudController<User> {
