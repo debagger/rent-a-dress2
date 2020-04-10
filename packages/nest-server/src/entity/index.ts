@@ -1,5 +1,6 @@
 export * from "./Image"
 export * from "./Token"
-export * from "./User"
+export * from "./user.entity"
+export * from "./user.interface"
 export * from "./catalogItemOption"
 export * from "./catalogItem"

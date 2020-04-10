@@ -16,6 +16,6 @@ export class ImagesController {
   @Post('upload')
   @UseInterceptors(FileInterceptor('file'))
   upload(@UploadedFile() file) {
-    console.log(file);
+    // console.log(file);
   }
 }

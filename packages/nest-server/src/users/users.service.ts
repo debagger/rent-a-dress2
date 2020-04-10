@@ -10,6 +10,7 @@ import { User } from '../entity';
 import { createHash } from 'crypto';
 import { Repository, DeepPartial } from 'typeorm';
 import { CrudRequest, GetManyDefaultResponse } from '@nestjsx/crud';
+import { plainToClass } from 'class-transformer';
 
 @Injectable()
 export class UsersService extends TypeOrmCrudService<User> {
@@ -21,7 +22,8 @@ export class UsersService extends TypeOrmCrudService<User> {
     if (user.password) {
       user.password = this.hash(user.password);
     }
-    return super.createOne(req, user);
+    const result = await super.createOne(req, user);
+    return result;
   }
 
   async updateOne(req: CrudRequest, user: DeepPartial<User>): Promise<User> {
@@ -32,10 +34,10 @@ export class UsersService extends TypeOrmCrudService<User> {
   }
 
   async getMany(req: CrudRequest) {
-    const result:any = await super.getMany(req);
-    if(result && result.data && Array.isArray(result.data)){
+    const result: any = await super.getMany(req);
+    if (result && result.data && Array.isArray(result.data)) {
       const def = <GetManyDefaultResponse<User>>result;
-      if(!def.pageCount){
+      if (!def.pageCount) {
         def.pageCount = 1;
       }
       return def;
@@ -47,8 +49,10 @@ export class UsersService extends TypeOrmCrudService<User> {
     if (user.password) {
       user.password = this.hash(user.password);
     }
-    return this.repo.save(user);
+    const result = await this.repo.save(user);
+    return result;
   }
+
   async changePassword(user: any, oldPassword: string, newPassword: string) {
     const oldPasswordHash = this.hash(oldPassword);
     const dbUser = await super.findOne({ username: user.username });

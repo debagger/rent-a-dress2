@@ -5,45 +5,36 @@ import { User } from '../entity';
 import { UsersService } from './users.service';
 import {
   ApiTags,
-  ApiOkResponse,
-  ApiCreatedResponse,
   ApiBadRequestResponse,
   ApiNotFoundResponse,
-  ApiProperty,
-  ApiPropertyOptional,
 } from '@nestjs/swagger';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { RoleGuard } from '../auth/roles.guard';
 import { Roles } from '../auth/roles.decorator';
 import { ApiResponseDescription } from '../api-response-description.decorator';
-export class UserResponse {
-  @ApiProperty() id: number;
-  @ApiPropertyOptional() username: string;
-  @ApiPropertyOptional() email: string;
-  @ApiPropertyOptional() role: string;
-}
+import { UserResponse } from './user-response.dto';
+import { CreateUserRequestDto } from './create-user-request.dto';
+import { UpdateUserRequestDto } from './update-user-request.dto';
 
 @Crud({
   model: {
     type: User,
   },
-  params: {},
-  query: { exclude: ['tokens', 'password'], alwaysPaginate: true },
+  query: { alwaysPaginate: true },
+  dto: { create: CreateUserRequestDto, update: UpdateUserRequestDto },
   serialize: { get: UserResponse, create: UserResponse, update: UserResponse },
   routes: {
     only: ['createOneBase', 'getOneBase', 'getManyBase', 'updateOneBase'],
     createOneBase: {
       decorators: [
         Roles('admin'),
-        ApiCreatedResponse({ description: 'Ok', type: UserResponse }),
+        ApiResponseDescription('201', 'ОК'),
         ApiBadRequestResponse(),
       ],
     },
     getOneBase: {
       decorators: [
         Roles('admin'),
-        ApiResponseDescription('200', ''),
+        ApiResponseDescription('200', 'ОК'),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
@@ -51,7 +42,7 @@ export class UserResponse {
     getManyBase: {
       decorators: [
         Roles('admin'),
-        ApiResponseDescription('200', ''),
+        ApiResponseDescription('200', 'ОК'),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
@@ -59,8 +50,9 @@ export class UserResponse {
     updateOneBase: {
       decorators: [
         Roles('admin'),
-        ApiOkResponse({ description: 'OK', type: UserResponse }),
+        ApiResponseDescription('200', 'ОК'),
         ApiBadRequestResponse(),
+        ApiNotFoundResponse(),
       ],
     },
   },
