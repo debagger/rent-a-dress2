@@ -11,9 +11,8 @@ export const ApiResponseDescription = (
 
     response.description = response.description || description;
     Reflect.defineMetadata('swagger/apiResponse', responses, descriptor.value);
-    // console.log(Reflect.getMetadata('swagger/apiResponse', descriptor.value));
 
-    return descriptor; 
+    return descriptor;
   };
   decoratorFactory.KEY = 'swagger/apiResponse';
   return decoratorFactory;
