@@ -40,7 +40,7 @@
     "@nestjs/platform-express": "^6.10.14",
     "@nestjs/swagger": "^4.3.2",
     "@nestjs/typeorm": "^6.3.3",
-    "@nestjsx/crud": "^4.4.1",
+    "@nestjsx/crud": "4.4.2",
     "@nestjsx/crud-typeorm": "^4.4.1",
     "@rent-a-dress/entities": "^1.0.0",
     "class-transformer": "^0.2.3",
