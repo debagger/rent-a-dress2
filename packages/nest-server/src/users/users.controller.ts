@@ -27,14 +27,12 @@ import { UpdateUserRequestDto } from './update-user-request.dto';
     createOneBase: {
       decorators: [
         Roles('admin'),
-        ApiResponseDescription('201', 'ОК'),
         ApiBadRequestResponse(),
       ],
     },
     getOneBase: {
       decorators: [
         Roles('admin'),
-        ApiResponseDescription('200', 'ОК'),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
@@ -42,7 +40,6 @@ import { UpdateUserRequestDto } from './update-user-request.dto';
     getManyBase: {
       decorators: [
         Roles('admin'),
-        ApiResponseDescription('200', 'ОК'),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
@@ -50,7 +47,6 @@ import { UpdateUserRequestDto } from './update-user-request.dto';
     updateOneBase: {
       decorators: [
         Roles('admin'),
-        ApiResponseDescription('200', 'ОК'),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
