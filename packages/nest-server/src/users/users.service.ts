@@ -19,38 +19,18 @@ export class UsersService extends TypeOrmCrudService<User> {
   }
 
   async createOne(req: CrudRequest, user: DeepPartial<User>): Promise<User> {
-    if (user.password) {
-      user.password = this.hash(user.password);
-    }
-    const result = await super.createOne(req, user);
-    return result;
+    user.password = user.password && this.hash(user.password);
+    return await super.createOne(req, user);
   }
 
   async updateOne(req: CrudRequest, user: DeepPartial<User>): Promise<User> {
-    if (user.password) {
-      user.password = this.hash(user.password);
-    }
+    user.password = user.password && this.hash(user.password);
     return super.updateOne(req, user);
   }
 
-  async getMany(req: CrudRequest) {
-    const result: any = await super.getMany(req);
-    if (result && result.data && Array.isArray(result.data)) {
-      const def = <GetManyDefaultResponse<User>>result;
-      if (!def.pageCount) {
-        def.pageCount = 1;
-      }
-      return def;
-    }
-    return result;
-  }
-
   async save(user: DeepPartial<User>): Promise<User> {
-    if (user.password) {
-      user.password = this.hash(user.password);
-    }
-    const result = await this.repo.save(user);
-    return result;
+    user.password = user.password && this.hash(user.password);
+    return await this.repo.save(user);
   }
 
   async changePassword(user: any, oldPassword: string, newPassword: string) {
