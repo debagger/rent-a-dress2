@@ -26,18 +26,19 @@ const compiler = webpack(config, (err, stats) => {
 
   require('./dist/server')
     .bootstrap()
-    .then(() => {
+    .then(async (res) => {
+      const adminToken = await res.getAdminToken();
+      console.log(adminToken);
       const ips = getIPs();
       console.log('IPs found: \n', ips);
       const spawn = require('child_process').spawn;
       const authHeader =
-        'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwic3ViIjoxLCJpYXQiOjE1ODQyNjg2OTksImV4cCI6MTU4NDI2ODc1OX0.9FQNp2iVCCP8W1lv950gcXHGSLjrrBw5KW3SVMTxBLA';
+        `Authorization: Bearer ${adminToken}`;
       const child = spawn(
         'docker',
         [
           'run',
-          '--network',
-          'host',
+          '--network=host',
           'kiwicom/schemathesis:stable',
           'run',
           `http://${ips[0]}/api-json`,
