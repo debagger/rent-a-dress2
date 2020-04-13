@@ -23,35 +23,30 @@ import { ApiResponseDescription } from '../api-response-description.decorator';
     createOneBase: {
       decorators: [
         Roles('admin'),
-        ApiCreatedResponse({ description: 'OK' }),
         ApiBadRequestResponse(),
       ],
     },
     updateOneBase: {
       decorators: [
         Roles('admin'),
-        ApiOkResponse({ description: 'OK' }),
         ApiBadRequestResponse(),
       ],
     },
     deleteOneBase: {
       decorators: [
         Roles('admin'),
-        ApiOkResponse({ description: 'OK' }),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
     },
     getOneBase: {
       decorators: [
-        ApiResponseDescription('200', ''),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
     },
     getManyBase: {
       decorators: [
-        ApiResponseDescription('200', ''),
         ApiBadRequestResponse(),
         ApiNotFoundResponse(),
       ],
