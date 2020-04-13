@@ -31,6 +31,7 @@ import * as http from 'http';
 import * as fs from 'fs';
 import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './exception.filter';
+import { AuthService } from './auth/auth.service';
 
 function startHttpRedirectServer() {
   const redirectExpressServer = express();
@@ -116,6 +117,10 @@ export async function bootstrap_http() {
   await app.listen(80);
   console.log(`Server starts in http mode on port 80`);
   return {
+    async getAdminToken(){const auth = app.get(AuthService);
+      const user = await auth.validateUser("admin", "123");
+      const result = await auth.login(user); 
+    return result.access_token},
     async close() {
       console.log('Closing http server');
       await app.close();
