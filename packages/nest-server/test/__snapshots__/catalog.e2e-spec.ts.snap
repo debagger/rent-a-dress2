@@ -77,6 +77,22 @@ Array [
 
 exports[`Catalog API tests (e2e) /catalog (POST) check validation 1`] = `
 Object {
+  "message": Array [
+    Object {
+      "children": Array [],
+      "constraints": Object {
+        "isInt": "price must be an integer number",
+      },
+      "property": "price",
+      "target": Object {
+        "caption": "New CatalogItem",
+        "desc": "New CatalogItem description",
+        "img": "",
+        "price": "1000 руб",
+      },
+      "value": "1000 руб",
+    },
+  ],
   "path": "/catalog",
   "statusCode": 400,
 }
