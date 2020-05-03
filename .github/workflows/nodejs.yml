@@ -25,11 +25,23 @@ jobs:
         run: |
           cd packages/nest-server
           yarn run test
+          env:
+            IMG_PATH: C:\Projects\images
+            DATABASE_PATH: :memory:
+            HTTP_MODE: http
       - name: Run nest-server e2e tests
         run: |
           cd packages/nest-server
           yarn run test:e2e
+          env:
+            IMG_PATH: C:\Projects\images
+            DATABASE_PATH: :memory:
+            HTTP_MODE: http
       - name: Run schemathesis
         run: |
           cd packages/nest-server
           sudo node ./schemathesis-test.js
+          env:
+            IMG_PATH: C:\Projects\images
+            DATABASE_PATH: :memory:
+            HTTP_MODE: http
