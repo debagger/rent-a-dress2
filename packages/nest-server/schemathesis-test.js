@@ -2,7 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const config = require('./webpack.config');
 
-process.env.DATABASE_PATH = ':memory:'
+process.env.DATABASE_PATH = ':memory:';
+process.env.IMG_PATH = fs.mkdtempSync(path.join(os.tmpdir(), 'img_'));
 
 function getIPs() {
   var os = require('os');
