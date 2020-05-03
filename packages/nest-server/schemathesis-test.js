@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('./webpack.config');
-require('dotenv').config();
+
+process.env.DATABASE_PATH = ':memory:'
 
 function getIPs() {
   var os = require('os');
