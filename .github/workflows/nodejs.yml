@@ -27,7 +27,7 @@ jobs:
           yarn run test
         env:
           IMG_PATH: C:\Projects\images
-          DATABASE_PATH: :memory:
+          DATABASE_PATH: ':memory:'
           HTTP_MODE: http
       - name: Run nest-server e2e tests
         run: |
@@ -35,7 +35,7 @@ jobs:
           yarn run test:e2e
         env:
           IMG_PATH: C:\Projects\images
-          DATABASE_PATH: :memory:
+          DATABASE_PATH: ':memory:'
           HTTP_MODE: http
       - name: Run schemathesis
         run: |
