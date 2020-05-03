@@ -24,7 +24,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { NotFoundExceptionFilter } from './notfound-exception.filter';
-import { UnauthorizedExceptionFilter } from './unauthorized-exception.filter';
 import { User, Token } from './entity';
 import * as express from 'express';
 import * as http from 'http';
@@ -32,6 +31,12 @@ import * as fs from 'fs';
 import { ValidationPipe } from '@nestjs/common';
 import { AllExceptionsFilter } from './exception.filter';
 import { AuthService } from './auth/auth.service';
+import { ConfigProvider } from './config/config.provider';
+import { NuxtMiddleware } from './nuxt.middleware';
+import { async } from 'rxjs/internal/scheduler/async';
+
+require('dotenv').config();
+const Configuration = ConfigProvider.useFactory();
 
 function startHttpRedirectServer() {
   const redirectExpressServer = express();
@@ -71,20 +76,14 @@ function configSwagger(app) {
   SwaggerModule.setup('api', app, document);
 }
 
-export async function bootstrap(nuxt) {
+async function bootstrap_https(nuxt) {
   const httpsOptions = {
-    key: fs.readFileSync('./../../../ssl/localhost.key'),
-    cert: fs.readFileSync('./../../../ssl/localhost.crt'),
+    key: fs.readFileSync(Configuration.httpsKeyPath),
+    cert: fs.readFileSync(Configuration.httpsCertPath),
   };
 
-  const app = await NestFactory.create(AppModule, { httpsOptions });
-
-  if (nuxt) app.useGlobalFilters(new NotFoundExceptionFilter(nuxt));
-  app.useGlobalFilters(new AllExceptionsFilter());
-  app.useGlobalPipes(new ValidationPipe({}));
-  configSwagger(app);
-  app.get;
-  await app.listen(443);
+  const { app, port } = await startApp(httpsOptions, nuxt);
+  console.log(`Server starts in http mode on port ${port}`);
 
   const httpRedirectServer = startHttpRedirectServer();
 
@@ -108,23 +107,40 @@ export async function bootstrap(nuxt) {
   };
 }
 
-export async function bootstrap_http() {
-  const app = await NestFactory.create(AppModule);
-
+async function startApp(
+  httpsOptions?: { key: Buffer; cert: Buffer } | undefined,
+  nuxt?: any,
+) {
+  const app = await NestFactory.create(AppModule, { httpsOptions });
+  if (nuxt) app.useGlobalFilters(new NotFoundExceptionFilter(nuxt));
   app.useGlobalFilters(new AllExceptionsFilter());
   app.useGlobalPipes(new ValidationPipe({}));
   configSwagger(app);
-  await app.listen(80);
-  console.log(`Server starts in http mode on port 80`);
+  const port = httpsOptions ? 443 : 80;
+  await app.listen(port);
+  return { app, port };
+}
+
+async function bootstrap_http(nuxt: any) {
+  const { app, port } = await startApp((nuxt = nuxt));
+  console.log(`Server starts in http mode on port ${port}`);
   return {
-    async getAdminToken(){const auth = app.get(AuthService);
-      const user = await auth.validateUser("admin", "123");
-      const result = await auth.login(user); 
-    return result.access_token},
+    async getAdminToken() {
+      const auth = app.get(AuthService);
+      const user = await auth.validateUser('admin', '123');
+      const result = await auth.login(user);
+      return result.access_token;
+    },
     async close() {
       console.log('Closing http server');
       await app.close();
       console.log('Https server closed');
     },
   };
+}
+
+export async function bootstrap(nuxt) {
+  return process.env.HTTP_MODE === 'https'
+    ? bootstrap_https(nuxt)
+    : bootstrap_http(nuxt);
 }

@@ -5,18 +5,19 @@ import { UsersModule } from './users/users.module';
 import { TypeOrmModule, InjectRepository } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import * as entities from './entity';
-import { Repository } from 'typeorm';
-import { User } from './entity';
 import { UsersService } from './users/users.service';
 import { CatalogModule } from './catalog/catalog.module';
 import { ImagesModule } from './images/images.module';
+import { ConfigModule } from './config/config.module';
+
+require('dotenv').config()
 
 @Module({
   imports: [
     UsersModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: ':memory:',
+      database: process.env.DATABASE_PATH,
       entities: Object.values(entities),
       synchronize: true,
       keepConnectionAlive: true,
@@ -25,6 +26,7 @@ import { ImagesModule } from './images/images.module';
     AuthModule,
     CatalogModule,
     ImagesModule,
+    ConfigModule
   ],
   controllers: [AppController],
   providers: [AppService],

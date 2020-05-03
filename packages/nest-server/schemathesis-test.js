@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('./webpack.config');
+
 function getIPs() {
   var os = require('os');
   var ifaces = os.networkInterfaces();
@@ -23,17 +24,17 @@ config.entry = [path.join(__dirname, '/src/main-http.ts')];
 const compiler = webpack(config, (err, stats) => {
   if (err) return console.log(err);
   if (stats.hasErrors()) return stats.compilation.errors;
+  console.log('Compilation finished. Run server...');
 
   require('./dist/server')
     .bootstrap()
-    .then(async (res) => {
+    .then(async res => {
       const adminToken = await res.getAdminToken();
       console.log(adminToken);
       const ips = getIPs();
       console.log('IPs found: \n', ips);
       const spawn = require('child_process').spawn;
-      const authHeader =
-        `Authorization: Bearer ${adminToken}`;
+      const authHeader = `Authorization: Bearer ${adminToken}`;
       const child = spawn(
         'docker',
         [
@@ -47,6 +48,7 @@ const compiler = webpack(config, (err, stats) => {
           '--exitfirst',
           '--header',
           authHeader,
+          '--show-errors-tracebacks'
         ],
         {
           stdio: 'inherit',
@@ -62,5 +64,8 @@ const compiler = webpack(config, (err, stats) => {
         console.log('Finished with code ' + code);
         process.exit(code);
       });
+    })
+    .catch(err => {
+      console.log(err);
     });
 });

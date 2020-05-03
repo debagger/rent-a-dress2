@@ -1,6 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ImagesService } from './images.service';
 import { AppModule } from '../app.module';
+import { ConfigModule } from '../config/config.module';
 
 describe('ImagesService', () => {
   let service: ImagesService;
@@ -9,7 +10,6 @@ describe('ImagesService', () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [AppModule],
     }).compile();
-
     service = module.get<ImagesService>(ImagesService);
   });
 
