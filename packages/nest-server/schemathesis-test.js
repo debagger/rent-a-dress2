@@ -1,6 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
 const config = require('./webpack.config');
+const fs = require('fs');
+const os = require('os');
 
 process.env.DATABASE_PATH = ':memory:';
 process.env.IMG_PATH = fs.mkdtempSync(path.join(os.tmpdir(), 'img_'));
