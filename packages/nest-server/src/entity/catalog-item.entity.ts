@@ -7,7 +7,7 @@ import {
   TableInheritance,
   OneToMany
 } from "typeorm";
-import { catalogItemOption } from "./catalogItemOption";
+import { catalogItemOption } from "./catalog-item-option.entity";
 
 @Entity()
 export class catalogItem {

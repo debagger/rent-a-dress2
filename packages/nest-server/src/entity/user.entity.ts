@@ -6,7 +6,7 @@ import {
   Column,
   OneToMany,
 } from 'typeorm';
-import { Token } from './Token';
+import { Token } from './token.entity';
 import { UserInterface } from './user.interface';
 
 @Entity()

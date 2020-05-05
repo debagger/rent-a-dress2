@@ -3,10 +3,9 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   Column,
-  TableInheritance,
   ManyToOne
 } from "typeorm";
-import { catalogItem } from "./catalogItem";
+import { catalogItem } from "./catalog-item.entity";
 
 @Entity()
 export class catalogItemOption {
