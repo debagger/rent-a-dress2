@@ -28,6 +28,8 @@ import { ExceptionResponse } from '../exception.filter';
 @UseGuards(RoleGuard)
 export class ImagesController {
   constructor(public service: ImagesService) {}
+
+
   @Post('upload')
   @UseGuards(MultipartRequestGuard)
   @UseInterceptors(AnyFilesInterceptor())
@@ -51,4 +53,5 @@ export class ImagesController {
   ) {
     return await this.service.saveImage(file);
   }
+  async get
 }
