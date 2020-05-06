@@ -53,5 +53,4 @@ export class ImagesController {
   ) {
     return await this.service.saveImage(file);
   }
-  async get
 }
