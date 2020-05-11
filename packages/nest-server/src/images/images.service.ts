@@ -8,6 +8,8 @@ import { createHash } from 'crypto';
 import path = require('path');
 import * as fs from 'fs';
 import { ConfigInterface } from '../config/config.interface';
+import { ImageDto, ImageHrefs } from './image.dto';
+import { ImageInterface } from '../entity/image.interface';
 
 const thumbs: { sizename: string; size: number }[] = [
   { sizename: 'small', size: 320 },
@@ -91,5 +93,27 @@ export class ImagesService {
         .jpeg({ quality: 50 })
         .toFile(thumbsFilePath);
     }
+  }
+
+  public async getImagesList() {
+    const dbImages = await this.images.find();
+
+    return dbImages.map((item: ImageInterface) => {
+      const hrefs = new ImageHrefs();
+      ['full', ...thumbs.map(item => item.sizename)].forEach(
+        key =>
+          (hrefs[key] = {
+            href: `/images/${key}/${item.id}.jpg`,
+            size:
+              key === 'full'
+                ? Math.max(item.Height, item.Width)
+                : thumbs.find(t => t.sizename === key).size,
+          }),
+      );
+      return <ImageDto>Object.assign(new ImageDto(), { ...item, hrefs });
+    });
+  }
+  public async getImageById(id: number) {
+    return await this.images.findOne({id});
   }
 }

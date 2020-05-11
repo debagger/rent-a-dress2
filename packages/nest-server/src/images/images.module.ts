@@ -4,19 +4,10 @@ import { ImagesController } from './images.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Image } from '../entity';
 import { ConfigModule } from '../config/config.module';
-import { ServeStaticModule } from '@nestjs/serve-static';
 
-console.log(process.env.IMG_PATH)
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Image]),
-    ConfigModule,
-    ServeStaticModule.forRoot({
-      rootPath: process.env.IMG_PATH,
-      serveRoot: '/images'
-    }),
-  ],
+  imports: [TypeOrmModule.forFeature([Image]), ConfigModule],
   providers: [ImagesService],
   controllers: [ImagesController],
 })

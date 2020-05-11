@@ -28,7 +28,7 @@ describe('Images test', () => {
     process.env.IMG_PATH = IMG_PATH;
   });
 
-  it('upload', async () => {
+  it('Upload and save to correct directory structure', async () => {
     return request(app.getHttpServer())
       .post('/images/upload')
       .attach('file', './test/0.jpg')
@@ -47,6 +47,27 @@ describe('Images test', () => {
             expect(fs.existsSync(expectedPath)).toBeTruthy();
           }),
         );
+      });
+  });
+
+  it('Returns uploaded images', async () => {
+    const server = app.getHttpServer();
+
+    const file = await new Promise<Buffer>((resolve, reject) => {
+      fs.readFile('./test/0.jpg', (err, data) => {
+        if (err) return reject(err);
+        resolve(data);
+      });
+    });
+
+    const res = await request(server)
+      .post('/images/upload')
+      .attach('file', './test/0.jpg');
+    const id = res.body[0].id;
+    return request(server)
+      .get(`/images/full/${id}.jpg`)
+      .expect(res => {
+        expect((<Buffer>res.body).compare(file)).toBeTruthy();
       });
   });
 });
