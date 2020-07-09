@@ -1,7 +1,5 @@
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-//const preset = require("vue-cli-plugin-vuetify-preset-shrine/preset");
-
 module.exports = {
+  telemetry: true,
   mode: "universal",
   /*
    ** Headers of the page
@@ -101,7 +99,7 @@ module.exports = {
   css: ["swiper/dist/css/swiper.css"],
   plugins: [
     { src: "~/plugins/swiper.js", ssr: false },
-    { src: "~/plugins/api.ts", ssr: false },
+    // { src: "~/plugins/api.ts", ssr: false },
     { src: "~/plugins/polyfills.js", ssr: false },
     { src: "~/plugins/vue-sticky-directive.js", ssr: false }
   ]

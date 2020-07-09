@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@babel/runtime": "7.8.4",
-    "@nuxt/types": "0.6.1",
+    "@nuxt/types": "2.13.2",
     "@nuxt/typescript-runtime": "0.3.8",
     "@nuxtjs/auth": "^4.8.4",
     "@nuxtjs/axios": "^5.9.0",
@@ -42,7 +42,7 @@
     "fastify-static": "2.6.0",
     "marked": "^0.8.0",
     "node-watch": "^0.6.3",
-    "nuxt": "^2.11.0",
+    "nuxt": "2.13.2",
     "nuxt-property-decorator": "^2.5.0",
     "nuxt-typed-vuex": "^0.1.15",
     "reflect-metadata": "^0.1.13",
@@ -71,7 +71,7 @@
   },
   "devDependencies": {
     "@nuxt/typescript": "^2.8.1",
-    "@nuxt/typescript-build": "0.5.6",
+    "@nuxt/typescript-build": "1.0.3",
     "@nuxtjs/vuetify": "^1.10.2",
     "@types/node": "13.7.4",
     "babel-eslint": "^10.0.1",
@@ -84,7 +84,7 @@
     "onchange": "^6.1.0",
     "ts-node": "^8.5.2",
     "tslint-config-standard": "^9.0.0",
-    "typescript": "3.8.2",
+    "typescript": "3.8.3",
     "vue-cli-plugin-vuetify-preset-shrine": "^1.0.1"
   }
 }

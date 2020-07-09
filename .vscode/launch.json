@@ -21,6 +21,38 @@
                 "webpack://app/./*": "${workspaceRoot}/packages/nest-server/*",
                 "webpack://app/*": "*"
             }
-        }
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch ts-watcher.js",
+            "program": "${workspaceFolder}\\packages\\nest-server\\ts-watcher.js",
+            "cwd": "${workspaceFolder}\\packages\\nest-server",
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch ts-compiler.js",
+            "program": "${workspaceFolder}\\packages\\nest-server\\ts-compiler.js",
+            "cwd": "${workspaceFolder}\\packages\\nest-server",
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch ts-compiler-min.js",
+            "program": "${workspaceFolder}\\packages\\nest-server\\ts-compiler-min.js",
+            "cwd": "${workspaceFolder}\\packages\\nest-server",
+            "sourceMaps": true
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch dev-server-nuxt.js",
+            "program": "${workspaceFolder}\\packages\\rent-a-dress\\dev-server-nuxt.js",
+            "cwd": "${workspaceFolder}\\packages\\rent-a-dress",
+            "sourceMaps": true
+        },
     ]
 }
